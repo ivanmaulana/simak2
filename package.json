@@ -9,8 +9,8 @@
     "@angular/common": "2.0.0-rc.4",
     "@angular/compiler": "2.0.0-rc.4",
     "@angular/core": "2.0.0-rc.4",
-    "@angular/http": "2.0.0-rc.4",
     "@angular/forms": "0.2.0",
+    "@angular/http": "2.0.0-rc.4",
     "@angular/platform-browser": "2.0.0-rc.4",
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
     "@angular/platform-server": "2.0.0-rc.4",
@@ -36,15 +36,11 @@
     "leaflet-map": "^0.2.1",
     "lodash": "^4.12.0",
     "ng2-bootstrap": "^1.0.16",
+    "ng2-ckeditor": "1.0.4",
     "normalize.css": "^4.1.1",
     "rxjs": "5.0.0-beta.6",
     "tether": "^1.2.4",
-<<<<<<< HEAD
-    "zone.js": "~0.6.12",
-    "ng2-ckeditor": "1.0.4"
-=======
     "zone.js": "~0.6.12"
->>>>>>> 7e01cecb7115b561c1d6112bdb3f5b1e5ef963ce
   },
   "devDependencies": {
     "angular2-hmr": "~0.7.0",
