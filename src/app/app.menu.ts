@@ -8,7 +8,7 @@ export const menuItems = [
     order: 0
   },
   {
-    title: 'Charts',
+    title: 'Judul',
     component: 'Charts',
     icon: 'ion-stats-bars',
     selected: false,
@@ -16,7 +16,7 @@ export const menuItems = [
     order: 200,
     subMenu: [
       {
-        title: 'Chartist.Js',
+        title: 'Pendaftaran Skripsi',
         component: 'ChartistJs',
       },
     ]

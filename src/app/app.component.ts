@@ -53,7 +53,7 @@ import {layoutPaths} from './theme/theme.constants';
   // you can specify any customer 404 page while it's not built in ito ng2-admin
   {
     path: '/**',
-    redirectTo: ['Login']
+    redirectTo: ['Pages']
   }
 ])
 export class App {
