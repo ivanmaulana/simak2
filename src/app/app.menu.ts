@@ -16,12 +16,54 @@ export const menuItems = [
     order: 100
   },
   {
+    title: 'Log Bimbingan',
+    component: 'Log',
+    icon: 'ion-chatboxes',
+    selected: false,
+    expanded: false,
+    order: 200
+  },
+  {
+    title: 'Profile',
+    component: 'Profile',
+    icon: 'ion-person',
+    selected: false,
+    expanded: false,
+    order: 300
+  },
+  {
+    title: 'Seminar / Kolokium',
+    component: 'Daftar',
+    icon: 'ion-android-exit',
+    selected: false,
+    expanded: false,
+    order: 400,
+    subMenu: [
+      {
+        title: 'Typography',
+        component: 'Typography',
+      },
+      {
+        title: 'Buttons',
+        component: 'Buttons',
+      },
+      {
+        title: 'Icons',
+        component: 'Icons',
+      },
+      {
+        title: 'Grid',
+        component: 'Grid',
+      },
+    ]
+  },
+  {
     title: 'Menu',
     component: 'Menu',
     icon: 'ion-android-home',
     selected: false,
     expanded: false,
-    order: 200
+    order: 500
   },
   {
     title: 'UI Features',
@@ -29,7 +71,7 @@ export const menuItems = [
     icon: 'ion-android-exit',
     selected: false,
     expanded: false,
-    order: 300,
+    order: 600,
     subMenu: [
       {
         title: 'Typography',
@@ -55,7 +97,7 @@ export const menuItems = [
     icon: 'ion-compose',
     selected: false,
     expanded: false,
-    order: 400,
+    order: 700,
     subMenu: [
       {
         title: 'Form Inputs',
@@ -73,7 +115,7 @@ export const menuItems = [
     icon: 'ion-grid',
     selected: false,
     expanded: false,
-    order: 500,
+    order: 800,
     subMenu: [
       {
         title: 'Basic Tables',
@@ -87,7 +129,7 @@ export const menuItems = [
     icon: 'ion-ios-location-outline',
     selected: false,
     expanded: false,
-    order: 600,
+    order: 900,
     subMenu: [
       {
         title: 'Google Maps',
@@ -112,7 +154,7 @@ export const menuItems = [
     icon: 'ion-document',
     selected: false,
     expanded: false,
-    order: 650,
+    order: 1000,
     subMenu: [
       {
         title: 'Login',
@@ -129,7 +171,7 @@ export const menuItems = [
     icon: 'ion-ios-more',
     selected: false,
     expanded: false,
-    order: 700,
+    order: 1100,
     subMenu: [
       {
         title: 'Menu Level 1.1',
@@ -157,7 +199,7 @@ export const menuItems = [
     icon: 'ion-android-exit',
     selected: false,
     expanded: false,
-    order: 800,
+    order: 1200,
     target: '_blank'
   }
 ];

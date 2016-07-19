@@ -10,6 +10,9 @@ import {Forms} from './forms';
 import {Tables} from './tables';
 import {Menu} from './menu';
 import {Pendaftaran} from './pendaftaran';
+import {Log} from './log';
+import {Profile} from './profile';
+import {Daftar} from './daftar';
 
 @Component({
   selector: 'pages',
@@ -52,9 +55,24 @@ import {Pendaftaran} from './pendaftaran';
     path: '/menu',
   },
   {
+    name: 'Daftar',
+    component: Daftar,
+    path: '/daftar/...',
+  },
+  {
     name: 'Pendaftaran',
     component: Pendaftaran,
     path: '/pendaftaran',
+  },
+  {
+    name: 'Profile',
+    component: Profile,
+    path: '/profile',
+  },
+  {
+    name: 'Log',
+    component: Log,
+    path: '/log',
   },
   {
     name: 'Maps',
