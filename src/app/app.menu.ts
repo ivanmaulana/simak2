@@ -10,7 +10,7 @@ export const menuItems = [
   {
     title: 'Pendaftaran Skripsi',
     component: 'Pendaftaran',
-    icon: 'ion-document-text',
+    icon: 'ion-document',
     selected: false,
     expanded: false,
     order: 100
