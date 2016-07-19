@@ -1,35 +1,31 @@
-import {Component} from '@angular/core';
-import {RouteConfig} from '@angular/router-deprecated';
+import {Component, ViewEncapsulation} from '@angular/core';
+import {ChartsService} from './charts.service';
 
-// import {ChartJs} from "./components/chartJs";
-import {ChartistJs} from "./components/chartistJs/chartistJs.component";
+import {BaCard} from '../../theme/components';
+import {BaChartistChart} from '../../theme/components';
+import {Observable} from 'rxjs/Observable';
+
+import {TYPEAHEAD_DIRECTIVES} from 'ng2-bootstrap';
 
 @Component({
-  selector: 'maps',
+  selector: 'chartist-js',
+  encapsulation: ViewEncapsulation.None,
   pipes: [],
-  providers: [],
-  styles: [],
-  template: `<router-outlet></router-outlet>`
+  providers: [BaCard, BaChartistChart, ChartsService],
+  styles: [require('chartist/dist/chartist.css'), require('./charts.scss')],
+  template: require('./charts.html')
 })
-@RouteConfig([
-  {
-    name: 'ChartistJs',
-    component: ChartistJs,
-    path: '/chartist-js',
-    useAsDefault: true,
-  },
-  // {
-  //   name: 'ChartJs',
-  //   component: ChartJs,
-  //   path: '/chart-js',
-  // },
-])
 export class Charts {
 
-  constructor() {
+  constructor(private _chartsService:ChartsService) {
   }
 
   ngOnInit() {
+
+  }
+
+  getResponsive(padding, offset) {
+    return this._chartsService.getResponsive(padding, offset);
   }
 
 }

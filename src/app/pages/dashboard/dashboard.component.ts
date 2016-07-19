@@ -15,6 +15,7 @@ import { SEMANTIC_COMPONENTS, SEMANTIC_DIRECTIVES } from 'ng-semantic';
   selector: 'dashboard',
   pipes: [],
   directives: [PopularApp, PieChart, TrafficChart, UsersMap, LineChart, Feed, Todo, Calendar, BaCard, SEMANTIC_COMPONENTS, SEMANTIC_DIRECTIVES],
+
   styles: [require('./dashboard.scss')],
   template: require('./dashboard.html')
 })

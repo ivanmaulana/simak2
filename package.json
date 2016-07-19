@@ -40,7 +40,8 @@
     "normalize.css": "^4.1.1",
     "rxjs": "5.0.0-beta.6",
     "tether": "^1.2.4",
-    "zone.js": "~0.6.12"
+    "zone.js": "~0.6.12",
+    "ionicons": "2.0.1"
   },
   "devDependencies": {
     "angular2-hmr": "~0.7.0",

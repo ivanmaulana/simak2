@@ -9,6 +9,8 @@ import {Maps} from './maps';
 import {Charts} from './charts';
 import {Forms} from './forms';
 import {Tables} from './tables';
+import {Menu} from './menu';
+import {Pendaftaran} from './pendaftaran';
 
 @Component({
   selector: 'pages',
@@ -25,15 +27,9 @@ import {Tables} from './tables';
       </div>
     </div>
     <footer class="al-footer clearfix">
-      <div class="al-footer-right">Created with <i class="ion-heart"></i></div>
+      <div class="al-footer-right">Departemen Ilmu Komputer IPB</div>
       <div class="al-footer-main clearfix">
-        <div class="al-copy">&copy; <a href="http://akveo.com">Akveo</a> 2016</div>
-        <ul class="al-share clearfix">
-          <li><i class="socicon socicon-facebook"></i></li>
-          <li><i class="socicon socicon-twitter"></i></li>
-          <li><i class="socicon socicon-google"></i></li>
-          <li><i class="socicon socicon-github"></i></li>
-        </ul>
+        <div class="al-copy">&copy; <a href="http://agri.web.id">Ivan Maulana</a> 2016</div>
       </div>
     </footer>
     <ba-back-top position="200"></ba-back-top>
@@ -52,6 +48,16 @@ import {Tables} from './tables';
     path: '/ui/...',
   },
   {
+    name: 'Menu',
+    component: Menu,
+    path: '/menu',
+  },
+  {
+    name: 'Pendaftaran',
+    component: Menu,
+    path: '/pendaftaran',
+  },
+  {
     name: 'Maps',
     component: Maps,
     path: '/maps/...',
@@ -59,7 +65,7 @@ import {Tables} from './tables';
   {
     name: 'Charts',
     component: Charts,
-    path: '/charts/...',
+    path: '/charts',
   },
   {
     name: 'Forms',

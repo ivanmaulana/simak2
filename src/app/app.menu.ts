@@ -8,23 +8,33 @@ export const menuItems = [
     order: 0
   },
   {
-    title: 'Judul',
+    title: 'Pendaftaran Skripsi',
     component: 'Charts',
-    icon: 'ion-stats-bars',
+    icon: 'ion-document-text',
     selected: false,
     expanded: false,
-    order: 200,
-    subMenu: [
-      {
-        title: 'Pendaftaran Skripsi',
-        component: 'ChartistJs',
-      },
-    ]
+    order: 100
+  },
+  {
+    title: 'Pendaftaran Skripsi',
+    component: 'Pendaftaran',
+    icon: 'ion-document-text',
+    selected: false,
+    expanded: false,
+    order: 100
+  },
+  {
+    title: 'Menu',
+    component: 'Menu',
+    icon: 'ion-android-home',
+    selected: false,
+    expanded: false,
+    order: 200
   },
   {
     title: 'UI Features',
     component: 'Ui',
-    icon: 'ion-android-laptop',
+    icon: 'ion-android-exit',
     selected: false,
     expanded: false,
     order: 300,
