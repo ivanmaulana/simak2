@@ -31,14 +31,42 @@ export const menuItems = [
     expanded: false,
     order: 200
   },
-  // {
-  //   title: 'Seminar',
-  //   component: 'Seminar',
-  //   icon: 'ion-ribbon-b',
-  //   selected: false,
-  //   expanded: false,
-  //   order: 200
-  // },
+  {
+    title: 'Seminar',
+    component: 'Seminar',
+    icon: 'ion-compose',
+    selected: false,
+    expanded: false,
+    order: 700,
+    subMenu: [
+      {
+        title: 'Praseminar',
+        component: 'Praseminar',
+      },
+      {
+        title: 'Seminar',
+        component: 'Seminar2',
+      },
+    ]
+  },
+  {
+    title: 'Forms',
+    component: 'Forms',
+    icon: 'ion-compose',
+    selected: false,
+    expanded: false,
+    order: 700,
+    subMenu: [
+      {
+        title: 'Form Inputs',
+        component: 'Inputs',
+      },
+      {
+        title: 'Form Layouts',
+        component: 'Layouts',
+      },
+    ]
+  },
   {
     title: 'Profile',
     component: 'Profile',
@@ -78,24 +106,6 @@ export const menuItems = [
       {
         title: 'Grid',
         component: 'Grid',
-      },
-    ]
-  },
-  {
-    title: 'Form Elements',
-    component: 'Forms',
-    icon: 'ion-compose',
-    selected: false,
-    expanded: false,
-    order: 700,
-    subMenu: [
-      {
-        title: 'Form Inputs',
-        component: 'Inputs',
-      },
-      {
-        title: 'Form Layouts',
-        component: 'Layouts',
       },
     ]
   },

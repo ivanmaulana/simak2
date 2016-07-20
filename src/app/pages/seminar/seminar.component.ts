@@ -1,17 +1,32 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component} from '@angular/core';
+import {RouteConfig} from '@angular/router-deprecated';
 
-import {BaCard} from '../../theme/components';
+import {Praseminar} from './components/praseminar';
+import {Seminar2} from './components/seminar2';
 
 @Component({
   selector: 'seminar',
   pipes: [],
-  directives: [BaCard],
-  encapsulation: ViewEncapsulation.None,
-  styles: [require('./seminar.scss')],
-  template: require('./seminar.html')
+  providers: [],
+  styles: [],
+  template: `<router-outlet></router-outlet>`
 })
+@RouteConfig([
+  {
+    name: 'Praseminar',
+    component: Praseminar,
+    path: '/praseminar',
+    useAsDefault: true
+  },
+  {
+    name: 'Seminar2',
+    component: Seminar2,
+    path: '/seminar',
+  }
+])
+
 export class Seminar {
+
   constructor() {
   }
-
 }

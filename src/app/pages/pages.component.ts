@@ -13,8 +13,7 @@ import {Pendaftaran} from './pendaftaran';
 import {Log} from './log';
 import {Profile} from './profile';
 import {Kolokium} from './kolokium';
-// import {Seminar} from './Seminar';
-// import {Daftar} from './daftar';
+import {Seminar} from './seminar';
 
 @Component({
   selector: 'pages',
@@ -52,6 +51,11 @@ import {Kolokium} from './kolokium';
     path: '/ui/...',
   },
   {
+    name: 'Seminar',
+    component: Seminar,
+    path: '/seminar/...',
+  },
+  {
     name: 'Menu',
     component: Menu,
     path: '/menu',
@@ -66,11 +70,6 @@ import {Kolokium} from './kolokium';
     component: Kolokium,
     path: '/kolokium',
   },
-  // {
-  //   name: 'Seminar',
-  //   component: Seminar,
-  //   path: '/seminar',
-  // },
   {
     name: 'Profile',
     component: Profile,

@@ -3,13 +3,13 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {BaCard} from '../../../../theme/components';
 
 @Component({
-  selector: 'grid',
+  selector: 'praseminar',
   encapsulation: ViewEncapsulation.None,
   directives: [BaCard],
-  styles: [require('./grid.scss')],
-  template: require('./grid.html'),
+  styles: [require('./praseminar.scss')],
+  template: require('./praseminar.html'),
 })
-export class Grid {
+export class Praseminar {
 
   constructor() {
   }
