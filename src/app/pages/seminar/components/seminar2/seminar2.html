@@ -1,1 +1,85 @@
-Seminar2
+<div class="row">
+  <div class="col-md-12">
+    <ba-card title="Pendaftaran Seminar" baCardClass="with-scroll">
+      <form class="row form-inline">
+        <div class="form-group col-md-12 col-xs-12">
+            <label>Topik yang diusulkan</label><br />
+            <textarea  class="form-control" style="width:100%" [(ngModel)]="topik"></textarea>
+            {{topik}}
+        </div>
+      </form><br /><br />
+
+      <form class="form-inline">
+        <div class="form-group input-demo checkbox-demo">
+          <div class="col col-xs-12 col-md-8">
+            <p>
+              Pilihan Lab Keilmuan
+            </p>
+            <div class="row">
+              <label class="radio-inline custom-radio nowrap">
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                <span>Applied & Computational Intelligence</span>
+              </label>
+            </div>
+            <div class="row">
+              <label class="radio-inline custom-radio nowrap">
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                <span>Software Engineering & Information System</span>
+              </label>
+            </div>
+            <div class="row">
+              <label class="radio-inline custom-radio nowrap">
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                <span>Net-Centric Computation</span>
+              </label>
+            </div>
+          </div>
+          <div class="col col-xs-12 col-md-4">
+            <p>
+              Perkembangan penelitian
+            </p>
+            <div class="row">
+              <label class="checkbox-inline custom-checkbox nowrap">
+                <input type="checkbox" id="inlineCheckbox01" value="option1">
+                <span>Belum melakukan apa-apa</span>
+              </label>
+            </div>
+            <div class="row">
+              <label class="checkbox-inline custom-checkbox nowrap">
+                <input type="checkbox" id="inlineCheckbox01" value="option1">
+                <span>Telah membaca skripsi terkait</span>
+              </label>
+            </div>
+            <div class="row">
+              <label class="checkbox-inline custom-checkbox nowrap">
+                <input type="checkbox" id="inlineCheckbox01" value="option1">
+                <span>Telah membaca paper dan referensi terkait</span>
+              </label>
+            </div>
+            <div class="row">
+              <label class="checkbox-inline custom-checkbox nowrap">
+                <input type="checkbox" id="inlineCheckbox01" value="option1">
+                <span>Telah mendapatkan data yang diperlukan</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </form><br />
+
+      <form class="form-group row form-inline">
+        <div class="form-group col-sm-6 col-md-6 col-xs-12">
+          <label padding-left for="pembimbing">Dosen Pembimbing</label><br />
+          <input type="text" class="form-control" id="pembimbing" placeholder="Pembimbing 1">
+        </div>
+        <div class="form-group col-sm-6 col-md-6 col-xs-12">
+          <label padding-left for="pembimbing">&nbsp;</label><br />
+          <input type="email" class="form-control" id="pembimbing" placeholder="Pembimbing 2">
+        </div>
+        <div class="section-block">
+          <label padding-left for="pembimbing">&nbsp;</label><br />
+          <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </div>
+      </form>
+    </ba-card>
+  </div>
+</div>

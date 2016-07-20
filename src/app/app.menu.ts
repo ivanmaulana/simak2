@@ -34,7 +34,7 @@ export const menuItems = [
   {
     title: 'Seminar',
     component: 'Seminar',
-    icon: 'ion-compose',
+    icon: 'ion-ribbon-b',
     selected: false,
     expanded: false,
     order: 700,

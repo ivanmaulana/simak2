@@ -10,7 +10,11 @@ import {BaCard} from '../../../../theme/components';
   template: require('./seminar2.html'),
 })
 export class Seminar2 {
+  topik;
 
   constructor() {
+    this.topik = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae qui non vident, nihil umquam magnum ac cognitione dignum amaverunt. Nihil ad rem! Ne sit sane";
   }
+
+
 }
