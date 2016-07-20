@@ -1,9 +1,9 @@
 {
-  "name": "ng2-admin",
-  "version": "0.3.0",
-  "description": "Angular 2 and Bootstrap 4 Admin Template.",
-  "author": "akveo",
-  "homepage": "http://akveo.github.io/ng2-admin/",
+  "name": "sim-ilkom",
+  "version": "0.0.1",
+  "description": "Simak Ilkom",
+  "author": "ivan maulana",
+  "homepage": "http://github.com/ivanmaulana/simak2",
   "license": "MIT",
   "dependencies": {
     "@angular/common": "2.0.0-rc.4",
