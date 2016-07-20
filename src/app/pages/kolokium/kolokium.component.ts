@@ -1,16 +1,17 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 
-import {BaCard} from '../../../../theme/components';
+import {BaCard} from '../../theme/components';
 
 @Component({
   selector: 'kolokium',
-  encapsulation: ViewEncapsulation.None,
+  pipes: [],
   directives: [BaCard],
+  encapsulation: ViewEncapsulation.None,
   styles: [require('./kolokium.scss')],
-  template: require('./kolokium.html'),
+  template: require('./kolokium.html')
 })
 export class Kolokium {
-
   constructor() {
   }
+
 }

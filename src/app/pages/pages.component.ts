@@ -12,7 +12,9 @@ import {Menu} from './menu';
 import {Pendaftaran} from './pendaftaran';
 import {Log} from './log';
 import {Profile} from './profile';
-import {Daftar} from './daftar';
+import {Kolokium} from './kolokium';
+import {Seminar} from './Seminar';
+// import {Daftar} from './daftar';
 
 @Component({
   selector: 'pages',
@@ -55,14 +57,19 @@ import {Daftar} from './daftar';
     path: '/menu',
   },
   {
-    name: 'Daftar',
-    component: Daftar,
-    path: '/daftar/...',
-  },
-  {
     name: 'Pendaftaran',
     component: Pendaftaran,
     path: '/pendaftaran',
+  },
+  {
+    name: 'Kolokium',
+    component: Kolokium,
+    path: '/kolokium',
+  },
+  {
+    name: 'Seminar',
+    component: Seminar,
+    path: '/seminar',
   },
   {
     name: 'Profile',

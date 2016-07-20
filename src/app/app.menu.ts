@@ -24,38 +24,28 @@ export const menuItems = [
     order: 200
   },
   {
+    title: 'Kolokium',
+    component: 'Kolokium',
+    icon: 'ion-chatboxes',
+    selected: false,
+    expanded: false,
+    order: 200
+  },
+  {
+    title: 'Seminar',
+    component: 'Seminar',
+    icon: 'ion-chatboxes',
+    selected: false,
+    expanded: false,
+    order: 200
+  },
+  {
     title: 'Profile',
     component: 'Profile',
     icon: 'ion-person',
     selected: false,
     expanded: false,
     order: 300
-  },
-  {
-    title: 'Seminar / Kolokium',
-    component: 'Daftar',
-    icon: 'ion-android-exit',
-    selected: false,
-    expanded: false,
-    order: 400,
-    subMenu: [
-      {
-        title: 'Typography',
-        component: 'Typography',
-      },
-      {
-        title: 'Buttons',
-        component: 'Buttons',
-      },
-      {
-        title: 'Icons',
-        component: 'Icons',
-      },
-      {
-        title: 'Grid',
-        component: 'Grid',
-      },
-    ]
   },
   {
     title: 'Menu',
