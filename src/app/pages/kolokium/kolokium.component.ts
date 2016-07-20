@@ -17,6 +17,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
   template: require('./kolokium.html')
 })
 export class Kolokium {
+  max : number = 100;
 
   public uploader:FileUploader = new FileUploader({url: URL});
   public hasBaseDropZoneOver:boolean = false;

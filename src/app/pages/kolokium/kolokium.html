@@ -21,6 +21,8 @@
         <div class="col-md-9" style="margin-bottom: 40px">
           <br />
             <div>
+              <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
+</progressbar>
                 <button type="button" class="btn btn-success btn-s"
                         (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
                     <span class="glyphicon glyphicon-upload"></span> Upload

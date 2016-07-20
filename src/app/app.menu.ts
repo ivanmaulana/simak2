@@ -50,6 +50,22 @@ export const menuItems = [
     ]
   },
   {
+    title: 'Profile',
+    component: 'Profile',
+    icon: 'ion-person',
+    selected: false,
+    expanded: false,
+    order: 300
+  },
+  {
+    title: 'Menu',
+    component: 'Menu',
+    icon: 'ion-android-home',
+    selected: false,
+    expanded: false,
+    order: 500
+  },
+  {
     title: 'Forms',
     component: 'Forms',
     icon: 'ion-compose',
@@ -66,22 +82,6 @@ export const menuItems = [
         component: 'Layouts',
       },
     ]
-  },
-  {
-    title: 'Profile',
-    component: 'Profile',
-    icon: 'ion-person',
-    selected: false,
-    expanded: false,
-    order: 300
-  },
-  {
-    title: 'Menu',
-    component: 'Menu',
-    icon: 'ion-android-home',
-    selected: false,
-    expanded: false,
-    order: 500
   },
   {
     title: 'UI Features',
