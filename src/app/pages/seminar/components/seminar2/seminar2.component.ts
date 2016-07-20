@@ -1,4 +1,5 @@
 import {Component, ViewEncapsulation, ChangeDetectionStrategy} from '@angular/core';
+import {RouteConfig} from '@angular/router-deprecated';
 
 import {BaCard} from '../../../../theme/components';
 import {CORE_DIRECTIVES} from '@angular/common';
@@ -14,6 +15,7 @@ import {TAB_DIRECTIVES} from 'ng2-bootstrap';
 })
 export class Seminar2 {
   topik;
+  content;
 
   constructor() {
     this.topik = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae qui non vident, nihil umquam magnum ac cognitione dignum amaverunt. Nihil ad rem! Ne sit sane";
@@ -38,5 +40,9 @@ export class Seminar2 {
   public removeTabHandler(/*tab:any*/):void {
     console.log('Remove Tab handler');
   };
+
+  public clicked(tab){
+
+  }
 
 }
