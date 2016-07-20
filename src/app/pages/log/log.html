@@ -2,22 +2,32 @@
   <div class="col-md-12">
     <ba-card title="Log Bimbingan" baCardClass="with-scroll">
       <form class="row form-inline">
+
+        <!-- judul log bimbingan -->
         <div class="form-group col-md-12 col-xs-12 ">
             <label>Judul Log</label><br />
             <input placeholder="Tulis progress kamu disini" class="form-control" style="width:100%" [(ngModel)]="text">
         </div>
+
+        <!-- progress yang sudah dilakukan -->
         <div class="form-group col-md-12 col-xs-12 has-success">
             <br /><label>Progress</label><br />
             <textarea placeholder="Tulis progress kamu disini" class="form-control" style="width:100%" [(ngModel)]="text"></textarea>
         </div>
+
+        <!-- kendala yang dihadapi -->
         <div class="form-group col-md-12 col-xs-12 has-error">
             <br /><label>Kendala yang dihadapi</label><br />
             <textarea placeholder="Tulis kendala yang kamu hadapi disini" class="form-control" style="width:100%"></textarea>
         </div><br />
+
+        <!-- tahap selanjutnya -->
         <div class="form-group col-md-12 col-xs-12 has-warning">
             <br /><label>Selanjutnya</label><br />
             <textarea placeholder="Tulis apa yang akan kamu lakukan setelahnya" class="form-control" style="width:100%"></textarea>
         </div>
+
+        <!-- button submit -->
         <div>
           <label padding-left for="pembimbing">&nbsp;</label><br />
           <button type="submit" class="btn btn-primary btn-md" disabled>Submit</button>
@@ -27,6 +37,8 @@
   </div>
 </div>
 
+
+<!-- List Log -->
 <div class="row">
   <div class="col-md-12">
     <ba-card title="List Log Bimbingan" baCardClass="with-scroll">

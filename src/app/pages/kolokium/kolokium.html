@@ -1,23 +1,29 @@
+
+<!-- Alert message -->
 <alert *ngFor="let alert of alerts;let i = index" [type]="alert.type">
   {{ alert?.msg }}. <a href="#/pages/seminar"><b><i>Download disini</i></b></a>
 </alert>
-
-<!-- <alert dismissOnTimeout="3000">This alert will dismiss in 3s</alert> -->
 
 <div class="row">
   <div class="col-md-12">
     <ba-card title="Makalah Kolokium" baCardClass="with-scroll">
       <form class="row form-inline">
+
+        <!-- judul topik -->
         <div class="form-group col-md-12 col-xs-12">
             <label><p href primary>Topik kamu</p></label><br />
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae qui non vident, nihil umquam magnum ac cognitione dignum amaverunt. Nihil ad rem! Ne sit sane
             </p><br />
         </div>
+
+        <!-- upload makalah kolokium -->
         <div class="form-group col-md-12 col-xs-12">
           <label><p href primary>Upload makalah</p></label><br />
           <input type="file" ng2FileSelect [uploader]="uploader" />
         </div>
+
+        <!-- upload progress -->
         <div class="col-md-9" style="margin-bottom: 40px">
           <br />
             <div>
@@ -38,10 +44,13 @@
   </div>
 </div>
 
+<!-- detail kolokium -->
 <div class="row">
   <div class="col-md-12">
     <ba-card title="Detail Kolokium" baCardClass="with-scroll">
       <form class="row form-inline">
+
+        <!-- judul topik -->
         <div class="form-group col-md-12 col-xs-12">
             <label><p href primary>Topik kamu</p></label><br />
             <p>
@@ -49,13 +58,19 @@
             </p>
         </div>
       </form><br /><br />
+
+
       <form class="form-group row form-inline">
+
+        <!-- moderator kolokium -->
         <div class="form-group col-sm-4 col-md-8 col-xs-12">
           <label padding-left for="pembimbing">Moderator</label><br />
           <p>
             Bu Imas Sitanggangg
           </p>
         </div>
+
+        <!-- pilihan bersedia -->
         <div class="section-block col-sm-8 col-md-4 col-xs-12">
           <label padding-left for="pembimbing">&nbsp;</label><br />
           <button type="submit" class="btn btn-primary btn-lg">Bersedia</button>
