@@ -3,84 +3,64 @@
 </p>
 <div (click)="$event.preventDefault()">
   <tabset [justified]="true">
+
+    <!-- TAB Seminar Bersama -->
     <tab heading="SEMINAR BERSAMA NASIONAL">
         <div class="row">
           <div class="col-md-12">
             <ba-card title="Seminar Bersama Nasional" baCardClass="with-scroll">
               <form class="row form-inline">
+
+                <!-- Nama Konferensi -->
                 <div class="form-group col-md-12 col-xs-12">
-                    <label>Topik yang diusulkan</label><br />
+                    <label>Nama Konferensi</label><br />
+                    <input class="form-control" type="text" name="konferensi" />
+                </div>
+
+                <!-- Judul Paper -->
+                <div class="form-group col-md-12 col-xs-12">
+                    <br /><label>Judul Paper</label><br />
                     <textarea  class="form-control" style="width:100%" [(ngModel)]="topik"></textarea>
-                    {{topik}}
                 </div>
-              </form><br /><br />
 
-              <form class="form-inline">
-                <div class="form-group input-demo checkbox-demo">
-                  <div class="col col-xs-12 col-md-8">
-                    <p>
-                      Pilihan Lab Keilmuan
-                    </p>
-                    <div class="row">
-                      <label class="radio-inline custom-radio nowrap">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                        <span>Applied & Computational Intelligence</span>
-                      </label>
-                    </div>
-                    <div class="row">
-                      <label class="radio-inline custom-radio nowrap">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                        <span>Software Engineering & Information System</span>
-                      </label>
-                    </div>
-                    <div class="row">
-                      <label class="radio-inline custom-radio nowrap">
-                        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                        <span>Net-Centric Computation</span>
-                      </label>
+                <!-- Tempat -->
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                  <br /><label>Tempat</label><br />
+                  <input class="form-control" type="text" name="konferensi" placeholder="Bogor, Institut Pertanian Bogor"/>
+                </div>
+
+                <!-- Tanggal -->
+                <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                  <br /><label>Tanggal</label><br />
+                  <input type="date" [(ngModel)]="date" class="form-control" style="height:36px"/>
+                </div>
+
+                <!-- Upload Makalah -->
+                <div class="form-group col-md-12 col-xs-12">
+                  <br /><label><p href primary>Upload makalah</p></label><br />
+                  <input type="file" ng2FileSelect [uploader]="uploader" />
+                </div>
+
+                <!-- Progress Upload -->
+                <div class="form-group col-md-12 col-xs-12">
+                  <br />
+                    <div>
+                      <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
+                      </progressbar>
+                        <button type="button" class="btn btn-success btn-s"
+                                (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                            <span class="glyphicon glyphicon-upload"></span> Upload
+                        </button>
+                        <button type="button" class="btn btn-danger btn-s"
+                                (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                            <span class="glyphicon glyphicon-trash"></span> Hapus
+                        </button>
                     </div>
                   </div>
-                  <div class="col col-xs-12 col-md-4">
-                    <p>
-                      Perkembangan penelitian
-                    </p>
-                    <div class="row">
-                      <label class="checkbox-inline custom-checkbox nowrap">
-                        <input type="checkbox" id="inlineCheckbox01" value="option1">
-                        <span>Belum melakukan apa-apa</span>
-                      </label>
-                    </div>
-                    <div class="row">
-                      <label class="checkbox-inline custom-checkbox nowrap">
-                        <input type="checkbox" id="inlineCheckbox01" value="option1">
-                        <span>Telah membaca skripsi terkait</span>
-                      </label>
-                    </div>
-                    <div class="row">
-                      <label class="checkbox-inline custom-checkbox nowrap">
-                        <input type="checkbox" id="inlineCheckbox01" value="option1">
-                        <span>Telah membaca paper dan referensi terkait</span>
-                      </label>
-                    </div>
-                    <div class="row">
-                      <label class="checkbox-inline custom-checkbox nowrap">
-                        <input type="checkbox" id="inlineCheckbox01" value="option1">
-                        <span>Telah mendapatkan data yang diperlukan</span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </form><br />
+              </form>
 
+              <!-- Submit -->
               <form class="form-group row form-inline">
-                <div class="form-group col-sm-6 col-md-6 col-xs-12">
-                  <label padding-left for="pembimbing">Dosen Pembimbing</label><br />
-                  <input type="text" class="form-control" id="pembimbing" placeholder="Pembimbing 1">
-                </div>
-                <div class="form-group col-sm-6 col-md-6 col-xs-12">
-                  <label padding-left for="pembimbing">&nbsp;</label><br />
-                  <input type="email" class="form-control" id="pembimbing" placeholder="Pembimbing 2">
-                </div>
                 <div class="section-block">
                   <label padding-left for="pembimbing">&nbsp;</label><br />
                   <button type="submit" class="btn btn-primary btn-lg">Submit</button>
@@ -90,7 +70,12 @@
           </div>
         </div>
     </tab>
+
+
+    <!-- TAB Mini Conference  -->
     <tab heading="MINI CONFERENCE ILMU KOMPUTER IPB">Short Labeled Justified content</tab>
+
+    <!-- TAB Seminar Mandiri -->
     <tab heading="SEMINAR MANDIRI">Long Labeled Justified content</tab>
   </tabset>
 </div>
