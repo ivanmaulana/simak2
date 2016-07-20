@@ -31,14 +31,14 @@ export const menuItems = [
     expanded: false,
     order: 200
   },
-  {
-    title: 'Seminar',
-    component: 'Seminar',
-    icon: 'ion-ribbon-b',
-    selected: false,
-    expanded: false,
-    order: 200
-  },
+  // {
+  //   title: 'Seminar',
+  //   component: 'Seminar',
+  //   icon: 'ion-ribbon-b',
+  //   selected: false,
+  //   expanded: false,
+  //   order: 200
+  // },
   {
     title: 'Profile',
     component: 'Profile',

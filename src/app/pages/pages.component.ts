@@ -13,7 +13,7 @@ import {Pendaftaran} from './pendaftaran';
 import {Log} from './log';
 import {Profile} from './profile';
 import {Kolokium} from './kolokium';
-import {Seminar} from './Seminar';
+// import {Seminar} from './Seminar';
 // import {Daftar} from './daftar';
 
 @Component({
@@ -66,11 +66,11 @@ import {Seminar} from './Seminar';
     component: Kolokium,
     path: '/kolokium',
   },
-  {
-    name: 'Seminar',
-    component: Seminar,
-    path: '/seminar',
-  },
+  // {
+  //   name: 'Seminar',
+  //   component: Seminar,
+  //   path: '/seminar',
+  // },
   {
     name: 'Profile',
     component: Profile,
