@@ -26,7 +26,7 @@ export const menuItems = [
   {
     title: 'Kolokium',
     component: 'Kolokium',
-    icon: 'ion-chatboxes',
+    icon: 'ion-lightbulb',
     selected: false,
     expanded: false,
     order: 200
@@ -34,7 +34,7 @@ export const menuItems = [
   {
     title: 'Seminar',
     component: 'Seminar',
-    icon: 'ion-chatboxes',
+    icon: 'ion-ribbon-b',
     selected: false,
     expanded: false,
     order: 200
