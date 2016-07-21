@@ -11,6 +11,12 @@ import {BaCard} from '../../theme/components';
   template: require('./profile.html')
 })
 export class Profile {
+  konferensi;
+  topik;
+
+  private nama: string = "Ivan Maulana Putra";
+  private nim: string = "G64130076";
+
   constructor() {
   }
 

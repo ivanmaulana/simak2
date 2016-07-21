@@ -1,1 +1,35 @@
-profile
+<div class="row">
+  <div class="col-md-12">
+    <ba-card title="Profil Mahasiswa" baCardClass="with-scroll" style="background-color: blue">
+      <form class="row form-inline">
+
+        <!-- NIM -->
+        <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          NIM
+        </div>
+
+        <div class="form-group col-md-9 col-sm-7 col-xs-12">
+          <input [(ngModel)]="nim" class="form-control"/>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <!-- Nama -->
+        <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          Nama Lengkap
+        </div>
+
+        <div class="form-group col-md-9 col-sm-7 col-xs-12">
+          <input [(ngModel)]="nama" class="form-control"/>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+      </form>
+    </ba-card>
+  </div>
+</div>
