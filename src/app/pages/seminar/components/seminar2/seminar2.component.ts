@@ -12,7 +12,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 @Component({
   selector: 'seminar2',
   encapsulation: ViewEncapsulation.None,
-  directives: [BaCard, AlertComponent, TAB_DIRECTIVES, CORE_DIRECTIVES, FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, CORE_DIRECTIVES, PROGRESSBAR_DIRECTIVES, FORM_DIRECTIVES],
+  directives: [BaCard, AlertComponent, TAB_DIRECTIVES, CORE_DIRECTIVES, FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, PROGRESSBAR_DIRECTIVES, FORM_DIRECTIVES],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [require('./seminar2.scss')],
   template: require('./seminar2.html'),

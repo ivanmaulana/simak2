@@ -7,7 +7,6 @@ import {BlockForm} from './components/blockForm';
 import {HorizontalForm} from './components/horizontalForm';
 import {BasicForm} from './components/basicForm';
 import {WithoutLabelsForm} from './components/withoutLabelsForm';
-import {BaPictureUploader} from '../../../../theme/components';
 
 @Component({
   selector: 'layouts',

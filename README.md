@@ -6,6 +6,8 @@
 
 - `ng2-admin` : https://github.com/akveo/ng2-admin
 
+- `ng2-uploader` : https://github.com/jkuri/ng2-uploader
+
 ## CHANGELOG
 
 `7/21/2016`

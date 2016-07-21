@@ -14,6 +14,7 @@ import {Log} from './log';
 import {Profile} from './profile';
 import {Kolokium} from './kolokium';
 import {Seminar} from './seminar';
+import {Sidang} from './sidang';
 
 @Component({
   selector: 'pages',
@@ -59,6 +60,11 @@ import {Seminar} from './seminar';
     name: 'Menu',
     component: Menu,
     path: '/menu',
+  },
+  {
+    name: 'Sidang',
+    component: Sidang,
+    path: '/sidang',
   },
   {
     name: 'Pendaftaran',

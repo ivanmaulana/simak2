@@ -50,6 +50,14 @@ export const menuItems = [
     ]
   },
   {
+    title: 'Sidang',
+    component: 'Sidang',
+    icon: 'ion-person',
+    selected: false,
+    expanded: false,
+    order: 300
+  },
+  {
     title: 'Profile',
     component: 'Profile',
     icon: 'ion-person',
