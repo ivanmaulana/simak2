@@ -26,19 +26,38 @@ export class Dashboard {
   name;
   response;
   creds;
+  kirim;
+  message;
+  status;
 
-  constructor(private dashService: DashboardService) {
+  constructor(private dashService: DashboardService, private http: Http) {
     this.name="angular2";
 
     this.dashService.getResponse()
       .subscribe(data => {
-        console.log(data);
         this.response = data;
       });
   }
 
   ngOnInit(){
 
+  }
+
+  onSubmit(){
+    // this.creds = JSON.stringify({name : this.name});
+    //
+    // this.kirim = this.dashService.postInput(this.creds);
+    // console.log(this.kirim);
+
+    this.http.post("http://localhost:8000/todo/", this.name)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.status = data[0].status;
+        this.message = data[0].message;
+      }
+    )
+
+    console.log(this.status);
   }
 
 }

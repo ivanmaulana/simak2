@@ -3,6 +3,19 @@
   {{item.name}}
 </div>
 
+<div>
+  <label>Input</label>
+  <input [(ngModel)]="name" type="form-control" />
+  <button (click)="onSubmit()" type="form-control" class="btn btn-primary btn-lg"></button>
+</div>
+
+{{message}}
+
+<div>
+  <!-- status : {{kirim.status}}<br />
+  message : {{kirim.message}} -->
+</div>
+
 <!-- <div class="row">
   <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
     <pie-chart></pie-chart>
