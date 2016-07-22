@@ -34,7 +34,6 @@ export class Dashboard {
       .subscribe(data => {
         console.log(data);
         this.response = data;
-
       });
   }
 

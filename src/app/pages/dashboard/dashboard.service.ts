@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
-import 'rxjs/Rx';
+import {Http, Headers} from '@angular/http';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DashboardService {
@@ -10,7 +10,7 @@ export class DashboardService {
   }
 
   getResponse(){
-    return this.http.get("http://greentransport.ipb.ac.id/api/rank")
+    return this.http.get("http://localhost:8000/todo/")
       .map(res => res.json());
   }
 
