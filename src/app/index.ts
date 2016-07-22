@@ -1,5 +1,6 @@
 // App
 import {AppState} from "./app.state";
+import {HTTP_PROVIDERS} from '@angular/http';
 export * from './app.component';
 
 // Application wide providers
