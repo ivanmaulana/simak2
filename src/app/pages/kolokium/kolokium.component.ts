@@ -17,6 +17,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
   template: require('./kolokium.html')
 })
 export class Kolokium {
+  topik;
   max : number = 100;
 
   public uploader:FileUploader = new FileUploader({url: URL});
@@ -32,18 +33,23 @@ export class Kolokium {
   }
 
   constructor() {
+    this.topik = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae qui non vident, nihil umquam magnum ac cognitione dignum amaverunt. Nihil ad rem! Ne sit sane";
   }
 
-  public alerts:Array<Object> = [
+  public success:Array<Object> = [
     {
       type: 'success',
-      msg: `Perhatian ! Jadwal kolokium 2017 sudah tersedia`,
+      msg: `Perhatian ! Jadwal kolokium 2017 adalah 27 Juli 2016. Detail Lengkap`,
       closable: true
     }
   ];
 
-  public closeAlert(i:number):void {
-    this.alerts.splice(i, 1);
-  }
+  public danger:Array<Object> = [
+    {
+      type: 'danger',
+      msg: `Pengisian & Upload makalah kolokium akan dibuka sampai 20 Juli 2016`,
+      closable: true
+    }
+  ]
 
 }
