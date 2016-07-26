@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <ba-card title="Makalah Kolokium" baCardClass="with-scroll">
+    <ba-card title="Surat Keterangan Lulus" baCardClass="with-scroll">
       <form class="row form-inline">
 
         <!-- nama & nim-->
@@ -53,17 +53,9 @@
         </div>
 
         <!-- judul topik -->
-        <div class="form-group col-md-12 col-xs-12">
-            <label><p href primary>Topik kamu</p></label><br />
-            <textarea [(ngModel)]="topik" style="width: 100%" class="form-control"></textarea>
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-xs-12">
-          <br />
-        </div>
-
-        <div class="col-md-12 col-xs-12 col-sm-12 text-right">
-          <button class="btn btn-lg btn-primary" type="submit">Ubah Topik</button>
+        <div class="form-group col-md-6 col-xs-6">
+            <label><p href primary>Tanggal SKL (Tanggal lulus berdasarkan SKL)</p></label><br />
+            <input type="date" class="form-control" [(ngModel)]="date" style="height:34px"/>
         </div>
 
         <div class="col-sm-12 col-md-12 col-xs-12">
@@ -80,7 +72,7 @@
         <div class="col-md-12 col-xs-12 col-sm-12" style="margin-bottom: 40px">
           <br />
             <div>
-              <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
+              <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}} %</span>
 </progressbar>
                 <button type="button" class="btn btn-success btn-s"
                         (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
@@ -91,6 +83,10 @@
                     <span class="glyphicon glyphicon-trash"></span> Remove
                 </button>
             </div>
+        </div>
+
+        <div class="col-md-12 col-xs-12 col-sm-12 text-right">
+          <button class="btn btn-lg btn-primary" type="submit">Submit</button>
         </div>
 
       </form>

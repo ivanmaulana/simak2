@@ -47,6 +47,7 @@
 - make seminar page menu it self
 - add upload 'revisi makalah kolokium' to kolokium page
 - add description in pengajuan page
+- add SKL page
 
 `7/21/2016`
 - update seminar pages

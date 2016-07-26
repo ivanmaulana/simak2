@@ -17,6 +17,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 })
 export class Skl {
   topik;
+  public max: number = 100;
   public uploader:FileUploader = new FileUploader({url: URL});
   public hasBaseDropZoneOver:boolean = false;
   public hasAnotherDropZoneOver:boolean = false;
