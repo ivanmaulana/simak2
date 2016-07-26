@@ -43,7 +43,10 @@
 `7/25/2016`
 - rename pendaftaran to pengajuan
 - add identity each pages
-- 
+- change praseminar from submenu to menu
+- make seminar page menu it self
+- add upload 'revisi makalah kolokium' to kolokium page
+- add description in pengajuan page
 
 `7/21/2016`
 - update seminar pages

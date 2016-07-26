@@ -10,7 +10,7 @@ export const menuItems = [
   {
     title: 'Pengajuan Topik',
     component: 'Pengajuan',
-    icon: 'ion-document',
+    icon: 'ion-edit',
     selected: false,
     expanded: false,
     order: 100
@@ -26,7 +26,7 @@ export const menuItems = [
   {
     title: 'Kolokium',
     component: 'Kolokium',
-    icon: 'ion-lightbulb',
+    icon: 'ion-document-text',
     selected: false,
     expanded: false,
     order: 200
@@ -42,25 +42,41 @@ export const menuItems = [
   {
     title: 'Seminar',
     component: 'Seminar',
-    icon: 'ion-ribbon-b',
+    icon: 'ion-person-stalker',
     selected: false,
     expanded: false,
-    order: 700,
-    subMenu: [
-      {
-        title: 'Praseminar',
-        component: 'Praseminar',
-      },
-      {
-        title: 'Seminar',
-        component: 'Seminar2',
-      },
-    ]
+    order: 200
   },
+  // {
+  //   title: 'Seminar',
+  //   component: 'Seminar',
+  //   icon: 'ion-ribbon-b',
+  //   selected: false,
+  //   expanded: false,
+  //   order: 700,
+  //   subMenu: [
+  //     {
+  //       title: 'Praseminar',
+  //       component: 'Praseminar',
+  //     },
+  //     {
+  //       title: 'Seminar',
+  //       component: 'Seminar2',
+  //     },
+  //   ]
+  // },
   {
     title: 'Sidang',
     component: 'Sidang',
-    icon: 'ion-person',
+    icon: 'ion-ribbon-b',
+    selected: false,
+    expanded: false,
+    order: 300
+  },
+  {
+    title: 'Skl',
+    component: 'Skl',
+    icon: 'ion-ribbon-b',
     selected: false,
     expanded: false,
     order: 300

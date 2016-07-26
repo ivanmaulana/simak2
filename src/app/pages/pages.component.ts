@@ -16,6 +16,7 @@ import {Kolokium} from './kolokium';
 import {Seminar} from './seminar';
 import {Sidang} from './sidang';
 import {Praseminar} from './praseminar';
+import {Skl} from './skl';
 
 @Component({
   selector: 'pages',
@@ -52,10 +53,15 @@ import {Praseminar} from './praseminar';
     component: Ui,
     path: '/ui/...',
   },
+  // {
+  //   name: 'Seminar',
+  //   component: Seminar,
+  //   path: '/seminar/...',
+  // },
   {
     name: 'Seminar',
     component: Seminar,
-    path: '/seminar/...',
+    path: '/seminar',
   },
   {
     name: 'Praseminar',
@@ -86,6 +92,11 @@ import {Praseminar} from './praseminar';
     name: 'Profile',
     component: Profile,
     path: '/profile',
+  },
+  {
+    name: 'Skl',
+    component: Skl,
+    path: '/skl',
   },
   {
     name: 'Log',
