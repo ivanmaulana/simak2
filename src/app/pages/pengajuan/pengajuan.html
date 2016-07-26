@@ -1,89 +1,181 @@
 <div class="row">
   <div class="col-md-12">
-    <ba-card title="Pengajuan Topik Tugas Akhir" baCardClass="with-scroll">
+    <ba-card title="Pengajuan Topik" baCardClass="with-scroll">
       <form class="row form-inline">
+
+        <!-- judul topik yang diusulkan -->
+        <div class="form-group col-md-12 col-xs-12">
+          <div class="row">
+            <div class="col-md-2">
+              Nama
+            </div>
+            <div class="col-md-8">
+              : Ivan Maulana Putra
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              NIM
+            </div>
+            <div class="col-md-8">
+              : G64130076
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
 
         <!-- judul topik yang diusulkan -->
         <div class="form-group col-md-12 col-xs-12">
             <label>Topik yang diusulkan</label><br />
             <textarea placeholder="Topik yang diusulkan" class="form-control" style="width:100%"></textarea>
         </div>
-      </form><br /><br />
 
-      <form class="form-inline">
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
 
-        <!-- pilihan lab keilmuan -->
-        <div class="form-group input-demo checkbox-demo">
-          <div class="col col-xs-12 col-md-8">
-            <p>
-              Pilihan Lab Keilmuan
-            </p>
-            <div class="row">
+        <div class="form-group col-md-6 col-xs-12">
+            <label>Pilihan Lab Keilmuan (Pilih salah satu)</label><br /><br />
+            <div class="row form-group padding-left">
               <label class="radio-inline custom-radio nowrap">
                 <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                 <span>Applied & Computational Intelligence</span>
               </label>
             </div>
-            <div class="row">
+            <div class="row padding-left">
               <label class="radio-inline custom-radio nowrap">
                 <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                 <span>Software Engineering & Information System</span>
               </label>
             </div>
-            <div class="row">
+            <div class="row padding-left">
               <label class="radio-inline custom-radio nowrap">
                 <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                 <span>Net-Centric Computation</span>
               </label>
             </div>
-          </div>
+        </div>
 
-          <!-- perkembangan penelitian -->
-          <div class="col col-xs-12 col-md-4">
-            <p>
-              Perkembangan penelitian
-            </p>
-            <div class="row">
+        <div class="form-group col-md-6 col-xs-12">
+            <label>Perkembangan penelitian (Boleh pilih lebih dari satu)</label><br />
+            <br />
+            <div class="row padding-left">
               <label class="checkbox-inline custom-checkbox nowrap">
                 <input type="checkbox" id="inlineCheckbox01" value="option1">
                 <span>Belum melakukan apa-apa</span>
               </label>
             </div>
-            <div class="row">
+            <div class="row padding-left">
               <label class="checkbox-inline custom-checkbox nowrap">
                 <input type="checkbox" id="inlineCheckbox01" value="option1">
                 <span>Telah membaca skripsi terkait</span>
               </label>
             </div>
-            <div class="row">
+            <div class="row padding-left">
               <label class="checkbox-inline custom-checkbox nowrap">
                 <input type="checkbox" id="inlineCheckbox01" value="option1">
                 <span>Telah membaca paper dan referensi terkait</span>
               </label>
             </div>
-            <div class="row">
+            <div class="row padding-left">
               <label class="checkbox-inline custom-checkbox nowrap">
                 <input type="checkbox" id="inlineCheckbox01" value="option1">
                 <span>Telah mendapatkan data yang diperlukan</span>
               </label>
             </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <p>
+            Dosen pembimbing yang diusulkan (prioritas berdasarkan urutan)
+          </p>
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6 col-xs-12">
+          <div class="row padding-left">
+            <label padding-left for="pembimbing">Pilihan 1</label><br />
+            <input type="text" class="form-control" id="pembimbing" placeholder="Pilihan 1">
+          </div>
+
+          <div class="row">
+            <br />
+          </div>
+
+          <div class="row">
+            <div class="col-md-7">
+              <label for="pembimbing">Sudah pernah berkonsultasi ?</label><br />
+
+              <div class="col-md-2">
+                <label class="radio-inline custom-radio nowrap">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <span>Ya</span>
+                </label>
+              </div>
+
+              <div class="col-md-2">
+                <label class="radio-inline custom-radio nowrap">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <span>Tidak</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <label class="padding-left" for="pembimbing">Jumlah Pertemuan</label>
+              <input type="text" class="form-control" placeholder="Jumlah Pertemuan"/>
+            </div>
           </div>
         </div>
-      </form><br />
 
+        <div class="form-group col-sm-12 col-md-6 col-xs-12">
+          <div class="row padding-left">
+            <label padding-left for="pembimbing">Pilihan 2</label><br />
+            <input type="text" class="form-control" id="pembimbing" placeholder="Pilihan 2">
+          </div>
 
-      <!-- pembimbing yang diusulkan -->
-      <form class="form-group row form-inline">
-        <div class="form-group col-sm-6 col-md-6 col-xs-12">
-          <label padding-left for="pembimbing">Dosen pembimbing yang diusulkan</label><br />
-          <input type="text" class="form-control" id="pembimbing" placeholder="Pembimbing 1">
+          <div class="row">
+            <br />
+          </div>
+
+          <div class="row">
+            <div class="col-md-7">
+              <label for="pembimbing">Sudah pernah berkonsultasi ?</label><br />
+
+              <div class="col-md-2">
+                <label class="radio-inline custom-radio nowrap">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <span>Ya</span>
+                </label>
+              </div>
+
+              <div class="col-md-2">
+                <label class="radio-inline custom-radio nowrap">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <span>Tidak</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <label class="padding-left" for="pembimbing">Jumlah Pertemuan</label>
+              <input type="text" class="form-control" placeholder="Jumlah Pertemuan"/>
+            </div>
+          </div>
         </div>
-        <div class="form-group col-sm-6 col-md-6 col-xs-12">
-          <label padding-left for="pembimbing">&nbsp;</label><br />
-          <input type="email" class="form-control" id="pembimbing" placeholder="Pembimbing 2">
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br /><br />
         </div>
-        <div class="section-block">
-          <label padding-left for="pembimbing">&nbsp;</label><br />
+
+        <div class="section-block text-right padding-right">
           <button type="submit" class="btn btn-primary btn-lg">Submit</button>
         </div>
       </form>

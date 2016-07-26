@@ -40,6 +40,11 @@
 
 ## CHANGELOG
 
+`7/25/2016`
+- rename pendaftaran to pengajuan
+- add identity each pages
+- 
+
 `7/21/2016`
 - update seminar pages
 - update profile pages
