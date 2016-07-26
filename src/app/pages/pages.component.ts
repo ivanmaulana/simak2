@@ -9,7 +9,7 @@ import {Maps} from './maps';
 import {Forms} from './forms';
 import {Tables} from './tables';
 import {Menu} from './menu';
-import {Pendaftaran} from './pendaftaran';
+import {Pengajuan} from './pengajuan';
 import {Log} from './log';
 import {Profile} from './profile';
 import {Kolokium} from './kolokium';
@@ -67,9 +67,9 @@ import {Sidang} from './sidang';
     path: '/sidang',
   },
   {
-    name: 'Pendaftaran',
-    component: Pendaftaran,
-    path: '/pendaftaran',
+    name: 'Pengajuan',
+    component: Pengajuan,
+    path: '/pengajuan',
   },
   {
     name: 'Kolokium',

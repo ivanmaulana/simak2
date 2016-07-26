@@ -8,8 +8,8 @@ export const menuItems = [
     order: 0
   },
   {
-    title: 'Pendaftaran Skripsi',
-    component: 'Pendaftaran',
+    title: 'Pengajuan Topik',
+    component: 'Pengajuan',
     icon: 'ion-document',
     selected: false,
     expanded: false,
