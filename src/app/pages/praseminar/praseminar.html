@@ -1,1 +1,108 @@
-Praseminar
+<!-- Alert message -->
+<alert *ngFor="let alert of success;let i = index" [type]="alert.type">
+  {{ alert?.msg }} <a href="#/pages/seminar"><b><i>Download disini</i></b></a>
+</alert>
+
+<alert *ngFor="let alert of danger;let i = index" [type]="alert.type">
+  {{ alert?.msg }}
+</alert>
+
+<div class="row">
+  <div class="col-md-12">
+    <ba-card title="Makalah Kolokium" baCardClass="with-scroll">
+      <form class="row form-inline">
+
+        <!-- nama & nim-->
+        <div class="col-md-12 col-xs-12">
+
+          <div class="col-md-6 col-sm-12">
+            <div class="row">
+              <div class="col-md-2">
+                Nama
+              </div>
+              <div class="col-md-8">
+                : Ivan Maulana Putra
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2">
+                NIM
+              </div>
+              <div class="col-md-8">
+                : G64130076
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="row">
+              <div class="col-md-5">
+                Pembimbing Ketua
+              </div>
+              <div class="col-md-7">
+                : Bu Imas Sitanggang
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5">
+                Pembimbing Anggota
+              </div>
+              <div class="col-md-7">
+                : Pak Abrar Istiadi
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br /><br />
+        </div>
+
+        <!-- judul topik -->
+        <div class="form-group col-md-12 col-xs-12">
+            <label><p href primary>Topik kamu</p></label><br />
+            <textarea [(ngModel)]="topik" style="width: 100%" class="form-control"></textarea>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <div class="col-md-12 col-xs-12 col-sm-12 text-right">
+          <button class="btn btn-lg btn-primary" type="submit">Ubah Topik</button>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br /><br />
+        </div>
+
+        <!-- upload makalah kolokium -->
+        <div class="form-group col-md-12 col-xs-12">
+          <label><p href primary>Upload makalah praseminar</p></label><br />
+          <input type="file" ng2FileSelect [uploader]="uploader" />
+        </div>
+
+        <!-- upload progress -->
+        <div class="col-md-12 col-xs-12 col-sm-12" style="margin-bottom: 40px">
+          <br />
+            <div>
+              <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
+</progressbar>
+                <button type="button" class="btn btn-success btn-s"
+                        (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                    <span class="glyphicon glyphicon-upload"></span> Upload
+                </button>
+                <button type="button" class="btn btn-danger btn-s"
+                        (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                    <span class="glyphicon glyphicon-trash"></span> Remove
+                </button>
+            </div>
+        </div>
+
+      </form>
+    </ba-card>
+  </div>
+</div>

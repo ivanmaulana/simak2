@@ -34,7 +34,7 @@ export const menuItems = [
   {
     title: 'Praseminar',
     component: 'Praseminar',
-    icon: 'ion-lightbulb',
+    icon: 'ion-code-working',
     selected: false,
     expanded: false,
     order: 200
