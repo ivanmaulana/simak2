@@ -3,6 +3,77 @@
     <ba-card title="Log Bimbingan" baCardClass="with-scroll">
       <form class="row form-inline">
 
+        <!-- nama & nim-->
+        <div class="col-md-12 col-xs-12">
+
+          <div class="col-md-6 col-sm-12">
+            <div class="row">
+              <div class="col-md-2">
+                Nama
+              </div>
+              <div class="col-md-8">
+                : Ivan Maulana Putra
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2">
+                NIM
+              </div>
+              <div class="col-md-8">
+                : G64130076
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-sm-12">
+            <div class="row">
+              <div class="col-md-5">
+                Pembimbing Ketua
+              </div>
+              <div class="col-md-7">
+                : Bu Imas Sitanggang
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5">
+                Pembimbing Anggota
+              </div>
+              <div class="col-md-7">
+                : Pak Abrar Istiadi
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br /><br />
+        </div>
+
+        <!-- tanggal -->
+        <div class="col-sm-12 col-md-4 col-xs-12">
+          <label>Tanggal</label><br />
+          <input type="date" class="form-control" [(ngModel)]="date" style="height:34px"/>
+        </div>
+
+        <!-- jam -->
+        <div class="col-sm-12 col-md-4 col-xs-12">
+          <label>Jam</label><br />
+          <input type="text" class="form-control" [(ngModel)]="jam" style="height:34px"/>
+        </div>
+
+        <!-- tempat -->
+        <div class="col-sm-12 col-md-4 col-xs-12">
+          <label>Tempat</label><br />
+          <input type="text" class="form-control" [(ngModel)]="tempat" style="height:34px"/>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
         <!-- judul log bimbingan -->
         <div class="form-group col-md-12 col-xs-12 ">
             <label>Judul Log</label><br />
@@ -27,10 +98,13 @@
             <textarea placeholder="Tulis apa yang akan kamu lakukan setelahnya" class="form-control" style="width:100%"></textarea>
         </div>
 
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
         <!-- button submit -->
-        <div>
-          <label padding-left for="pembimbing">&nbsp;</label><br />
-          <button type="submit" class="btn btn-primary btn-md" disabled>Submit</button>
+        <div class="form-group text-right col-md-12 col-xs-12 col-sm-12">
+          <button type="submit" class="btn btn-primary btn-lg">Submit</button>
         </div>
       </form><br />
     </ba-card>
