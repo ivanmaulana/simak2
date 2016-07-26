@@ -32,6 +32,14 @@ export const menuItems = [
     order: 200
   },
   {
+    title: 'Praseminar',
+    component: 'Praseminar',
+    icon: 'ion-lightbulb',
+    selected: false,
+    expanded: false,
+    order: 200
+  },
+  {
     title: 'Seminar',
     component: 'Seminar',
     icon: 'ion-ribbon-b',

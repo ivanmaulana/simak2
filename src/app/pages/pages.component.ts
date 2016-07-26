@@ -15,6 +15,7 @@ import {Profile} from './profile';
 import {Kolokium} from './kolokium';
 import {Seminar} from './seminar';
 import {Sidang} from './sidang';
+import {Praseminar} from './praseminar';
 
 @Component({
   selector: 'pages',
@@ -55,6 +56,11 @@ import {Sidang} from './sidang';
     name: 'Seminar',
     component: Seminar,
     path: '/seminar/...',
+  },
+  {
+    name: 'Praseminar',
+    component: Praseminar,
+    path: '/praseminar',
   },
   {
     name: 'Menu',
