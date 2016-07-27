@@ -29,11 +29,9 @@
 - Install Typescript : `npm install -g typescript`
 - Install Webpack : `npm install -g webpack` and `npm install webpack-dev-server`
 - Install Bower : `npm install -g bower`
-
 - Clone this repo : `git clone https://github.com/ivanmaulana/simak2.git`
 - Go inside to the repository : `cd simak2`
 - Install dependencies : `npm install`
-
 - Running web : `npm start`
 - Go to `http://localhost:3000` in your browser
 
