@@ -40,6 +40,11 @@
 
 ## CHANGELOG
 
+`7/27/2016`
+- update sidang page
+- test gzip compression
+- test build production
+
 `7/25/2016`
 - rename pendaftaran to pengajuan
 - add identity each pages
