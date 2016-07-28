@@ -43,7 +43,7 @@
 - test gzip compression
 - test build production
 
-`7/25/2016`
+`7/26/2016`
 - rename pendaftaran to pengajuan
 - add identity each pages
 - change praseminar from submenu to menu
