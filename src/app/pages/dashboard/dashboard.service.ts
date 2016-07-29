@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class DashboardService {
@@ -12,25 +13,14 @@ export class DashboardService {
 
   }
 
-  getResponse(){
+  getResponse(): Observable<any>{
     return this.http.get("http://localhost:8000/todo/")
       .map(res => res.json());
   }
 
   postInput(input){
-    this.http.post("http://localhost:8000/todo/", input)
+    return this.http.post("http://localhost:8000/todo/", input)
       .map(res => res.json())
-      .subscribe(data => {
-        this.status = data[0].status;
-        this.message = data[0].message;
-      }
-    )
-
-    console.log(this.status);
-    console.log(this.message);
-
-    return JSON.stringify({status: this.status, message: this.message});
-
   }
 
   getStatus(){

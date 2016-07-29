@@ -56,12 +56,14 @@
         <div class="col-sm-12 col-md-4 col-xs-12">
           <label>Tanggal</label><br />
           <input type="date" class="form-control" [(ngModel)]="date" style="height:34px"/>
+          {{date}}
         </div>
 
         <!-- jam -->
         <div class="col-sm-12 col-md-4 col-xs-12">
           <label>Jam</label><br />
-          <input type="text" class="form-control" [(ngModel)]="jam" style="height:34px"/>
+          <input type="time" class="form-control" [(ngModel)]="jam" style="height:34px"/>
+          {{jam}}
         </div>
 
         <!-- tempat -->

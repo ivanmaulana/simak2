@@ -1,6 +1,6 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
-import {Http, Response, HTTP_PROVIDERS} from '@angular/http';
+import {Http, Response, HTTP_PROVIDERS, Headers} from '@angular/http';
 
 import {PopularApp} from './popularApp';
 import {PieChart} from './pieChart';
@@ -13,6 +13,7 @@ import {Calendar} from './calendar';
 import {BaCard} from '../../theme/components';
 
 import {DashboardService} from './dashboard.service';
+import {Model} from './dashboard.model';
 
 @Component({
   selector: 'dashboard',
@@ -22,40 +23,45 @@ import {DashboardService} from './dashboard.service';
   styles: [require('./dashboard.scss')],
   template: require('./dashboard.html')
 })
-export class Dashboard {
+export class Dashboard implements OnInit{
   name;
   response;
   creds;
   kirim;
   message;
   status;
+  model: Model[] = [];
 
-  constructor(private dashService: DashboardService, private http: Http) {
-    this.name="angular2";
 
+  ngOnInit(){
     this.dashService.getResponse()
       .subscribe(data => {
         this.response = data;
       });
   }
 
-  ngOnInit(){
+  constructor(private dashService: DashboardService, private http: Http) {
+    this.name="angular2";
+    this.status = 1;
 
   }
 
   onSubmit(){
-    // this.creds = JSON.stringify({name : this.name});
-    //
-    // this.kirim = this.dashService.postInput(this.creds);
-    // console.log(this.kirim);
-
-    this.http.post("http://localhost:8000/todo/", this.name)
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.creds = JSON.stringify({name : this.name});
+    this.http.post("http://localhost:8000/todo/", this.creds, {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;
         this.message = data[0].message;
       }
     )
+
+    this.dashService.getResponse()
+      .subscribe(data => {
+        this.response = data;
+      });
 
     console.log(this.status);
   }
