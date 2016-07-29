@@ -38,6 +38,14 @@
 
 ## CHANGELOG
 
+`7/29/2016`
+- create CRUD for NodeJs
+- test SQL Injection
+
+`7/28/2016`
+- test NodeJS back end
+- preparing page to HTTP Request
+
 `7/27/2016`
 - update sidang page
 - test gzip compression
