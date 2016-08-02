@@ -4,27 +4,25 @@ import 'rxjs/add/operator/map';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class DashboardService {
-  kirim;
-  private status = "";
-  message;
-
+export class PengajuanService {
   constructor(private http: Http){
 
   }
 
   getResponse(): Observable<any>{
-    return this.http.get("http://localhost:8000/todo/")
+    return this.http.get("http://localhost:8000/ta/daftar")
       .map(res => res.json());
   }
 
   postInput(input){
-    return this.http.post("http://localhost:8000/todo/", input)
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post("http://localhost:8000/ta/daftar", input, {headers: headers})
       .map(res => res.json())
   }
 
   getStatus(){
-    return this.status;
+    // return this.status;
   }
 
 }

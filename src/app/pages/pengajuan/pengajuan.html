@@ -31,7 +31,7 @@
         <!-- judul topik yang diusulkan -->
         <div class="form-group col-md-12 col-xs-12">
             <label>Topik yang diusulkan</label><br />
-            <textarea placeholder="Topik yang diusulkan" class="form-control" style="width:100%"></textarea>
+            <textarea placeholder="Topik yang diusulkan" [(ngModel)]="topik" class="form-control" style="width:100%"></textarea>
         </div>
 
         <div class="col-sm-12 col-md-12 col-xs-12">
@@ -41,22 +41,22 @@
         <!-- pilihan lab -->
         <div class="form-group col-md-6 col-xs-12">
             <label>Pilihan Lab Keilmuan (Pilih salah satu)</label><br /><br />
-            <div class="row form-group padding-left">
-              <label class="radio-inline custom-radio nowrap">
-                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                <span>Applied & Computational Intelligence</span>
-              </label>
-            </div>
             <div class="row padding-left">
               <label class="radio-inline custom-radio nowrap">
-                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                <span>Software Engineering & Information System</span>
-              </label>
-            </div>
-            <div class="row padding-left">
-              <label class="radio-inline custom-radio nowrap">
-                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                <input type="radio" name="lab" (click)="radioLab(1)">
                 <span>Net-Centric Computation</span>
+              </label>
+            </div><br />
+            <div class="row padding-left">
+              <label class="radio-inline custom-radio nowrap">
+                <input type="radio" name="lab" (click)="radioLab(2)">
+                <span>Applied Computational Intelligence</span>
+              </label>
+            </div><br />
+            <div class="row padding-left">
+              <label class="radio-inline custom-radio nowrap">
+                <input type="radio" name="lab" (click)="radioLab(3)">
+                <span>Software Engineering & Information System</span>
               </label>
             </div>
         </div>
@@ -67,28 +67,28 @@
             <br />
             <div class="row padding-left">
               <label class="checkbox-inline custom-checkbox nowrap">
-                <input type="checkbox" id="inlineCheckbox01" value="option1">
+                <input type="checkbox" (click)="checkbox(1)">
                 <span>Belum melakukan apa-apa</span>
               </label>
-            </div>
+            </div><br />
             <div class="row padding-left">
               <label class="checkbox-inline custom-checkbox nowrap">
-                <input type="checkbox" id="inlineCheckbox01" value="option1">
+                <input type="checkbox" (click)="checkbox(2)">
                 <span>Telah membaca skripsi terkait</span>
               </label>
-            </div>
+            </div><br />
             <div class="row padding-left">
               <label class="checkbox-inline custom-checkbox nowrap">
-                <input type="checkbox" id="inlineCheckbox01" value="option1">
+                <input type="checkbox" (click)="checkbox(3)">
                 <span>Telah membaca paper dan referensi terkait</span>
               </label>
-            </div>
+            </div><br />
             <div class="row padding-left">
               <label class="checkbox-inline custom-checkbox nowrap">
-                <input type="checkbox" id="inlineCheckbox01" value="option1">
+                <input type="checkbox" (click)="checkbox(4)">
                 <span>Telah mendapatkan data yang diperlukan</span>
               </label>
-            </div>
+            </div><br />
         </div>
 
         <div class="col-sm-12 col-md-12 col-xs-12">
@@ -106,7 +106,7 @@
         <div class="form-group col-sm-12 col-md-6 col-xs-12">
           <div class="row padding-left">
             <label padding-left for="pembimbing">Pilihan 1</label><br />
-            <input type="text" class="form-control" id="pembimbing" placeholder="Pilihan 1">
+            <input class="form-control" [(ngModel)]="dosen_1" placeholder="Pilihan 1">
           </div>
 
           <div class="row">
@@ -119,14 +119,14 @@
 
               <div class="col-md-2">
                 <label class="radio-inline custom-radio nowrap">
-                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <input type="radio" name="konsultasi_1" (click)=radio1(true) value="option1">
                   <span>Ya</span>
                 </label>
               </div>
 
               <div class="col-md-2">
                 <label class="radio-inline custom-radio nowrap">
-                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <input type="radio" name="konsultasi_1" (click)=radio1(false) value="option1">
                   <span>Tidak</span>
                 </label>
               </div>
@@ -134,7 +134,7 @@
 
             <div class="col-md-5">
               <label class="padding-left" for="pembimbing">Jumlah Pertemuan</label>
-              <input type="text" class="form-control" placeholder="Jumlah Pertemuan"/>
+              <input class="form-control" [(ngModel)]="pertemuan_1" placeholder="Jumlah Pertemuan"/>
             </div>
           </div>
         </div>
@@ -142,7 +142,7 @@
         <div class="form-group col-sm-12 col-md-6 col-xs-12">
           <div class="row padding-left">
             <label padding-left for="pembimbing">Pilihan 2</label><br />
-            <input type="text" class="form-control" id="pembimbing" placeholder="Pilihan 2">
+            <input [(ngModel)]="dosen_2" class="form-control" placeholder="Pilihan 2">
           </div>
 
           <div class="row">
@@ -155,14 +155,14 @@
 
               <div class="col-md-2">
                 <label class="radio-inline custom-radio nowrap">
-                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <input type="radio" name="konsultasi_2" (click)=radio2(true) value="option1">
                   <span>Ya</span>
                 </label>
               </div>
 
               <div class="col-md-2">
                 <label class="radio-inline custom-radio nowrap">
-                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <input type="radio" name="konsultasi_2" (click)=radio2(false) value="option1">
                   <span>Tidak</span>
                 </label>
               </div>
@@ -170,7 +170,7 @@
 
             <div class="col-md-5">
               <label class="padding-left" for="pembimbing">Jumlah Pertemuan</label>
-              <input type="text" class="form-control" placeholder="Jumlah Pertemuan"/>
+              <input class="form-control" [(ngModel)]="pertemuan_2" placeholder="Jumlah Pertemuan"/>
             </div>
           </div>
         </div>
@@ -181,9 +181,19 @@
 
         <!-- submit -->
         <div class="section-block text-right padding-right">
-          <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+          <button type="submit" class="btn btn-primary btn-lg" (click)="onSubmit()">Submit</button>
         </div>
       </form>
+      nim : {{nim}}<br />
+      topik : {{topik}}<br />
+      lab : {{lab}}
+      progress : {{progress_1}}, {{progress_2}}, {{progress_3}}, {{progress_4}}<br />
+      dosen : {{dosen_1}}, {{dosen_2}}<br />
+      konsultasi_1 : {{konsultasi_1}}, {{pertemuan_1}}<br />
+      konsultasi_2 : {{konsultasi_2}}, {{konsultasi_2}}<br /><br />
+
+      status : {{status}}<br />
+      message : {{message}}
     </ba-card>
   </div>
 </div>
