@@ -5,12 +5,12 @@
   dosen_1 : {{res.lab}}<br />
 </div> -->
 
-<div class="row">
+<div class="row" *ngIf="nim">
   <div class="col-md-4 col-sm-12 col-xs-12">
     <ba-card title="Profil Mahasiswa" baCardClass="with-scroll">
       <img class="profile" src="http://random-ize.com/lorem-ipsum-generators/lorem-ipsum/lorem-ipsum.jpg"/>
       <br />
-      <p>NIM : G64130076</p>
+      <p>NIM : {{nim}}</p>
       <p>Nama : Ivan Maulana Putra</p>
       <p>IPK : x.xx</p>
     </ba-card>
@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group col-md-9 col-sm-7 col-xs-12">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quid sequatur, quid repugnet, vident. Si enim ad populum me vocas, eum. Tecum optime, deinde etiam
+          {{topik}}
         </div>
 
         <div class="col-sm-12 col-md-12 col-xs-12">
@@ -39,7 +39,7 @@
         </div>
 
         <div class="form-group col-md-9 col-sm-7 col-xs-12">
-          Software Engineering & Information System
+          {{lab}}
         </div>
 
         <div class="col-sm-12 col-md-12 col-xs-12">
@@ -52,7 +52,7 @@
         </div>
 
         <div class="form-group col-md-9 col-sm-7 col-xs-12">
-          Imas Sitanggang
+          {{dosen_1}}
         </div>
 
         <div class="col-sm-12 col-md-12 col-xs-12">
@@ -65,7 +65,7 @@
         </div>
 
         <div class="form-group col-md-9 col-sm-7 col-xs-12">
-          Muhammad Abrar Istiadi
+          {{dosen_2}}
         </div>
 
         <div class="col-sm-12 col-md-12 col-xs-12">
@@ -78,10 +78,10 @@
         </div>
 
         <div class="form-group col-md-9 col-sm-7 col-xs-12">
-            <li>Sudah melakukan a</li>
-            <li>Sudah melakukan b</li>
-            <li>Sudah melakukan c</li>
-
+            <li *ngIf="progress_1">Belum melakukan apa-apa</li>
+            <li *ngIf="progress_2">Telah membaca skripsi terkait</li>
+            <li *ngIf="progress_3">Telah membaca paper terkait</li>
+            <li *ngIf="progress_4">Telah mendapatkan data yang diperlukan</li>
         </div>
 
         <div class="col-sm-12 col-md-12 col-xs-12">
@@ -117,7 +117,7 @@
             <td>{{ res.lab}}</td>
             <td>{{ res.dosen_1}}</td>
             <td>{{ res.dosen_2}}</td>
-            <td><button type="button" class="btn btn-primary btn-sm"><i class="ion-eye"></i></button></td>
+            <td><button type="button" class="btn btn-primary btn-sm" (click)="openProfile(res.nim)"><i class="ion-eye"></i></button></td>
           </tr>
           </tbody>
         </table>
