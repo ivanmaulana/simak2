@@ -1,10 +1,11 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation, ElementRef} from '@angular/core';
 import {BaCard} from '../../theme/components';
 import {PengajuanService} from './pengajuan.service';
 import {Http, Response, HTTP_PROVIDERS, Headers} from '@angular/http';
 
 @Component({
   selector: 'pengajuan',
+  host: {'(document:click)': 'handleClick($event)',},
   pipes: [],
   directives: [BaCard],
   providers: [PengajuanService, HTTP_PROVIDERS],
@@ -31,7 +32,56 @@ export class Pengajuan {
   status;
   message;
 
-  constructor(private http: Http, private pengajuanService: PengajuanService) {
+  response;
+
+  public query = '';
+  public dosen = [ "Albania","Andorra","Armenia","Austria","Azerbaijan","Belarus",
+                      "Belgium","Bosnia & Herzegovina","Bulgaria","Croatia","Cyprus",
+                      "Czech Republic","Denmark","Estonia","Finland","France","Georgia",
+                      "Germany","Greece","Hungary","Iceland","Ireland","Italy","Kosovo",
+                      "Latvia","Liechtenstein","Lithuania","Luxembourg","Macedonia","Malta",
+                      "Moldova","Monaco","Montenegro","Netherlands","Norway","Poland",
+                      "Portugal","Romania","Russia","San Marino","Serbia","Slovakia","Slovenia",
+                      "Spain","Sweden","Switzerland","Turkey","Ukraine","United Kingdom","Vatican City"];
+  public filteredList = [];
+  public elementRef;
+
+  constructor(private http: Http, private pengajuanService: PengajuanService, myElement: ElementRef) {
+    this.elementRef = myElement;
+    this.http.get('http://localhost:8000/dosen')
+      .map(res => res.json())
+        .subscribe( data => {
+          this.response = data;
+        })
+  }
+
+  filter() {
+    if (this.query !== ""){
+        this.filteredList = this.dosen.filter(function(el){
+            return el.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
+        }.bind(this));
+    }else{
+        this.filteredList = [];
+    }
+  }
+
+  select(item){
+      this.query = item;
+      this.filteredList = [];
+  }
+
+  handleClick(event){
+   var clickedComponent = event.target;
+   var inside = false;
+   do {
+       if (clickedComponent === this.elementRef.nativeElement) {
+           inside = true;
+       }
+      clickedComponent = clickedComponent.parentNode;
+   } while (clickedComponent);
+    if(!inside){
+        this.filteredList = [];
+    }
   }
 
   onSubmit(){
