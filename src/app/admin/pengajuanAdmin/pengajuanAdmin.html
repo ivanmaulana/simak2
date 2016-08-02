@@ -1,1 +1,127 @@
-Dashboard Admin
+<!-- <div *ngFor="let res of response">
+  nim : {{res.nim}}<br />
+  topik : {{res.topik}}<br />
+  lab : {{res.lab}}<br />
+  dosen_1 : {{res.lab}}<br />
+</div> -->
+
+<div class="row">
+  <div class="col-md-4 col-sm-12 col-xs-12">
+    <ba-card title="Profil Mahasiswa" baCardClass="with-scroll">
+      <img class="profile" src="http://random-ize.com/lorem-ipsum-generators/lorem-ipsum/lorem-ipsum.jpg"/>
+      <br />
+      <p>NIM : G64130076</p>
+      <p>Nama : Ivan Maulana Putra</p>
+      <p>IPK : x.xx</p>
+    </ba-card>
+  </div>
+
+  <div class="col-md-8 col-sm-12 col-xs-12">
+    <ba-card title="Profil Mahasiswa" baCardClass="with-scroll" style="background-color: blue">
+      <form class="row form-inline">
+
+        <!-- NIM -->
+        <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          Topik
+        </div>
+
+        <div class="form-group col-md-9 col-sm-7 col-xs-12">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quid sequatur, quid repugnet, vident. Si enim ad populum me vocas, eum. Tecum optime, deinde etiam
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <!-- Nama -->
+        <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          Lab
+        </div>
+
+        <div class="form-group col-md-9 col-sm-7 col-xs-12">
+          Software Engineering & Information System
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <!-- Nama -->
+        <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          Dosen Pilihan 1
+        </div>
+
+        <div class="form-group col-md-9 col-sm-7 col-xs-12">
+          Imas Sitanggang
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <!-- Alamat -->
+        <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          Dosen Pilihan 2
+        </div>
+
+        <div class="form-group col-md-9 col-sm-7 col-xs-12">
+          Muhammad Abrar Istiadi
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <!-- Email -->
+        <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          Progress
+        </div>
+
+        <div class="form-group col-md-9 col-sm-7 col-xs-12">
+            <li>Sudah melakukan a</li>
+            <li>Sudah melakukan b</li>
+            <li>Sudah melakukan c</li>
+
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+      </form>
+    </ba-card>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 col-md-12">
+    <ba-card title="List Pengajuan Tugas Akhir" baCardClass="with-scroll table-panel">
+      <div class="horizontal-scroll">
+        <table class="table table-condensed">
+          <thead>
+          <tr>
+            <th class="table-id">#</th>
+            <th>NIM</th>
+            <th>Nama</th>
+            <th>Lab</th>
+            <th>Dosen Pilihan 1</th>
+            <th>Dosen Pilihan 2</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let res of response">
+            <td class="table-id">{{ res.id }}</td>
+            <td>{{ res.nim }}</td>
+            <td>G64130076</td>
+            <td>{{ res.lab}}</td>
+            <td>{{ res.dosen_1}}</td>
+            <td>{{ res.dosen_2}}</td>
+            <td><button type="button" class="btn btn-primary btn-sm"><i class="ion-eye"></i></button></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </ba-card>
+  </div>
+</div>
