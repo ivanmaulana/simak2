@@ -4,22 +4,8 @@ import {RouteConfig} from '@angular/router-deprecated';
 import {BaPageTop, BaContentTop, BaSidebarAdmin, BaBackTop} from '../theme/components';
 
 import {DashboardAdmin} from './dashboardAdmin';
+import {PengajuanAdmin} from './pengajuanAdmin';
 
-//
-// import {Dashboard} from './dashboard';
-// import {Ui} from './ui';
-// import {Maps} from './maps';
-// import {Forms} from './forms';
-// import {Tables} from './tables';
-// import {Menu} from './menu';
-// import {Pengajuan} from './pengajuan';
-// import {Log} from './log';
-// import {Profile} from './profile';
-// import {Kolokium} from './kolokium';
-// import {Seminar} from './seminar';
-// import {Sidang} from './sidang';
-// import {Praseminar} from './praseminar';
-// import {Skl} from './skl';
 
 @Component({
   selector: 'admin',
@@ -50,72 +36,12 @@ import {DashboardAdmin} from './dashboardAdmin';
     component: DashboardAdmin,
     path: '/dashboard',
     useAsDefault: true,
+  },
+  {
+    name: 'PengajuanAdmin',
+    component: PengajuanAdmin,
+    path: '/pengajuan',
   }
-  // {
-  //   name: 'Ui',
-  //   component: Ui,
-  //   path: '/ui/...',
-  // },
-  // {
-  //   name: 'Seminar',
-  //   component: Seminar,
-  //   path: '/seminar',
-  // },
-  // {
-  //   name: 'Praseminar',
-  //   component: Praseminar,
-  //   path: '/praseminar',
-  // },
-  // {
-  //   name: 'Menu',
-  //   component: Menu,
-  //   path: '/menu',
-  // },
-  // {
-  //   name: 'Sidang',
-  //   component: Sidang,
-  //   path: '/sidang',
-  // },
-  // {
-  //   name: 'Pengajuan',
-  //   component: Pengajuan,
-  //   path: '/pengajuan',
-  // },
-  // {
-  //   name: 'Kolokium',
-  //   component: Kolokium,
-  //   path: '/kolokium',
-  // },
-  // {
-  //   name: 'Profile',
-  //   component: Profile,
-  //   path: '/profile',
-  // },
-  // {
-  //   name: 'Skl',
-  //   component: Skl,
-  //   path: '/skl',
-  // },
-  // {
-  //   name: 'Log',
-  //   component: Log,
-  //   path: '/log',
-  // },
-  // {
-  //   name: 'Maps',
-  //   component: Maps,
-  //   path: '/maps/...',
-  // },
-  // {
-  //   name: 'Forms',
-  //   component: Forms,
-  //   path: '/forms/...',
-  // },
-  // {
-  //   name: 'Tables',
-  //   component: Tables,
-  //   path: '/tables/...',
-  // }
 ])
 export class Admin {
 
