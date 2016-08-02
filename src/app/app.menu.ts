@@ -74,7 +74,7 @@ export const menuItems = [
     order: 300
   },
   {
-    title: 'Skl',
+    title: 'SKL',
     component: 'Skl',
     icon: 'ion-university',
     selected: false,

@@ -53,11 +53,6 @@ import {Skl} from './skl';
     component: Ui,
     path: '/ui/...',
   },
-  // {
-  //   name: 'Seminar',
-  //   component: Seminar,
-  //   path: '/seminar/...',
-  // },
   {
     name: 'Seminar',
     component: Seminar,

@@ -4,6 +4,8 @@ import {Component, ViewEncapsulation} from '@angular/core';
 import {RouteConfig} from '@angular/router-deprecated';
 
 import {Pages} from './pages';
+import {Admin} from './admin';
+
 import {Login} from './pages/login';
 import {Register} from './pages/register';
 import {AppState} from './app.state';
@@ -33,10 +35,15 @@ import {layoutPaths} from './theme/theme.constants';
 })
 @RouteConfig([
   {
-    path: '/pages/...',
+    path: '/mahasiswa/...',
     name: 'Pages',
     component: Pages,
     useAsDefault: true
+  },
+  {
+    path: '/admin/...',
+    name: 'Admin',
+    component: Admin
   },
   {
     path: '/login',

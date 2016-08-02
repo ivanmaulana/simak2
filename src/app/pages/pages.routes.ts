@@ -23,15 +23,15 @@ export const PagesRoutes:RouterConfig = [
     children: [{
       path: 'dashboard',
       component: Dashboard,
-      data: {
-          menu: {
-            title: 'Dashboard',
-            icon: 'ion-android-home',
-            selected: false,
-            expanded: false,
-            order: 0
-          }
-        }
+      // data: {
+      //     menu: {
+      //       title: 'Dashboard',
+      //       icon: 'ion-android-home',
+      //       selected: false,
+      //       expanded: false,
+      //       order: 0
+      //     }
+      //   }
 
       }
 
