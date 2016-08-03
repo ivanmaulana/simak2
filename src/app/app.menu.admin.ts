@@ -19,5 +19,12 @@ export const menuItemsAdmin = [
     icon: 'ion-document',
     selected: false,
     expanded: false
+  },
+  {
+    title: 'Kolokium',
+    component: 'KolokiumAdmin',
+    icon: 'ion-document-text',
+    selected: false,
+    expanded: false
   }
 ];

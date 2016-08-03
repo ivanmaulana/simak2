@@ -1,0 +1,29 @@
+<div class="col-lg-12 col-md-12 col-sm-12">
+  <ba-card title="Penentuan Kolokium" baCardClass="with-scroll table-panel">
+    <div class="row form-group">
+      <div class="col-md-3 padding-top">Aktifkan Fitur Kolokium {{active}}</div>
+      <div class="col-md-2">
+        <button type="button" *ngIf="active" (click)="activate()" class="btn btn-primary">Aktif</button>
+        <button type="button" *ngIf="!active" (click)="activate()" class="btn btn-default">Tidak Aktif</button>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-3 padding-top">Jadwal Kolokium {{jadwal}}</div>
+      <div class="col-md-4">
+        <input type="date" class="form-control" [(ngModel)]="jadwal" style="height:33px"/>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-3 padding-top">Jadwal Kolokium {{jadwal}}</div>
+      <div class="col-md-4">
+        <input type="date" class="form-control" [(ngModel)]="jadwal" style="height:33px"/>
+      </div>
+    </div>
+  </ba-card>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+  <ba-card title="Makalah Kolokium Mahasiswa" baCardClass="with-scroll table-panel">
+
+  </ba-card>
+</div>

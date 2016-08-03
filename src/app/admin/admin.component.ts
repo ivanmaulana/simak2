@@ -6,6 +6,7 @@ import {BaPageTop, BaContentTop, BaSidebarAdmin, BaBackTop} from '../theme/compo
 import {DashboardAdmin} from './dashboardAdmin';
 import {PengajuanAdmin} from './pengajuanAdmin';
 import {TaAdmin} from './taAdmin';
+import {KolokiumAdmin} from './kolokiumAdmin';
 
 
 @Component({
@@ -47,6 +48,11 @@ import {TaAdmin} from './taAdmin';
     name: 'TaAdmin',
     component: TaAdmin,
     path: '/ta',
+  },
+  {
+    name: 'KolokiumAdmin',
+    component: KolokiumAdmin,
+    path: '/kolokium',
   }
 ])
 export class Admin {
