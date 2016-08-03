@@ -38,6 +38,20 @@
 
 ## CHANGELOG
 
+`8/3/2016`
+- add penentuan TA admin
+- add penentuan Kolokium admin
+- add HTTP Request
+
+`8/2/2016`
+- add list pengajuan TA admin
+- add HTTP Request
+
+`8/1/2016`
+- add admin page
+- create route for admin
+- routing nodejs
+
 `7/29/2016`
 - create CRUD for NodeJs
 - test SQL Injection

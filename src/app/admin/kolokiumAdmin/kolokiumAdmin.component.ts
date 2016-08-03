@@ -1,13 +1,19 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {Http, Headers} from '@angular/http';
+import {AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
+import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload';
 
 import {BaCard} from '../../theme/components';
 import {BaAppPicturePipe} from '../../theme/pipes';
 
+// const URL = '/api/';
+const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
+
 @Component({
   selector: 'taAdmin',
   pipes: [BaAppPicturePipe],
-  directives: [BaCard],
+  directives: [BaCard, AlertComponent, FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, CORE_DIRECTIVES, FORM_DIRECTIVES, PROGRESSBAR_DIRECTIVES],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./kolokiumAdmin.scss')],
   template: require('./kolokiumAdmin.html')
@@ -37,6 +43,19 @@ export class KolokiumAdmin implements OnInit {
   private status: boolean;
   private message: string;
 
+  max : number = 100;
+
+  public uploader:FileUploader = new FileUploader({url: URL});
+  public hasBaseDropZoneOver:boolean = false;
+  public hasAnotherDropZoneOver:boolean = false;
+
+  public fileOverBase(e:any):void {
+    this.hasBaseDropZoneOver = e;
+  }
+
+  public fileOverAnother(e:any):void {
+    this.hasAnotherDropZoneOver = e;
+  }
 
   ngOnInit(){
     this.http.get('http://localhost:8000/ta/daftar')
