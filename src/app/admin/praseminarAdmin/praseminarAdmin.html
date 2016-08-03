@@ -1,0 +1,67 @@
+<div class="col-lg-12 col-md-12 col-sm-12">
+  <ba-card title="Penentuan Praseminar" baCardClass="with-scroll table-panel">
+    <div class="row form-group">
+      <div class="col-md-3 padding-top">Aktifkan Fitur Praseminar {{active}}</div>
+      <div class="col-md-2">
+        <button type="button" *ngIf="active" (click)="activate()" class="btn btn-primary">Aktif</button>
+        <button type="button" *ngIf="!active" (click)="activate()" class="btn btn-default">Tidak Aktif</button>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-3 padding-top">Jadwal Praseminar {{jadwal}}</div>
+      <div class="col-md-4">
+        <input type="date" class="form-control" [(ngModel)]="jadwal" style="height:33px"/>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-3 padding-top">Deadline Upload Makalah {{deadline}}</div>
+      <div class="col-md-4">
+        <input type="date" class="form-control" [(ngModel)]="deadline" style="height:33px"/>
+      </div>
+    </div>
+
+    <div class="row">
+      <br />
+    </div>
+
+    <!-- upload makalah kolokium -->
+    <div class="row form-group">
+      <div class="col-md-12 col-xs-12">
+        <label><p href primary>Upload File Jadwal Praseminar</p></label><br />
+        <input type="file" ng2FileSelect [uploader]="uploader" />
+      </div>
+
+      <!-- upload progress -->
+      <div class="col-md-12 col-xs-12 col-sm-12" style="margin-bottom: 40px">
+        <br />
+          <div>
+            <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
+  </progressbar>
+              <button type="button" class="btn btn-success btn-s"
+                      (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                  <span class="glyphicon glyphicon-upload"></span> Upload
+              </button>
+              <button type="button" class="btn btn-danger btn-s"
+                      (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                  <span class="glyphicon glyphicon-trash"></span> Remove
+              </button>
+          </div>
+      </div>
+    </div>
+
+    status : {{status}}<br />
+    message : {{message}}
+
+    <div class="row">
+      <div class="form-group col-md-12 col-sm-12 align-right padding-right">
+        <button type="button" class="btn btn-primary btn-lg" (click)="simpan()">Simpan</button>
+      </div>
+    </div>
+  </ba-card>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+  <ba-card title="Makalah Praseminar Mahasiswa" baCardClass="with-scroll table-panel">
+
+  </ba-card>
+</div>

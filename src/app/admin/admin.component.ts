@@ -7,6 +7,7 @@ import {DashboardAdmin} from './dashboardAdmin';
 import {PengajuanAdmin} from './pengajuanAdmin';
 import {TaAdmin} from './taAdmin';
 import {KolokiumAdmin} from './kolokiumAdmin';
+import {PraseminarAdmin} from './praseminarAdmin';
 
 
 @Component({
@@ -53,6 +54,11 @@ import {KolokiumAdmin} from './kolokiumAdmin';
     name: 'KolokiumAdmin',
     component: KolokiumAdmin,
     path: '/kolokium',
+  },
+  {
+    name: 'PraseminarAdmin',
+    component: PraseminarAdmin,
+    path: '/praseminar',
   }
 ])
 export class Admin {

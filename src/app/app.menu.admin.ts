@@ -26,5 +26,12 @@ export const menuItemsAdmin = [
     icon: 'ion-document-text',
     selected: false,
     expanded: false
+  },
+  {
+    title: 'Praseminar',
+    component: 'PraseminarAdmin',
+    icon: 'ion-code-working',
+    selected: false,
+    expanded: false
   }
 ];

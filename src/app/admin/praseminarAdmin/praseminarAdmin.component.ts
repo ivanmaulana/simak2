@@ -11,15 +11,15 @@ import {BaAppPicturePipe} from '../../theme/pipes';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
-  selector: 'kolokiumAdmin',
+  selector: 'praseminarAdmin',
   pipes: [BaAppPicturePipe],
   directives: [BaCard, AlertComponent, FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, CORE_DIRECTIVES, FORM_DIRECTIVES, PROGRESSBAR_DIRECTIVES],
   encapsulation: ViewEncapsulation.None,
-  styles: [require('./kolokiumAdmin.scss')],
-  template: require('./kolokiumAdmin.html')
+  styles: [require('./praseminarAdmin.scss')],
+  template: require('./praseminarAdmin.html')
 })
 
-export class KolokiumAdmin implements OnInit {
+export class PraseminarAdmin implements OnInit {
   private active: boolean = false;
   private jadwal: string;
   private deadline: string;
@@ -61,11 +61,11 @@ export class KolokiumAdmin implements OnInit {
   }
 
   ngOnInit(){
-    this.http.get('http://localhost:8000/jadwalKolokium')
+    this.http.get('http://localhost:8000/jadwalPraseminar')
       .map(res => res.json())
       .subscribe(data => {
         this.active = data[0]['active'];
-        this.jadwal = data[0]['jadwal_kolokium'];
+        this.jadwal = data[0]['jadwal_seminar'];
         this.deadline = data[0]['deadline'];
       })
   }
@@ -102,9 +102,9 @@ export class KolokiumAdmin implements OnInit {
   simpan(){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    this.creds = JSON.stringify({active: this.active, jadwal_kolokium: this.jadwal, deadline: this.deadline});
+    this.creds = JSON.stringify({active: this.active, jadwal_seminar: this.jadwal, deadline: this.deadline});
 
-    this.http.put("http://localhost:8000/jadwalKolokium", this.creds, {headers: headers})
+    this.http.put("http://localhost:8000/jadwalPraseminar", this.creds, {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;
