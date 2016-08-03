@@ -13,10 +13,8 @@ import {BaAppPicturePipe} from '../../theme/pipes';
   template: require('./taAdmin.html')
 })
 export class TaAdmin implements OnInit {
-  private input: string = "g64130076";
 
-  response;
-  profile = false;
+  private profile: boolean = false;
   private nim: string = "";
   private nama: string = "";
   private ipk: string = "";
@@ -32,6 +30,11 @@ export class TaAdmin implements OnInit {
   private progress_2: boolean = false;
   private progress_3: boolean = false;
   private progress_4: boolean = false;
+  private input: string;
+  private creds: string;
+  private response: string;
+  private status: boolean;
+  private message: string;
 
 
   ngOnInit(){
@@ -90,6 +93,21 @@ export class TaAdmin implements OnInit {
         this.progress_4 = data[0].progress_4;
         console.log(data);
       })
+  }
+
+  simpan(){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2, konsultasi_1: this.konsultasi_1, konsultasi_2: this.konsultasi_2,
+    pertemuan_1: this.pertemuan_1, pertemuan_2: this.pertemuan_2, progress_1: this.progress_1, progress_2: this.progress_2, progress_3: this.progress_3, progress_4: this.progress_4});
+
+    this.http.post("http://localhost:8000/ta/daftar", this.creds, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        this.status = data[0].status;
+        this.message = data[0].message;
+      }
+    )
   }
 
 }
