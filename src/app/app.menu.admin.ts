@@ -33,5 +33,12 @@ export const menuItemsAdmin = [
     icon: 'ion-code-working',
     selected: false,
     expanded: false
+  },
+  {
+    title: 'Profile',
+    component: 'ProfileAdmin',
+    icon: 'ion-person',
+    selected: false,
+    expanded: false
   }
 ];
