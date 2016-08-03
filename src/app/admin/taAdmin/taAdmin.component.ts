@@ -44,7 +44,7 @@ export class TaAdmin implements OnInit {
         this.response = data;
       })
 
-      this.http.get('http://localhost:8000/ta/daftar/'+this.input)
+      this.http.get('http://localhost:8000/ta/'+this.input)
         .map(res => res.json())
         .subscribe(data => {
           this.nim = data[0].nim;
@@ -73,7 +73,7 @@ export class TaAdmin implements OnInit {
   }
 
   openProfile(input){
-    this.http.get('http://localhost:8000/ta/daftar/'+input)
+    this.http.get('http://localhost:8000/ta/'+input)
       .map(res => res.json())
       .subscribe(data => {
         this.nim = data[0].nim;
@@ -98,10 +98,9 @@ export class TaAdmin implements OnInit {
   simpan(){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2, konsultasi_1: this.konsultasi_1, konsultasi_2: this.konsultasi_2,
-    pertemuan_1: this.pertemuan_1, pertemuan_2: this.pertemuan_2, progress_1: this.progress_1, progress_2: this.progress_2, progress_3: this.progress_3, progress_4: this.progress_4});
+    this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2});
 
-    this.http.post("http://localhost:8000/ta/daftar", this.creds, {headers: headers})
+    this.http.put("http://localhost:8000/ta/edit/", this.creds, {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;

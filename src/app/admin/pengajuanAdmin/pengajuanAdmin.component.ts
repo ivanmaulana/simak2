@@ -33,7 +33,7 @@ export class PengajuanAdmin implements OnInit {
 
 
   ngOnInit(){
-    this.http.get('http://localhost:8000/ta/daftar')
+    this.http.get('http://localhost:8000/ta/daftar/list')
       .map(res => res.json())
       .subscribe(data => {
         this.response = data;
