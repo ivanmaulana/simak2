@@ -18,8 +18,11 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
   styles: [require('./kolokiumAdmin.scss')],
   template: require('./kolokiumAdmin.html')
 })
+
 export class KolokiumAdmin implements OnInit {
   private active: boolean = false;
+  private jadwal: string;
+  private deadline: string;
 
   private profile: boolean = false;
   private nim: string = "";
@@ -58,32 +61,13 @@ export class KolokiumAdmin implements OnInit {
   }
 
   ngOnInit(){
-    this.http.get('http://localhost:8000/ta/daftar')
+    this.http.get('http://localhost:8000/jadwalKolokium')
       .map(res => res.json())
       .subscribe(data => {
-        this.response = data;
+        this.active = data[0]['active'];
+        this.jadwal = data[0]['jadwal_kolokium'];
+        this.deadline = data[0]['deadline'];
       })
-
-      this.http.get('http://localhost:8000/ta/'+this.input)
-        .map(res => res.json())
-        .subscribe(data => {
-          this.nim = data[0].nim;
-          this.nama = data[0].nama;
-          this.ipk = data[0].ipk;
-          this.topik = data[0].topik;
-          this.lab = data[0].lab;
-          this.dosen_1 = data[0].dosen_1;
-          this.dosen_2 = data[0].dosen_2;
-          this.konsultasi_1 = data[0].konsultasi_1;
-          this.konsultasi_2 = data[0].konsultasi_2;
-          this.pertemuan_1 = data[0].pertemuan_1;
-          this.pertemuan_2 = data[0].pertemuan_2;
-          this.progress_1 = data[0].progress_1;
-          this.progress_2 = data[0].progress_2;
-          this.progress_3 = data[0].progress_3;
-          this.progress_4 = data[0].progress_4;
-          console.log(data);
-        })
   }
 
   peopleTableData:Array<any>;
@@ -118,9 +102,9 @@ export class KolokiumAdmin implements OnInit {
   simpan(){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2});
+    this.creds = JSON.stringify({active: this.active, jadwal_kolokium: this.jadwal, deadline: this.deadline});
 
-    this.http.put("http://localhost:8000/ta/edit/", this.creds, {headers: headers})
+    this.http.put("http://localhost:8000/jadwalKolokium", this.creds, {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;
