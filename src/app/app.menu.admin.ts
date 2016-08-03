@@ -12,5 +12,12 @@ export const menuItemsAdmin = [
     icon: 'ion-edit',
     selected: false,
     expanded: false
+  },
+  {
+    title: 'Penentuan TA',
+    component: 'TaAdmin',
+    icon: 'ion-document',
+    selected: false,
+    expanded: false
   }
 ];

@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <ba-card title="Penentuan TA" baCardClass="with-scroll table-panel">
+      <div class="row">
+        <div class="col-md-3 col-sm-12 padding-top"><p>Cari Berdasarkan NIM : </p></div>
+        <div class="col-md-7 col-sm-12">
+          <input [(ngModel)]="input" class="form-control"/>
+        </div>
+        <div class="col-md-2 col-sm-12">
+          <button type="button" class="btn btn-primary btn-md" (click)="openProfile(input)">Cari</button>
+        </div>
+      </div>
+    </ba-card>
+  </div>
+</div>
+
+<div class="row" *ngIf="nim">
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <ba-card title="Profile Mahasiswa" baCardClass="with-scroll table-panel">
+      <div class="col-md-4">
+        <br /><br />
+        <img src="https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png" class="profile" />
+        <div class="col-md-12"><br />
+          NIM : {{nim}}
+        </div>
+        <div class="col-md-12">
+          Nama : {{nama}}
+        </div>
+      </div>
+      <div class="col-md-8">
+        <!-- Topik -->
+        <div class="form-group col-md-2 col-sm-5 col-xs-12 padding-top">
+          Topik
+        </div>
+
+        <div class="form-group col-md-10 col-sm-7 col-xs-12">
+          <textarea class="form-control" [(ngModel)]="topik"></textarea>
+        </div>
+
+        <!-- Lab -->
+        <div class="form-group col-md-2 col-sm-5 col-xs-12 padding-top">
+          Lab {{lab}}
+        </div>
+
+        <div class="form-group col-md-10 col-sm-7 col-xs-12">
+          <select [(ngModel)]="lab" class="form-control" style="height:33px">
+            <option value="1">Net Centric Computing</option>
+            <option value="2">Applied & Computational Intelligence</option>
+            <option value="3">Software Engineering & Information System</option>
+          </select>
+          <!-- <input [(ngModel)]="lab" class="form-control"/> -->
+        </div>
+
+        <!-- Dosen Ketua -->
+        <div class="form-group col-md-4 col-sm-5 col-xs-12 padding-top">
+          Pembimbing Ketua
+        </div>
+
+        <div class="form-group col-md-8 col-sm-7 col-xs-12">
+          <input [(ngModel)]="dosen_1" class="form-control"/>
+        </div>
+
+        <!-- Dosen Ketua -->
+        <div class="form-group col-md-4 col-sm-5 col-xs-12 padding-top">
+          Pembimbing Anggota
+        </div>
+
+        <div class="form-group col-md-8 col-sm-7 col-xs-12">
+          <input [(ngModel)]="dosen_2" class="form-control"/>
+        </div>
+
+      </div>
+    </ba-card>
+  </div>
+</div>
