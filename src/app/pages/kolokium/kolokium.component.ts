@@ -1,7 +1,8 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload';
+import {Http, Headers} from '@angular/http';
 
 import {BaCard} from '../../theme/components';
 
@@ -16,13 +17,33 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
   styles: [require('./kolokium.scss')],
   template: require('./kolokium.html')
 })
-export class Kolokium {
-  topik;
+export class Kolokium implements OnInit {
+  private topik;
+  private dosen_1;
+  private dosen_2;
+  private nim;
+  private nama;
+  private lab;
+
+  private active;
+  private jadwal;
+  private deadline;
+
+  private creds;
+  private status;
+  private message;
+  private response: boolean = false;
+
   max : number = 100;
 
   public uploader:FileUploader = new FileUploader({url: URL});
   public hasBaseDropZoneOver:boolean = false;
   public hasAnotherDropZoneOver:boolean = false;
+
+  ngOnInit(){
+    this.getDataMahasiswa();
+    this.getDataKolokium();
+  }
 
   public fileOverBase(e:any):void {
     this.hasBaseDropZoneOver = e;
@@ -32,24 +53,48 @@ export class Kolokium {
     this.hasAnotherDropZoneOver = e;
   }
 
-  constructor() {
-    this.topik = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae qui non vident, nihil umquam magnum ac cognitione dignum amaverunt. Nihil ad rem! Ne sit sane";
+  constructor(private http: Http) {
+    this.getDataMahasiswa();
+    this.getDataKolokium();
+
   }
 
-  public success:Array<Object> = [
-    {
-      type: 'success',
-      msg: `Perhatian ! Jadwal kolokium 2017 adalah 27 Juli 2016. Detail Lengkap`,
-      closable: true
-    }
-  ];
+  getDataMahasiswa(){
+    this.http.get('http://localhost:8000/ta/g64130076')
+      .map(res => res.json())
+      .subscribe(data => {
+        this.nim = data[0].nim;
+        this.nama = data[0].nama;
+        this.topik = data[0].topik;
+        this.dosen_1 = data[0].dosen_1;
+        this.dosen_2 = data[0].dosen_2;
+      })
+  }
 
-  public danger:Array<Object> = [
-    {
-      type: 'danger',
-      msg: `Pengisian & Upload makalah kolokium akan dibuka sampai 20 Juli 2016`,
-      closable: true
-    }
-  ]
+  getDataKolokium(){
+    this.http.get('http://localhost:8000/jadwalKolokium')
+      .map(res => res.json())
+      .subscribe(data => {
+        this.active = data[0]['active'];
+        this.jadwal = data[0]['jadwal_kolokium'];
+        this.deadline = data[0]['deadline'];
+
+        if (this.jadwal) this.response = true;
+      })
+  }
+
+  simpan(){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.creds = JSON.stringify({nim: this.nim, topik: this.topik});
+
+    this.http.put("http://localhost:8000/ta/update/", this.creds, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        this.status = data[0].status;
+        this.message = data[0].message;
+      }
+    )
+  }
 
 }
