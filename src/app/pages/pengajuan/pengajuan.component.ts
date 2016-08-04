@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, ElementRef} from '@angular/core';
+import {Component, ViewEncapsulation, ElementRef, OnInit} from '@angular/core';
 import {BaCard} from '../../theme/components';
 import {PengajuanService} from './pengajuan.service';
 import {Http, Response, HTTP_PROVIDERS, Headers} from '@angular/http';
@@ -14,7 +14,7 @@ import {Http, Response, HTTP_PROVIDERS, Headers} from '@angular/http';
   template: require('./pengajuan.html')
 })
 
-export class Pengajuan {
+export class Pengajuan implements OnInit{
   private nim: string = "G64130076";
   private topik: string = "";
   private lab: number = 0;
@@ -31,32 +31,36 @@ export class Pengajuan {
   private creds: string = "";
   status;
   message;
+  private dosen = [];
+  private count;
+
+  private c: boolean = true;
+
+  ngOnInit(){
+    this.http.get('http://localhost:8000/dosen')
+      .map(res => res.json())
+        .subscribe( data => {
+          this.count = data[0]['id'];
+          for (var i = 0; i < this.count; i++){
+            this.dosen.push(data[i]['nama']);
+          }
+        })
+  }
 
   response;
 
   public query = '';
-  public dosen = [ "Albania","Andorra","Armenia","Austria","Azerbaijan","Belarus",
-                      "Belgium","Bosnia & Herzegovina","Bulgaria","Croatia","Cyprus",
-                      "Czech Republic","Denmark","Estonia","Finland","France","Georgia",
-                      "Germany","Greece","Hungary","Iceland","Ireland","Italy","Kosovo",
-                      "Latvia","Liechtenstein","Lithuania","Luxembourg","Macedonia","Malta",
-                      "Moldova","Monaco","Montenegro","Netherlands","Norway","Poland",
-                      "Portugal","Romania","Russia","San Marino","Serbia","Slovakia","Slovenia",
-                      "Spain","Sweden","Switzerland","Turkey","Ukraine","United Kingdom","Vatican City"];
+  public query2 = '';
   public filteredList = [];
+  public filteredList2 = [];
   public elementRef;
 
   constructor(private http: Http, private pengajuanService: PengajuanService, myElement: ElementRef) {
     this.elementRef = myElement;
-    this.http.get('http://localhost:8000/dosen')
-      .map(res => res.json())
-        .subscribe( data => {
-          this.response = data;
-        })
   }
 
   filter() {
-    if (this.query !== ""){
+    if (this.query !== "" && this.query.length > 2){
         this.filteredList = this.dosen.filter(function(el){
             return el.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
         }.bind(this));
@@ -68,6 +72,33 @@ export class Pengajuan {
   select(item){
       this.query = item;
       this.filteredList = [];
+      this.c = !this.c;
+  }
+
+  reset(){
+    this.c = true;
+    this.query = "";
+  }
+
+  filter2() {
+    if (this.query2 !== "" && this.query2.length > 2){
+        this.filteredList2 = this.dosen.filter(function(el){
+            return el.toLowerCase().indexOf(this.query2.toLowerCase()) > -1;
+        }.bind(this));
+    }else{
+        this.filteredList2 = [];
+    }
+  }
+
+  select2(item){
+      this.query2 = item;
+      this.filteredList2 = [];
+      this.c = !this.c;
+  }
+
+  reset2(){
+    this.c = true;
+    this.query2 = "";
   }
 
   handleClick(event){
@@ -87,7 +118,7 @@ export class Pengajuan {
   onSubmit(){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2, konsultasi_1: this.konsultasi_1, konsultasi_2: this.konsultasi_2,
+    this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.query, dosen_2: this.query2, konsultasi_1: this.konsultasi_1, konsultasi_2: this.konsultasi_2,
     pertemuan_1: this.pertemuan_1, pertemuan_2: this.pertemuan_2, progress_1: this.progress_1, progress_2: this.progress_2, progress_3: this.progress_3, progress_4: this.progress_4});
 
     this.http.post("http://localhost:8000/ta/daftar", this.creds, {headers: headers})
