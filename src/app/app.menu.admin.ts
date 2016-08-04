@@ -40,5 +40,26 @@ export const menuItemsAdmin = [
     icon: 'ion-person',
     selected: false,
     expanded: false
-  }
+  },
+  {
+    title: 'Seminar',
+    component: 'SeminarAdmin',
+    icon: 'ion-ribbon-b',
+    selected: false,
+    expanded: false,
+    order: 700,
+    subMenu: [
+      {
+        title: 'Konferensi',
+        component: 'KonferensiAdmin',
+      },
+      {
+        title: 'Mini Conference',
+        component: 'MiconAdmin',
+      },{
+        title: 'Seminar Mandiri',
+        component: 'MandiriAdmin',
+      }
+    ]
+  },
 ];

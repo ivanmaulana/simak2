@@ -38,6 +38,12 @@
 
 ## CHANGELOG
 
+`8/4/2016`
+- add praseminar admin
+- add profile admin
+- add seminar (konferensi, micon, mandiri) admin
+- add crud to back end
+
 `8/3/2016`
 - add penentuan TA admin
 - add penentuan Kolokium admin
