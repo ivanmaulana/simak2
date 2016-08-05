@@ -61,7 +61,7 @@ export class PraseminarAdmin implements OnInit {
   }
 
   ngOnInit(){
-    this.http.get('http://localhost:8000/jadwalPraseminar')
+    this.http.get('http://210.16.120.17:8000/jadwalPraseminar')
       .map(res => res.json())
       .subscribe(data => {
         this.active = data[0]['active'];
@@ -104,7 +104,7 @@ export class PraseminarAdmin implements OnInit {
     headers.append('Content-Type', 'application/json');
     this.creds = JSON.stringify({active: this.active, jadwal_seminar: this.jadwal, deadline: this.deadline});
 
-    this.http.put("http://localhost:8000/jadwalPraseminar", this.creds, {headers: headers})
+    this.http.put("http://210.16.120.17:8000/jadwalPraseminar", this.creds, {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;

@@ -2,11 +2,9 @@ import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 
 import {BaCard} from '../../theme/components';
-import {BaAppPicturePipe} from '../../theme/pipes';
 
 @Component({
   selector: 'sidangAdmin',
-  pipes: [BaAppPicturePipe],
   directives: [BaCard],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./sidangAdmin.scss')],
@@ -34,21 +32,25 @@ export class SidangAdmin implements OnInit {
 
 
   ngOnInit(){
-    this.http.get('http://localhost:8000/ta/daftar/list')
+    this.getDataSidang();
+  }
+
+  peopleTableData:Array<any>;
+
+  constructor(private http: Http) {
+    this.getDataSidang();
+  }
+
+  getDataSidang(){
+    this.http.get('http://210.16.120.17:8000/sidang')
       .map(res => res.json())
       .subscribe(data => {
         this.response = data;
       })
   }
 
-  peopleTableData:Array<any>;
-
-  constructor(private http: Http) {
-
-  }
-
   openProfile(input){
-    this.http.get('http://localhost:8000/ta/daftar/'+input)
+    this.http.get('http://210.16.120.17:8000/ta/daftar/'+input)
       .map(res => res.json())
       .subscribe(data => {
         this.nim = data[0].nim;

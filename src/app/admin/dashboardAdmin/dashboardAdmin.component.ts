@@ -17,7 +17,7 @@ export class DashboardAdmin implements OnInit {
   response;
 
   ngOnInit(){
-    this.http.get('http://localhost:8000/ta/daftar')
+    this.http.get('http://210.16.120.17:8000/ta/daftar')
       .map(res => res.json())
       .subscribe(data => {
         this.response = data;

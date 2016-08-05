@@ -50,7 +50,7 @@ export class Dashboard implements OnInit{
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     this.creds = JSON.stringify({name : this.name});
-    this.http.post("http://localhost:8000/todo/", this.creds, {headers: headers})
+    this.http.post("http://210.16.120.17:8000/todo/", this.creds, {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;

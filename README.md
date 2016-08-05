@@ -38,6 +38,11 @@
 
 ## CHANGELOG
 
+`8/5/2016`
+- add sidang admin
+- testing crud sidang, praseminar, kolokium with nodejs
+- route to VPS backend
+
 `8/4/2016`
 - add praseminar admin
 - add profile admin

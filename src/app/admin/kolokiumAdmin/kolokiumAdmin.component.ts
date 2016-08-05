@@ -61,7 +61,7 @@ export class KolokiumAdmin implements OnInit {
   }
 
   ngOnInit(){
-    this.http.get('http://localhost:8000/jadwalKolokium')
+    this.http.get('http://210.16.120.17:8000/jadwalKolokium')
       .map(res => res.json())
       .subscribe(data => {
         this.active = data[0]['active'];
@@ -77,7 +77,7 @@ export class KolokiumAdmin implements OnInit {
   }
 
   openProfile(input){
-    this.http.get('http://localhost:8000/ta/'+input)
+    this.http.get('http://210.16.120.17:8000/ta/'+input)
       .map(res => res.json())
       .subscribe(data => {
         this.nim = data[0].nim;
@@ -104,7 +104,7 @@ export class KolokiumAdmin implements OnInit {
     headers.append('Content-Type', 'application/json');
     this.creds = JSON.stringify({active: this.active, jadwal_kolokium: this.jadwal, deadline: this.deadline});
 
-    this.http.put("http://localhost:8000/jadwalKolokium", this.creds, {headers: headers})
+    this.http.put("http://210.16.120.17:8000/jadwalKolokium", this.creds, {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;

@@ -51,7 +51,7 @@ export class Sidang {
   }
 
   getDataMahasiswa(){
-    this.http.get('http://localhost:8000/ta/g64130076')
+    this.http.get('http://210.16.120.17:8000/ta/g64130076')
       .map(res => res.json())
       .subscribe(data => {
         this.nim = data[0].nim;
@@ -63,7 +63,7 @@ export class Sidang {
   }
 
   getDataSidang(){
-    this.http.get('http://localhost:8000/ta/sidang/g64130076')
+    this.http.get('http://210.16.120.17:8000/ta/sidang/g64130076')
       .map(res => res.json())
       .subscribe(data => {
         this.nim = data[0].nim;
@@ -78,7 +78,7 @@ export class Sidang {
 
 
   filter() {
-    if (this.query !== "" && this.query.length > 1){
+    if (this.query !== "" && this.query.length > 2){
         this.filteredList = this.dosen.filter(function(el){
             return el.toLowerCase().indexOf(this.query.toLowerCase()) > -1;
         }.bind(this));
@@ -97,7 +97,7 @@ export class Sidang {
   }
 
   filter2() {
-    if (this.query2 !== "" && this.query2.length > 1){
+    if (this.query2 !== "" && this.query2.length > 2){
         this.filteredList2 = this.dosen.filter(function(el){
             return el.toLowerCase().indexOf(this.query2.toLowerCase()) > -1;
         }.bind(this));
@@ -116,7 +116,7 @@ export class Sidang {
   }
 
   getDataDosen(){
-    this.http.get('http://localhost:8000/dosen')
+    this.http.get('http://210.16.120.17:8000/dosen')
       .map(res => res.json())
         .subscribe( data => {
           this.count = data[0]['id'];
@@ -145,7 +145,7 @@ export class Sidang {
     headers.append('Content-Type', 'application/json');
     this.creds = JSON.stringify({nim: this.nim, topik: this.topik, tanggal: this.tanggal, jam: this.jam, tempat: this.tempat, penguji_ketua: this.query, penguji_anggota: this.query2});
 
-    this.http.post("http://localhost:8000/ta/sidang", this.creds, {headers: headers})
+    this.http.post("http://210.16.120.17:8000/ta/sidang", this.creds, {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;

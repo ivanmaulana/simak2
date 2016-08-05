@@ -33,7 +33,7 @@ export class PengajuanAdmin implements OnInit {
 
 
   ngOnInit(){
-    this.http.get('http://localhost:8000/ta/daftar/list')
+    this.http.get('http://210.16.120.17:8000/ta/daftar/list')
       .map(res => res.json())
       .subscribe(data => {
         this.response = data;
@@ -47,7 +47,7 @@ export class PengajuanAdmin implements OnInit {
   }
 
   openProfile(input){
-    this.http.get('http://localhost:8000/ta/daftar/'+input)
+    this.http.get('http://210.16.120.17:8000/ta/daftar/'+input)
       .map(res => res.json())
       .subscribe(data => {
         this.nim = data[0].nim;
