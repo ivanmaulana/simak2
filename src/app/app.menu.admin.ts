@@ -35,13 +35,6 @@ export const menuItemsAdmin = [
     expanded: false
   },
   {
-    title: 'Profile',
-    component: 'ProfileAdmin',
-    icon: 'ion-person',
-    selected: false,
-    expanded: false
-  },
-  {
     title: 'Seminar',
     component: 'SeminarAdmin',
     icon: 'ion-ribbon-b',
@@ -61,5 +54,18 @@ export const menuItemsAdmin = [
         component: 'MandiriAdmin',
       }
     ]
+  },{
+    title: 'Sidang',
+    component: 'SidangAdmin',
+    icon: 'ion-ribbon-b',
+    selected: false,
+    expanded: false
   },
+  {
+    title: 'Profile',
+    component: 'ProfileAdmin',
+    icon: 'ion-person',
+    selected: false,
+    expanded: false
+  }
 ];

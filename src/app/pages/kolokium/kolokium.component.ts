@@ -56,7 +56,6 @@ export class Kolokium implements OnInit {
   constructor(private http: Http) {
     this.getDataMahasiswa();
     this.getDataKolokium();
-
   }
 
   getDataMahasiswa(){

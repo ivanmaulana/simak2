@@ -37,14 +37,7 @@ export class Pengajuan implements OnInit{
   private c: boolean = true;
 
   ngOnInit(){
-    this.http.get('http://localhost:8000/dosen')
-      .map(res => res.json())
-        .subscribe( data => {
-          this.count = data[0]['id'];
-          for (var i = 0; i < this.count; i++){
-            this.dosen.push(data[i]['nama']);
-          }
-        })
+    this.getDataDosen();
   }
 
   response;
@@ -55,7 +48,7 @@ export class Pengajuan implements OnInit{
   public filteredList2 = [];
   public elementRef;
 
-  constructor(private http: Http, private pengajuanService: PengajuanService, myElement: ElementRef) {
+  constructor(private http: Http, private pengajuanService: PengajuanService,private myElement: ElementRef) {
     this.elementRef = myElement;
   }
 
@@ -113,6 +106,17 @@ export class Pengajuan implements OnInit{
     if(!inside){
         this.filteredList = [];
     }
+  }
+
+  getDataDosen(){
+    this.http.get('http://localhost:8000/dosen')
+      .map(res => res.json())
+        .subscribe( data => {
+          this.count = data[0]['id'];
+          for (var i = 0; i < this.count; i++){
+            this.dosen.push(data[i]['nama']);
+          }
+        })
   }
 
   onSubmit(){

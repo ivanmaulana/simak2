@@ -1,0 +1,126 @@
+<!-- <div *ngFor="let res of response">
+  nim : {{res.nim}}<br />
+  topik : {{res.topik}}<br />
+  lab : {{res.lab}}<br />
+  dosen_1 : {{res.lab}}<br />
+</div> -->
+
+<div class="row" *ngIf="nim">
+  <div class="col-md-4 col-sm-12 col-xs-12">
+    <ba-card title="Profil Mahasiswa" baCardClass="with-scroll">
+      <img class="profile" src="https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png"/>
+      <br /><br />
+      <p>NIM : {{nim}}</p>
+      <p>Nama : Ivan Maulana Putra</p>
+    </ba-card>
+  </div>
+
+  <div class="col-md-8 col-sm-12 col-xs-12">
+    <ba-card title="Profil Mahasiswa" baCardClass="with-scroll" style="background-color: blue">
+      <form class="row form-inline">
+
+        <!-- NIM -->
+        <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          Topik
+        </div>
+
+        <div class="form-group col-md-9 col-sm-7 col-xs-12">
+          {{topik}}
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <!-- Nama -->
+        <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          Lab
+        </div>
+
+        <div class="form-group col-md-9 col-sm-7 col-xs-12">
+          {{lab}}
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <!-- Nama -->
+        <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          Dosen Pilihan 1
+        </div>
+
+        <div class="form-group col-md-9 col-sm-7 col-xs-12">
+          {{dosen_1}}
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <!-- Alamat -->
+        <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          Dosen Pilihan 2
+        </div>
+
+        <div class="form-group col-md-9 col-sm-7 col-xs-12">
+          {{dosen_2}}
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <!-- Email -->
+        <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          Progress
+        </div>
+
+        <div class="form-group col-md-9 col-sm-7 col-xs-12">
+            <li *ngIf="progress_1">Belum melakukan apa-apa</li>
+            <li *ngIf="progress_2">Telah membaca skripsi terkait</li>
+            <li *ngIf="progress_3">Telah membaca paper terkait</li>
+            <li *ngIf="progress_4">Telah mendapatkan data yang diperlukan</li>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+      </form>
+    </ba-card>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12 col-md-12">
+    <ba-card title="List Pengajuan Tugas Akhir" baCardClass="with-scroll table-panel">
+      <div class="horizontal-scroll">
+        <table class="table table-condensed">
+          <thead>
+          <tr>
+            <th class="table-id">#</th>
+            <th>NIM</th>
+            <th>Nama</th>
+            <th>Lab</th>
+            <th>Dosen Pilihan 1</th>
+            <th>Dosen Pilihan 2</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let res of response">
+            <td class="table-id">{{ res.id }}</td>
+            <td>{{ res.nim }}</td>
+            <td>G64130076</td>
+            <td>{{ res.lab}}</td>
+            <td>{{ res.dosen_1}}</td>
+            <td>{{ res.dosen_2}}</td>
+            <td><button type="button" class="btn btn-primary btn-sm" (click)="openProfile(res.nim)"><i class="ion-eye"></i></button></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </ba-card>
+  </div>
+</div>

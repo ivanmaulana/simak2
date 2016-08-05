@@ -5,7 +5,7 @@
     <!-- nama & nim-->
     <div class="col-md-12 col-xs-12">
 
-      <div class="col-md-6 col-sm-12">
+      <div class="col-md-4 col-sm-12">
         <div class="row">
           <div class="col-md-2">
             Nama
@@ -20,18 +20,18 @@
             NIM
           </div>
           <div class="col-md-8">
-            : G64130076
+            : {{nim}}
           </div>
         </div>
       </div>
 
-      <div class="col-md-6 col-sm-12">
+      <div class="col-md-8 col-sm-12">
         <div class="row">
           <div class="col-md-5">
             Pembimbing Ketua
           </div>
           <div class="col-md-7">
-            : Bu Imas Sitanggang
+            : {{dosen_1}}
           </div>
         </div>
 
@@ -40,7 +40,7 @@
             Pembimbing Anggota
           </div>
           <div class="col-md-7">
-            : Pak Abrar Istiadi
+            : {{dosen_2}}
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@
     <!-- Judul Paper -->
     <div class="form-group col-md-12 col-xs-12">
         <label>Topik</label><br />
-        <textarea class="form-control" style="width:100%" placeholder="Judul paper kamu"></textarea>
+        <textarea class="form-control" style="width:100%" placeholder="Judul paper kamu" [(ngModel)]="topik"></textarea>
     </div>
 
     <div class="col-sm-12 col-md-12 col-xs-12">
@@ -64,17 +64,17 @@
     <!-- Tempat -->
     <div class="form-group col-md-4 col-sm-8 col-xs-12">
       <label>Tanggal</label><br />
-      <input class="form-control" type="date" name="date" style="height:36px"/>
+      <input class="form-control" type="date" name="date" style="height:36px" [(ngModel)]="tanggal"/>
     </div>
 
     <div class="form-group col-md-2 col-sm-4 col-xs-12">
       <label>Jam</label><br />
-      <input class="form-control" type="text" name="konferensi" placeholder="10.00"/>
+      <input class="form-control" type="time" name="konferensi" placeholder="10.00" style="height:35px" [(ngModel)]="jam"/>
     </div>
 
     <div class="form-group col-md-6 col-sm-12 col-xs-12">
       <label>Tempat</label><br />
-      <input class="form-control" type="text" name="konferensi" placeholder="R. Sidang Ilkom"/>
+      <input class="form-control" type="text" name="konferensi" placeholder="R. Sidang Ilkom" [(ngModel)]="tempat"/>
     </div>
 
     <div class="col-sm-12 col-md-12 col-xs-12">
@@ -83,14 +83,40 @@
 
 
     <!-- Penguji -->
-    <div class="form-group col-sm-6 col-md-6 col-xs-12">
-      <label padding-left for="pembimbing">Penguji 1</label><br />
-      <input type="text" class="form-control" id="pembimbing" placeholder="Penguji 1">
+    <div class="form-group col-sm-12 col-md-6 col-xs-12 padding-left">
+      <div class="row padding-left">
+        Penguji 1 {{query}}
+      </div>
+
+      <div class="form-group row padding-left input-group">
+        <input type="text" class="form-control validate filter-input has-error" [(ngModel)]=query (keyup)=filter() placeholder="Penguji 1">
+        <span class="input-group-btn">
+            <button class="btn btn-danger" type="button" (click)="reset()">x</button>
+        </span>
+      </div>
+      <div style="position:absolute;z-index:2" *ngIf="filteredList.length > 0">
+        <div class="row" *ngFor="#item of filteredList" class="form-control primary" (click)="select(item)">
+              {{item}}
+        </div>
+      </div>
     </div>
 
-    <div class="form-group col-sm-6 col-md-6 col-xs-12">
-      <label padding-left for="pembimbing">Penguji 2</label><br />
-      <input type="email" class="form-control" id="pembimbing" placeholder="Penguji 2">
+    <div class="form-group col-sm-12 col-md-6 col-xs-12">
+      <div class="row padding-left">
+        Penguji 2 {{query2}}
+      </div>
+
+      <div class="form-group row padding-left input-group">
+        <input type="text" class="form-control validate filter-input has-error" [(ngModel)]=query2 (keyup)=filter2() placeholder="Penguji 2">
+        <span class="input-group-btn">
+            <button class="btn btn-danger" type="button" (click)="reset2()">x</button>
+        </span>
+      </div>
+      <div style="position:absolute;z-index:1" *ngIf="filteredList2.length > 0">
+        <div *ngFor="#item of filteredList2" class="form-control primary" (click)="select2(item)">
+              {{item}}
+        </div>
+      </div>
     </div>
 
     <div class="col-sm-12 col-md-12 col-xs-12">
@@ -99,9 +125,16 @@
 
 
     <!-- Submit -->
-    <div class="section-block">
-      <label padding-left for="pembimbing">&nbsp;</label><br />
-      <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+    <div class="col-md-12 col-sm-12">
+      <div class="section-block text-right padding-right">
+        <button type="submit" class="btn btn-primary btn-lg" (click)="onSubmit()">Submit</button>
+      </div>
     </div>
+
+    <div class="col-sm-12 col-md-12 col-xs-12">
+      status : {{status}}<br />
+      message : {{message}}
+    </div>
+
   </form>
 </ba-card>
