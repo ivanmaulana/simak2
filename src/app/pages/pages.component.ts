@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {RouteConfig} from '@angular/router-deprecated';
 
 import {BaPageTop, BaContentTop, BaSidebar, BaBackTop} from '../theme/components';
@@ -114,7 +114,7 @@ import {Skl} from './skl';
     path: '/tables/...',
   }
 ])
-export class Pages {
+export class Pages implements OnInit{
 
   constructor() {
   }

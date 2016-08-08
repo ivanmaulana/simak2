@@ -67,7 +67,7 @@ export class Dashboard implements OnInit{
   }
 
   pindah(){
-    this.router.navigate(['Kolokium']);
+    this.router.navigate(['Login']);
   }
 
 }

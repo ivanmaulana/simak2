@@ -1,13 +1,12 @@
 import './app.loader.ts';
 
-import {Component, ViewEncapsulation} from '@angular/core';
-import {RouteConfig} from '@angular/router-deprecated';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {RouteConfig, Router} from '@angular/router-deprecated';
 
 import {Pages} from './pages';
 import {Admin} from './admin';
 
 import {Login} from './auth/login';
-import {Register} from './pages/register';
 import {AppState} from './app.state';
 import {BaThemeConfigProvider, BaThemeConfig} from './theme';
 import {BaThemeRun} from './theme/directives';
@@ -50,11 +49,6 @@ import {layoutPaths} from './theme/theme.constants';
     name: 'Login',
     component: Login
   },
-  {
-    path: '/register',
-    name: 'Register',
-    component: Register
-  },
   // handle any non-registered route
   // and simply redirects back to dashboard page
   // you can specify any customer 404 page while it's not built in ito ng2-admin
@@ -63,11 +57,26 @@ import {layoutPaths} from './theme/theme.constants';
     redirectTo: ['Pages']
   }
 ])
-export class App {
+export class App implements OnInit{
+  private status;
+
+  ngOnInit(){
+    this.status = localStorage.getItem('status');
+
+    if(this.status === 'dosen'){
+      this.route.navigate(['Admin']);
+    }
+    else if(this.status === 'mahasiswa'){
+      this.route.navigate(['Pages']);
+    }
+    else {
+      this.route.navigate(['Login']);
+    }
+  }
 
   isMenuCollapsed:boolean = false;
 
-  constructor(private _state:AppState, private _imageLoader:BaImageLoaderService, private _spinner:BaThemeSpinner, private _config:BaThemeConfig) {
+  constructor(private route: Router, private _state:AppState, private _imageLoader:BaImageLoaderService, private _spinner:BaThemeSpinner, private _config:BaThemeConfig) {
     this._loadImages();
 
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {

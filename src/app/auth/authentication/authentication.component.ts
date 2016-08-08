@@ -1,7 +1,7 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 
-
+import {AuthenticationService} from './authentication.service';
 import {Router} from '@angular/router-deprecated';
 
 @Component({
@@ -17,6 +17,10 @@ export class Authentication implements OnInit {
 
   constructor(private router: Router) {
 
+  }
+
+  pindah(){
+    this.router.navigate(['Admin']);
   }
 
 }
