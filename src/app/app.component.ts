@@ -6,7 +6,7 @@ import {RouteConfig} from '@angular/router-deprecated';
 import {Pages} from './pages';
 import {Admin} from './admin';
 
-import {Login} from './pages/login';
+import {Login} from './auth/login';
 import {Register} from './pages/register';
 import {AppState} from './app.state';
 import {BaThemeConfigProvider, BaThemeConfig} from './theme';

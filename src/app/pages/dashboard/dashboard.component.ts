@@ -13,13 +13,14 @@ import {Calendar} from './calendar';
 import {BaCard} from '../../theme/components';
 
 import {DashboardService} from './dashboard.service';
-import {Model} from './dashboard.model';
+
+import {Router, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 @Component({
   selector: 'dashboard',
   pipes: [],
   providers: [DashboardService, HTTP_PROVIDERS],
-  directives: [PopularApp, PieChart, TrafficChart, UsersMap, LineChart, Feed, Todo, Calendar, BaCard],
+  directives: [PopularApp, PieChart, TrafficChart, UsersMap, LineChart, Feed, Todo, Calendar, BaCard, ROUTER_DIRECTIVES],
   styles: [require('./dashboard.scss')],
   template: require('./dashboard.html')
 })
@@ -30,7 +31,6 @@ export class Dashboard implements OnInit{
   kirim;
   message;
   status;
-  model: Model[] = [];
 
 
   ngOnInit(){
@@ -40,7 +40,7 @@ export class Dashboard implements OnInit{
       });
   }
 
-  constructor(private dashService: DashboardService, private http: Http) {
+  constructor(private dashService: DashboardService, private http: Http, private router: Router) {
     this.name="angular2";
     this.status = 1;
 
@@ -64,6 +64,10 @@ export class Dashboard implements OnInit{
       });
 
     console.log(this.status);
+  }
+
+  pindah(){
+    this.router.navigate(['Kolokium']);
   }
 
 }

@@ -3,6 +3,8 @@ import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {BaCard} from '../../theme/components';
 import {Http, Headers} from '@angular/http';
 
+import {Router} from '@angular/router-deprecated';
+
 
 @Component({
   selector: 'dashboardAdmin',
@@ -24,8 +26,12 @@ export class DashboardAdmin implements OnInit {
       })
   }
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private router: Router) {
 
+  }
+
+  pindah(){
+    this.router.navigate(['KolokiumAdmin']);
   }
 
 }
