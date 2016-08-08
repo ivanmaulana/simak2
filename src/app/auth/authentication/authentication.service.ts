@@ -5,12 +5,14 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class AuthenticationService {
-  kirim;
-  private status = "";
-  message;
+  private status: string = "ivan";
 
   constructor(private http: Http){
 
+  }
+
+  getStatus(){
+    return this.status;
   }
 
 }

@@ -12,7 +12,6 @@ import {ProfileAdmin} from './profileAdmin';
 import {SeminarAdmin} from './seminarAdmin';
 import {SidangAdmin} from './sidangAdmin';
 
-
 @Component({
   selector: 'admin',
   encapsulation: ViewEncapsulation.None,

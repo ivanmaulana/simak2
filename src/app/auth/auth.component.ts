@@ -3,9 +3,6 @@ import {RouteConfig, Router} from '@angular/router-deprecated';
 
 import {BaPageTop, BaContentTop, BaSidebarAdmin, BaBackTop} from '../theme/components';
 
-import {Authentication} from './authentication';
-
-
 @Component({
   selector: 'auth',
   encapsulation: ViewEncapsulation.None,

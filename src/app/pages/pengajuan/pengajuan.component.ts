@@ -3,18 +3,34 @@ import {BaCard} from '../../theme/components';
 import {PengajuanService} from './pengajuan.service';
 import {Http, Response, HTTP_PROVIDERS, Headers} from '@angular/http';
 
+import {CompleterCmp, CompleterService, CompleterData, COMPLETER_DATA_PROVIDERS, CompleterItem} from "ng2-completer";
+
 @Component({
   selector: 'pengajuan',
   host: {'(document:click)': 'handleClick($event)',},
   pipes: [],
-  directives: [BaCard],
-  providers: [PengajuanService, HTTP_PROVIDERS],
+  directives: [BaCard, CompleterCmp],
+  providers: [PengajuanService, HTTP_PROVIDERS, COMPLETER_DATA_PROVIDERS, CompleterService],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./pengajuan.scss')],
   template: require('./pengajuan.html')
 })
 
 export class Pengajuan implements OnInit{
+
+  private searchStr: string;
+  private dataService: CompleterData;
+  private searchData = [
+    { color: 'red', value: '#f00' },
+    { color: 'green', value: '#0f0' },
+    { color: 'blue', value: '#00f' },
+    { color: 'cyan', value: '#0ff' },
+    { color: 'magenta', value: '#f0f' },
+    { color: 'yellow', value: '#ff0' },
+    { color: 'black', value: '#000' }
+  ];
+
+
   private nim: string = "G64130076";
   private topik: string = "";
   private lab: number = 0;
@@ -48,8 +64,9 @@ export class Pengajuan implements OnInit{
   public filteredList2 = [];
   public elementRef;
 
-  constructor(private http: Http, private pengajuanService: PengajuanService,private myElement: ElementRef) {
+  constructor(private completerService: CompleterService, private http: Http, private pengajuanService: PengajuanService,private myElement: ElementRef) {
     this.elementRef = myElement;
+    this.dataService = completerService.local(this.searchData, 'color', 'color');
   }
 
   filter() {
@@ -112,10 +129,12 @@ export class Pengajuan implements OnInit{
     this.http.get('http://210.16.120.17:8000/dosen')
       .map(res => res.json())
         .subscribe( data => {
-          this.count = data[0]['id'];
-          for (var i = 0; i < this.count; i++){
-            this.dosen.push(data[i]['nama']);
-          }
+          // this.count = data[0]['id'];
+          // for (var i = 0; i < this.count; i++){
+          //   this.dosen.push(data[i]['nama']);
+          // }
+
+          this.dosen = data;
         })
   }
 

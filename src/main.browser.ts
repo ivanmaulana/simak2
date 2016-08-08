@@ -14,6 +14,8 @@ import {ENV_PROVIDERS} from './platform/environment';
  * our top level component that holds all of our components
  */
 import {App, APP_PROVIDERS} from './app';
+import { disableDeprecatedForms, provideForms } from '@angular/forms';
+import {HTTP_PROVIDERS} from '@angular/http';
 
 
 /*
@@ -27,7 +29,10 @@ export function main(initialHmrState?: any): Promise<any> {
     ...ENV_PROVIDERS,
     ...DIRECTIVES,
     ...PIPES,
-    ...APP_PROVIDERS
+    ...APP_PROVIDERS,
+    HTTP_PROVIDERS,
+    disableDeprecatedForms(),
+    provideForms()
   ])
   .catch(err => console.error(err));
 
