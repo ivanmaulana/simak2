@@ -5,6 +5,8 @@ import {BaProfilePicturePipe} from '../../pipes';
 import {BaMsgCenter} from '../../components/baMsgCenter';
 import {BaScrollPosition} from '../../directives';
 
+import {Router} from '@angular/router-deprecated';
+
 @Component({
   selector: 'ba-page-top',
   styles: [require('./baPageTop.scss')],
@@ -18,7 +20,7 @@ export class BaPageTop {
   public isScrolled:boolean = false;
   public isMenuCollapsed:boolean = false;
 
-  constructor(private _state:AppState) {
+  constructor(private _state:AppState, private route: Router) {
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
       this.isMenuCollapsed = isCollapsed;
     });
@@ -31,5 +33,11 @@ export class BaPageTop {
 
   public scrolledChanged(isScrolled) {
     this.isScrolled = isScrolled;
+  }
+
+  signOut(){
+    localStorage.removeItem('status');
+
+    this.route.navigate(['Login']);
   }
 }

@@ -1,5 +1,5 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {RouteConfig} from '@angular/router-deprecated';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {RouteConfig, Router} from '@angular/router-deprecated';
 
 import {BaPageTop, BaContentTop, BaSidebarAdmin, BaBackTop} from '../theme/components';
 
@@ -79,11 +79,23 @@ import {SidangAdmin} from './sidangAdmin';
     path: '/sidang',
   }
 ])
-export class Admin {
+export class Admin implements OnInit {
+  private status;
 
-  constructor() {
+  constructor(private route: Router) {
   }
 
-  ngOnInit() {
+  ngOnInit(){
+    this.status = localStorage.getItem('status');
+
+    if(this.status === 'dosen'){
+      this.route.navigate(['Admin']);
+    }
+    else if(this.status === 'mahasiswa'){
+      this.route.navigate(['Pages']);
+    }
+    else {
+      this.route.navigate(['Login']);
+    }
   }
 }

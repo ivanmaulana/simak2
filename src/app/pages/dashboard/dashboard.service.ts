@@ -14,12 +14,12 @@ export class DashboardService {
   }
 
   getResponse(): Observable<any>{
-    return this.http.get("http://localhost:8000/todo/")
+    return this.http.get("http://210.16.120.17:8000/todo/")
       .map(res => res.json());
   }
 
   postInput(input){
-    return this.http.post("http://localhost:8000/todo/", input)
+    return this.http.post("http://210.16.120.17:8000/todo/", input)
       .map(res => res.json())
   }
 

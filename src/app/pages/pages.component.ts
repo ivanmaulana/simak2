@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
-import {RouteConfig} from '@angular/router-deprecated';
+import {RouteConfig, Router} from '@angular/router-deprecated';
 
 import {BaPageTop, BaContentTop, BaSidebar, BaBackTop} from '../theme/components';
 
@@ -115,10 +115,22 @@ import {Skl} from './skl';
   }
 ])
 export class Pages implements OnInit{
+  private status;
 
-  constructor() {
+  constructor(private route: Router) {
   }
 
-  ngOnInit() {
+  ngOnInit(){
+    this.status = localStorage.getItem('status');
+
+    if(this.status === 'dosen'){
+      this.route.navigate(['Admin']);
+    }
+    else if(this.status === 'mahasiswa'){
+      this.route.navigate(['Pages']);
+    }
+    else {
+      this.route.navigate(['Login']);
+    }
   }
 }

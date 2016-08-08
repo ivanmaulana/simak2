@@ -1,5 +1,5 @@
-import {Component, ViewEncapsulation} from '@angular/core';
-import {RouteConfig} from '@angular/router-deprecated';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {RouteConfig, Router} from '@angular/router-deprecated';
 
 import {BaPageTop, BaContentTop, BaSidebarAdmin, BaBackTop} from '../theme/components';
 
@@ -38,12 +38,14 @@ import {Authentication} from './authentication';
   // }
 ])
 
-export class Auth {
+export class Auth implements OnInit{
+  private status;
 
-  constructor() {
-    
+  constructor(private route: Router) {
+
   }
 
-  ngOnInit() {
+  ngOnInit(){
+
   }
 }
