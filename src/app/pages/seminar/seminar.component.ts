@@ -4,6 +4,8 @@ import {CORE_DIRECTIVES, NgClass, NgStyle, FORM_DIRECTIVES, } from '@angular/com
 import {TAB_DIRECTIVES, AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload';
 
+import {MahasiswaService} from '../service';
+
 import {BaCard} from '../../theme/components';
 
 // const URL = '/api/';
@@ -12,6 +14,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 @Component({
   selector: 'seminar',
   encapsulation: ViewEncapsulation.None,
+  providers: [MahasiswaService],
   directives: [BaCard, AlertComponent, TAB_DIRECTIVES, CORE_DIRECTIVES, FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, PROGRESSBAR_DIRECTIVES, FORM_DIRECTIVES],
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [require('./seminar.scss')],
@@ -33,9 +36,8 @@ export class Seminar {
   {title: 'Dynamic Title 3', content: 'Dynamic content 3', removable: true}
   ];
 
-  constructor() {
+  constructor(private data: MahasiswaService) {
     this.topik = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae qui non vident, nihil umquam magnum ac cognitione dignum amaverunt. Nihil ad rem! Ne sit sane";
-
     this.seminarBersama = "";
   }
 

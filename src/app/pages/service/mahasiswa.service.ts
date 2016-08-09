@@ -25,7 +25,7 @@ export class MahasiswaService {
   getLocalStorage(){
     this.id = localStorage.getItem('id');
     this.nim = localStorage.getItem('nim');
-    this.nama = localStorage.getItem('token');
+    this.nama = localStorage.getItem('nama');
     this.token = localStorage.getItem('token');
     this.username = localStorage.getItem('username');
     this.status = localStorage.getItem('status');

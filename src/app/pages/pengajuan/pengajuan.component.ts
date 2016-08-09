@@ -1,22 +1,24 @@
 import {Component, ViewEncapsulation, ElementRef, OnInit} from '@angular/core';
 import {BaCard} from '../../theme/components';
-import {PengajuanService} from './pengajuan.service';
 import {Http, Response, HTTP_PROVIDERS, Headers} from '@angular/http';
+
+import {MahasiswaService} from '../service';
 
 @Component({
   selector: 'pengajuan',
   host: {'(document:click)': 'handleClick($event)',},
   pipes: [],
   directives: [BaCard],
-  providers: [PengajuanService, HTTP_PROVIDERS],
+  providers: [MahasiswaService, HTTP_PROVIDERS],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./pengajuan.scss')],
   template: require('./pengajuan.html')
 })
 
 export class Pengajuan implements OnInit{
-  private nim: string = "G64130076";
-  private topik: string = "";
+  private nim: string;
+  private nama: string;
+  private topik: string;
   private lab: number = 0;
   private dosen_1: string = "";
   private dosen_2: string = "";
@@ -38,8 +40,10 @@ export class Pengajuan implements OnInit{
   private c2: boolean = true;
   private response;
 
+  private disableCheckbox: boolean = true;
+
   ngOnInit(){
-    this.getDataDosen();
+
   }
 
   public query = '';
@@ -48,8 +52,13 @@ export class Pengajuan implements OnInit{
   public filteredList2 = [];
   public elementRef;
 
-  constructor(private http: Http, private pengajuanService: PengajuanService,private myElement: ElementRef) {
+  constructor(private http: Http, private data: MahasiswaService, private myElement: ElementRef) {
+    this.getDataDosen();
     this.elementRef = myElement;
+
+    this.nim = this.data.nim;
+    this.nama = this.data.nama;
+    this.getDataPengajuan();
   }
 
   filter() {
@@ -130,9 +139,29 @@ export class Pengajuan implements OnInit{
       if (nama === this.response[i]['nama'])
       id =  this.response[i]['id'];
     }
-
-
     return id;
+  }
+
+  getDataPengajuan(){
+    this.http.get('http://210.16.120.17:8000/ta/daftar/'+this.nim)
+      .map(res => res.json())
+        .subscribe( data => {
+          this.count = data[0]['id'];
+          this.nim = data[0]['nim'];
+          this.topik = data[0]['topik'];
+          this.lab = data[0]['lab'];
+          this.dosen_1 = data[0]['dosen_1'];
+          this.konsultasi_1 = data[0]['konsultasi_1'];
+          this.pertemuan_1 = data[0]['pertemuan_1'];
+          this.dosen_2 = data[0]['dosen_2'];
+          this.konsultasi_2 = data[0]['konsultasi_2'];
+          this.pertemuan_2 = data[0]['pertemuan_2'];
+
+          this.progress_1 = data[0]['progress_1'];
+          this.progress_2 = data[0]['progress_2'];
+          this.progress_3 = data[0]['progress_3'];
+          this.progress_4 = data[0]['progress_4'];
+        })
   }
 
   onSubmit(){
@@ -141,7 +170,7 @@ export class Pengajuan implements OnInit{
     this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2, konsultasi_1: this.konsultasi_1, konsultasi_2: this.konsultasi_2,
     pertemuan_1: this.pertemuan_1, pertemuan_2: this.pertemuan_2, progress_1: this.progress_1, progress_2: this.progress_2, progress_3: this.progress_3, progress_4: this.progress_4});
 
-    this.http.post("http://210.16.120.17:8000/ta/daftar", this.creds, {headers: headers})
+    this.http.post("http://210.16.120.17:8000/ta/pengajuan", this.creds, {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;
@@ -165,18 +194,28 @@ export class Pengajuan implements OnInit{
   checkbox(input){
     if (input == 1){
       this.progress_1 = !this.progress_1;
+      this.progress_2 = false;
+      this.progress_3 = false;
+      this.progress_4 = false;
+
+      this.disableCheckbox = !this.disableCheckbox;
+
+
     }
 
     if (input == 2){
       this.progress_2 = !this.progress_2;
+      this.progress_1 = false;
     }
 
     if (input == 3){
       this.progress_3 = !this.progress_3;
+      this.progress_1 = false;
     }
 
     if (input == 4){
       this.progress_4 = !this.progress_4;
+      this.progress_1 = false;
     }
   }
 

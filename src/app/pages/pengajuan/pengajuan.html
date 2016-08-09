@@ -26,7 +26,7 @@ count = {{count}} -->
               Nama
             </div>
             <div class="col-md-8">
-              : Ivan Maulana Putra
+              : {{nama}}
             </div>
           </div>
 
@@ -35,7 +35,7 @@ count = {{count}} -->
               NIM
             </div>
             <div class="col-md-8">
-              : G64130076
+              : {{nim}}
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@ count = {{count}} -->
 
         <!-- judul topik yang diusulkan -->
         <div class="form-group col-md-12 col-xs-12">
-            <label>Topik yang diusulkan</label><br />
+            <label>Topik yang diusulkan {{topik}}</label><br />
             <textarea placeholder="Topik yang diusulkan" [(ngModel)]="topik" class="form-control" style="width:100%"></textarea>
         </div>
 
@@ -59,19 +59,19 @@ count = {{count}} -->
             <label>Pilihan Lab Keilmuan (Pilih salah satu)</label><br /><br />
             <div class="row padding-left">
               <label class="radio-inline custom-radio nowrap">
-                <input type="radio" name="lab" (click)="radioLab(1)">
+                <input type="radio" name="lab" [checked]="lab == 1" (click)="radioLab(1)">
                 <span>Net-Centric Computation</span>
               </label>
             </div><br />
             <div class="row padding-left">
               <label class="radio-inline custom-radio nowrap">
-                <input type="radio" name="lab" (click)="radioLab(2)">
+                <input type="radio" name="lab" [checked]="lab == 2" (click)="radioLab(2)">
                 <span>Applied Computational Intelligence</span>
               </label>
             </div><br />
             <div class="row padding-left">
               <label class="radio-inline custom-radio nowrap">
-                <input type="radio" name="lab" (click)="radioLab(3)">
+                <input type="radio" name="lab" [checked]="lab == 3" (click)="radioLab(3)">
                 <span>Software Engineering & Information System</span>
               </label>
             </div>
@@ -83,25 +83,25 @@ count = {{count}} -->
             <br />
             <div class="row padding-left">
               <label class="checkbox-inline custom-checkbox nowrap">
-                <input type="checkbox" (click)="checkbox(1)">
+                <input type="checkbox" [checked]="progress_1" (click)="checkbox(1)">
                 <span>Belum melakukan apa-apa</span>
               </label>
             </div><br />
             <div class="row padding-left">
               <label class="checkbox-inline custom-checkbox nowrap">
-                <input type="checkbox" (click)="checkbox(2)">
+                <input [disabled]="!disableCheckbox" [checked]="progress_2" type="checkbox" (click)="checkbox(2)">
                 <span>Telah membaca skripsi terkait</span>
               </label>
             </div><br />
             <div class="row padding-left">
               <label class="checkbox-inline custom-checkbox nowrap">
-                <input type="checkbox" (click)="checkbox(3)">
+                <input [disabled]="!disableCheckbox" [checked]="progress_3" type="checkbox" (click)="checkbox(3)">
                 <span>Telah membaca paper dan referensi terkait</span>
               </label>
             </div><br />
             <div class="row padding-left">
               <label class="checkbox-inline custom-checkbox nowrap">
-                <input type="checkbox" (click)="checkbox(4)">
+                <input [disabled]="!disableCheckbox" [checked]="progress_4" type="checkbox" (click)="checkbox(4)">
                 <span>Telah mendapatkan data yang diperlukan</span>
               </label>
             </div><br />
@@ -147,14 +147,14 @@ count = {{count}} -->
 
               <div class="col-md-3 col-sm-5 col-xs-5">
                 <label class="radio-inline custom-radio nowrap">
-                  <input type="radio" name="konsultasi_1" (click)=radio1(true) value="option1">
+                  <input type="radio" name="konsultasi_1" [checked]="konsultasi_1" (click)=radio1(true) value="option1">
                   <span>Ya</span>
                 </label>
               </div>
 
               <div class="col-md-3 col-sm-7 col-xs-7">
                 <label class="radio-inline custom-radio nowrap">
-                  <input type="radio" name="konsultasi_1" (click)=radio1(false) value="option1">
+                  <input type="radio" name="konsultasi_1" [checked]="!konsultasi_1" (click)=radio1(false) value="option1">
                   <span>Tidak</span>
                 </label>
               </div>
@@ -194,14 +194,14 @@ count = {{count}} -->
 
               <div class="col-md-3 col-sm-5 col-xs-5">
                 <label class="radio-inline custom-radio nowrap">
-                  <input type="radio" name="konsultasi_2" (click)=radio2(true) value="option1">
+                  <input type="radio" name="konsultasi_2" [checked]="konsultasi_2" (click)=radio2(true) value="option1">
                   <span>Ya</span>
                 </label>
               </div>
 
               <div class="col-md-3 col-sm-7 col-xs-7">
                 <label class="radio-inline custom-radio nowrap">
-                  <input type="radio" name="konsultasi_2" (click)=radio2(false) value="option1">
+                  <input type="radio" name="konsultasi_2" [checked]="!konsultasi_2" (click)=radio2(false) value="option1">
                   <span>Tidak</span>
                 </label>
               </div>

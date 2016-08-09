@@ -3,6 +3,7 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/commo
 import {AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload';
 import {Http, Headers} from '@angular/http';
+import {MahasiswaService} from '../service';
 
 import {BaCard} from '../../theme/components';
 
@@ -12,6 +13,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 @Component({
   selector: 'praseminar',
   encapsulation: ViewEncapsulation.None,
+  providers: [MahasiswaService],
   directives: [BaCard, AlertComponent, FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, CORE_DIRECTIVES, FORM_DIRECTIVES, PROGRESSBAR_DIRECTIVES],
   styles: [require('./praseminar.scss')],
   template: require('./praseminar.html'),
@@ -39,9 +41,12 @@ export class Praseminar implements OnInit {
 
   max : number = 100;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private data: MahasiswaService) {
     this.getDataPraseminar();
     this.getDataMahasiswa();
+
+    this.nim = this.data.nim;
+    this.nama = this.data.nama;
   }
 
   ngOnInit(){
@@ -50,15 +55,13 @@ export class Praseminar implements OnInit {
   }
 
   getDataMahasiswa(){
-    this.http.get('http://210.16.120.17:8000/ta/g64130076')
+    this.http.get('http://210.16.120.17:8000/ta/'+this.nim)
       .map(res => res.json())
       .subscribe(data => {
-        this.nim = data[0].nim;
-        this.nama = data[0].nama;
         this.topik = data[0].topik;
         this.lab = data[0].lab;
-        this.dosen_1 = data[0].dosen_1;
-        this.dosen_2 = data[0].dosen_2;
+        this.dosen_1 = data[0].dosen1;
+        this.dosen_2 = data[0].dosen2;
       })
   }
 
