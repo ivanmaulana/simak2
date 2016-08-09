@@ -1,4 +1,238 @@
-<h1>Search color</h1>
-<ng2-completer class="completer-dropdown" [(ngModel)]="searchStr" [dataService]="dataService" [minSearchLength]="0"></ng2-completer>
+<!-- <br /><br /><br /><div class="input-group">
+  <input type="text" class="form-control validate filter-input has-error" [(ngModel)]=query (keyup)=filter() [disabled]="!c">
+  <span class="input-group-btn">
+      <button class="btn btn-danger" type="button" (click)="reset()">x</button>
+  </span>
+</div>
+<div style="position:absolute;" *ngIf="filteredList.length > 0">
+  <div *ngFor="#item of filteredList" class="form-control" (click)="select(item)">
+        {{item}}
+  </div>
+</div>
 
-{{searchStr}}
+{{query}}<br />
+
+count = {{count}} -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ba-card title="Pengajuan Topik" baCardClass="with-scroll">
+      <form class="row form-inline">
+
+        <!-- nama & nim-->
+        <div class="form-group col-md-12 col-xs-12">
+          <div class="row">
+            <div class="col-md-2">
+              Nama
+            </div>
+            <div class="col-md-8">
+              : Ivan Maulana Putra
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-2">
+              NIM
+            </div>
+            <div class="col-md-8">
+              : G64130076
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <!-- judul topik yang diusulkan -->
+        <div class="form-group col-md-12 col-xs-12">
+            <label>Topik yang diusulkan</label><br />
+            <textarea placeholder="Topik yang diusulkan" [(ngModel)]="topik" class="form-control" style="width:100%"></textarea>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+        <!-- pilihan lab -->
+        <div class="form-group col-md-6 col-xs-12">
+            <label>Pilihan Lab Keilmuan (Pilih salah satu)</label><br /><br />
+            <div class="row padding-left">
+              <label class="radio-inline custom-radio nowrap">
+                <input type="radio" name="lab" (click)="radioLab(1)">
+                <span>Net-Centric Computation</span>
+              </label>
+            </div><br />
+            <div class="row padding-left">
+              <label class="radio-inline custom-radio nowrap">
+                <input type="radio" name="lab" (click)="radioLab(2)">
+                <span>Applied Computational Intelligence</span>
+              </label>
+            </div><br />
+            <div class="row padding-left">
+              <label class="radio-inline custom-radio nowrap">
+                <input type="radio" name="lab" (click)="radioLab(3)">
+                <span>Software Engineering & Information System</span>
+              </label>
+            </div>
+        </div>
+
+        <!-- perkembangan penelitian -->
+        <div class="form-group col-md-6 col-xs-12">
+            <label>Perkembangan penelitian (Boleh pilih lebih dari satu)</label><br />
+            <br />
+            <div class="row padding-left">
+              <label class="checkbox-inline custom-checkbox nowrap">
+                <input type="checkbox" (click)="checkbox(1)">
+                <span>Belum melakukan apa-apa</span>
+              </label>
+            </div><br />
+            <div class="row padding-left">
+              <label class="checkbox-inline custom-checkbox nowrap">
+                <input type="checkbox" (click)="checkbox(2)">
+                <span>Telah membaca skripsi terkait</span>
+              </label>
+            </div><br />
+            <div class="row padding-left">
+              <label class="checkbox-inline custom-checkbox nowrap">
+                <input type="checkbox" (click)="checkbox(3)">
+                <span>Telah membaca paper dan referensi terkait</span>
+              </label>
+            </div><br />
+            <div class="row padding-left">
+              <label class="checkbox-inline custom-checkbox nowrap">
+                <input type="checkbox" (click)="checkbox(4)">
+                <span>Telah mendapatkan data yang diperlukan</span>
+              </label>
+            </div><br />
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br />
+        </div>
+
+
+        <!-- dosen pembimbing -->
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <p>
+            Dosen pembimbing yang diusulkan (prioritas berdasarkan urutan)
+          </p>
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6 col-xs-12">
+          <div class="row padding-left">
+            Pilihan 1
+          </div>
+
+          <div class="form-group row padding-left input-group">
+            <input [disabled]="!c" type="text" class="form-control validate filter-input has-error" [(ngModel)]=query (keyup)=filter() placeholder="Pilihan 1">
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" (click)="reset()">x</button>
+            </span>
+          </div>
+          <div style="position:absolute;z-index:2" *ngIf="filteredList.length > 0">
+            <div class="row" *ngFor="#item of filteredList" class="form-control primary" (click)="select(item)">
+                  {{item}}
+            </div>
+          </div>
+
+
+          <div class="row">
+            <br />
+          </div>
+
+          <div class="row">
+            <div class="col-md-7">
+              <label for="pembimbing">Sudah pernah berkonsultasi ?</label><br />
+
+              <div class="col-md-3 col-sm-5 col-xs-5">
+                <label class="radio-inline custom-radio nowrap">
+                  <input type="radio" name="konsultasi_1" (click)=radio1(true) value="option1">
+                  <span>Ya</span>
+                </label>
+              </div>
+
+              <div class="col-md-3 col-sm-7 col-xs-7">
+                <label class="radio-inline custom-radio nowrap">
+                  <input type="radio" name="konsultasi_1" (click)=radio1(false) value="option1">
+                  <span>Tidak</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <label>Jumlah Pertemuan</label>
+              <input class="form-control" [(ngModel)]="pertemuan_1" placeholder="Jumlah Pertemuan"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-sm-12 col-md-6 col-xs-12">
+          <div class="row padding-left">
+            Pilihan 2
+          </div>
+
+          <div class="form-group row padding-left input-group">
+            <input [disabled]="!c2" type="text" class="form-control validate filter-input has-error" [(ngModel)]=query2 (keyup)=filter2() placeholder="Pilihan 2">
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" (click)="reset2()">x</button>
+            </span>
+          </div>
+          <div style="position:absolute;z-index:2" *ngIf="filteredList2.length > 0">
+            <div *ngFor="#item of filteredList2" class="form-control primary" (click)="select2(item)">
+                  {{item}}
+            </div>
+          </div>
+
+          <div class="row">
+            <br />
+          </div>
+
+          <div class="row">
+            <div class="col-md-7">
+              <label for="pembimbing">Sudah pernah berkonsultasi ?</label><br />
+
+              <div class="col-md-3 col-sm-5 col-xs-5">
+                <label class="radio-inline custom-radio nowrap">
+                  <input type="radio" name="konsultasi_2" (click)=radio2(true) value="option1">
+                  <span>Ya</span>
+                </label>
+              </div>
+
+              <div class="col-md-3 col-sm-7 col-xs-7">
+                <label class="radio-inline custom-radio nowrap">
+                  <input type="radio" name="konsultasi_2" (click)=radio2(false) value="option1">
+                  <span>Tidak</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="col-md-5">
+              <label>Jumlah Pertemuan</label>
+              <input class="form-control" [(ngModel)]="pertemuan_2" placeholder="Jumlah Pertemuan"/>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br /><br />
+        </div>
+
+        <!-- submit -->
+        <div class="section-block text-right padding-right">
+          <button type="submit" class="btn btn-primary btn-lg" (click)="onSubmit()">Submit</button>
+        </div>
+      </form>
+      nim : {{nim}}<br />
+      topik : {{topik}}<br />
+      lab : {{lab}}
+      progress : {{progress_1}}, {{progress_2}}, {{progress_3}}, {{progress_4}}<br />
+      dosen : {{query}}, {{query2}}<br />
+      konsultasi_1 : {{konsultasi_1}}, {{pertemuan_1}}<br />
+      konsultasi_2 : {{konsultasi_2}}, {{konsultasi_2}}<br /><br />
+
+      status : {{status}}<br />
+      message : {{message}}
+    </ba-card>
+  </div>
+</div>

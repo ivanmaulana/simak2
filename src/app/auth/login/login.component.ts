@@ -39,21 +39,23 @@ export class Login implements OnInit {
   }
 
   submit(){
-
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
     this.creds = JSON.stringify({username: this.username, password: this.password});
 
-    this.http.post("http://greentransport.ipb.ac.id/api/simak", this.creds)
+    this.http.post("http://greentransport.ipb.ac.id/api/similkom", this.creds)
       .map(res => res.json())
       .subscribe(data => {
-        // console.log(data);
-        this.status = data['status'];
-        localStorage.setItem('status', this.status);
+
+        localStorage.setItem('id', data['id']);
+        localStorage.setItem('username', data['username']);
+        localStorage.setItem('nim', data['nim']);
+        localStorage.setItem('nip', data['nip']);
+        localStorage.setItem('nama', data['nama']);
+        localStorage.setItem('email', data['email']);
+        localStorage.setItem('angkatan', data['angkatan']);
+        localStorage.setItem('status', data['status']);
+        localStorage.setItem('token', data['token']);
 
         this.checkStatus();
-
-        console.log(data['status']);
       }
     )
   }
@@ -61,10 +63,10 @@ export class Login implements OnInit {
   checkStatus(){
     this.test = localStorage.getItem('status');
 
-    if (this.test === 'mahasiswa'){
+    if (this.test === '5787be38ee03a9ae5360f54d9026465f'){
       this.route.navigate(['Pages']);
     }
-    else if (this.test === 'dosen'){
+    else if (this.test === 'ce28eed1511f631af6b2a7bb0a85d636'){
       this.route.navigate(['Admin']);
     }
   }

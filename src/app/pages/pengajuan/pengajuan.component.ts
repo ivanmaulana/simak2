@@ -3,34 +3,18 @@ import {BaCard} from '../../theme/components';
 import {PengajuanService} from './pengajuan.service';
 import {Http, Response, HTTP_PROVIDERS, Headers} from '@angular/http';
 
-import {CompleterCmp, CompleterService, CompleterData, COMPLETER_DATA_PROVIDERS, CompleterItem} from "ng2-completer";
-
 @Component({
   selector: 'pengajuan',
   host: {'(document:click)': 'handleClick($event)',},
   pipes: [],
-  directives: [BaCard, CompleterCmp],
-  providers: [PengajuanService, HTTP_PROVIDERS, COMPLETER_DATA_PROVIDERS, CompleterService],
+  directives: [BaCard],
+  providers: [PengajuanService, HTTP_PROVIDERS],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./pengajuan.scss')],
   template: require('./pengajuan.html')
 })
 
 export class Pengajuan implements OnInit{
-
-  private searchStr: string;
-  private dataService: CompleterData;
-  private searchData = [
-    { color: 'red', value: '#f00' },
-    { color: 'green', value: '#0f0' },
-    { color: 'blue', value: '#00f' },
-    { color: 'cyan', value: '#0ff' },
-    { color: 'magenta', value: '#f0f' },
-    { color: 'yellow', value: '#ff0' },
-    { color: 'black', value: '#000' }
-  ];
-
-
   private nim: string = "G64130076";
   private topik: string = "";
   private lab: number = 0;
@@ -51,12 +35,12 @@ export class Pengajuan implements OnInit{
   private count;
 
   private c: boolean = true;
+  private c2: boolean = true;
+  private response;
 
   ngOnInit(){
     this.getDataDosen();
   }
-
-  response;
 
   public query = '';
   public query2 = '';
@@ -64,9 +48,8 @@ export class Pengajuan implements OnInit{
   public filteredList2 = [];
   public elementRef;
 
-  constructor(private completerService: CompleterService, private http: Http, private pengajuanService: PengajuanService,private myElement: ElementRef) {
+  constructor(private http: Http, private pengajuanService: PengajuanService,private myElement: ElementRef) {
     this.elementRef = myElement;
-    this.dataService = completerService.local(this.searchData, 'color', 'color');
   }
 
   filter() {
@@ -83,6 +66,8 @@ export class Pengajuan implements OnInit{
       this.query = item;
       this.filteredList = [];
       this.c = !this.c;
+
+      this.dosen_1 = this.getIdDosen(this.query);
   }
 
   reset(){
@@ -103,11 +88,13 @@ export class Pengajuan implements OnInit{
   select2(item){
       this.query2 = item;
       this.filteredList2 = [];
-      this.c = !this.c;
+      this.c2 = !this.c2;
+
+      this.dosen_2 = this.getIdDosen(this.query2);
   }
 
   reset2(){
-    this.c = true;
+    this.c2 = true;
     this.query2 = "";
   }
 
@@ -129,19 +116,29 @@ export class Pengajuan implements OnInit{
     this.http.get('http://210.16.120.17:8000/dosen')
       .map(res => res.json())
         .subscribe( data => {
-          // this.count = data[0]['id'];
-          // for (var i = 0; i < this.count; i++){
-          //   this.dosen.push(data[i]['nama']);
-          // }
-
-          this.dosen = data;
+          this.count = data[0]['id'];
+          this.response = data;
+          for (var i = 0; i < this.count; i++){
+            this.dosen.push(data[i]['nama']);
+          }
         })
+  }
+
+  getIdDosen(nama){
+    let id;
+    for (var i = 0; i < this.count; i++){
+      if (nama === this.response[i]['nama'])
+      id =  this.response[i]['id'];
+    }
+
+
+    return id;
   }
 
   onSubmit(){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.query, dosen_2: this.query2, konsultasi_1: this.konsultasi_1, konsultasi_2: this.konsultasi_2,
+    this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2, konsultasi_1: this.konsultasi_1, konsultasi_2: this.konsultasi_2,
     pertemuan_1: this.pertemuan_1, pertemuan_2: this.pertemuan_2, progress_1: this.progress_1, progress_2: this.progress_2, progress_3: this.progress_3, progress_4: this.progress_4});
 
     this.http.post("http://210.16.120.17:8000/ta/daftar", this.creds, {headers: headers})

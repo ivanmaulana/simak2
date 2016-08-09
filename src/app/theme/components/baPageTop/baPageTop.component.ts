@@ -36,7 +36,7 @@ export class BaPageTop {
   }
 
   signOut(){
-    localStorage.removeItem('status');
+    localStorage.clear();
 
     this.route.navigate(['Login']);
   }
