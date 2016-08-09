@@ -18,10 +18,13 @@ import {Sidang} from './sidang';
 import {Praseminar} from './praseminar';
 import {Skl} from './skl';
 
+import {MahasiswaService} from './service';
+
 @Component({
   selector: 'pages',
   encapsulation: ViewEncapsulation.None,
   styles: [],
+  providers: [MahasiswaService],
   directives: [BaPageTop, BaSidebar, BaContentTop, BaBackTop],
   template: `
     <ba-sidebar></ba-sidebar>
@@ -117,20 +120,20 @@ import {Skl} from './skl';
 export class Pages implements OnInit{
   private status;
 
-  constructor(private route: Router) {
+  constructor(private route: Router, private mahasiswaService: MahasiswaService) {
   }
 
   ngOnInit(){
-    this.status = localStorage.getItem('status');
+    this.status = this.mahasiswaService.status;
 
     if(this.status === 'ce28eed1511f631af6b2a7bb0a85d636'){
       this.route.navigate(['Admin']);
     }
     else if(this.status === '5787be38ee03a9ae5360f54d9026465f'){
-      this.route.navigate(['Pages']);
     }
     else {
       this.route.navigate(['Login']);
     }
+
   }
 }

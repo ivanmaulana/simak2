@@ -25,7 +25,17 @@ export class Login implements OnInit {
   private test;
 
   ngOnInit(){
+    this.status = localStorage.getItem('status');
 
+    if(this.status === 'ce28eed1511f631af6b2a7bb0a85d636'){
+      this.route.navigate(['Admin']);
+    }
+    else if(this.status === '5787be38ee03a9ae5360f54d9026465f'){
+      this.route.navigate(['Pages']);
+    }
+    else {
+      this.route.navigate(['Login']);
+    }
   }
 
   peopleTableData:Array<any>;

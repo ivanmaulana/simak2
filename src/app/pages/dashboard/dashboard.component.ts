@@ -14,12 +14,14 @@ import {BaCard} from '../../theme/components';
 
 import {DashboardService} from './dashboard.service';
 
+import {MahasiswaService} from '../service';
+
 import {Router, ROUTER_DIRECTIVES} from '@angular/router-deprecated';
 
 @Component({
   selector: 'dashboard',
   pipes: [],
-  providers: [DashboardService, HTTP_PROVIDERS],
+  providers: [DashboardService, MahasiswaService, HTTP_PROVIDERS],
   directives: [PopularApp, PieChart, TrafficChart, UsersMap, LineChart, Feed, Todo, Calendar, BaCard, ROUTER_DIRECTIVES],
   styles: [require('./dashboard.scss')],
   template: require('./dashboard.html')
@@ -40,9 +42,12 @@ export class Dashboard implements OnInit{
       });
   }
 
-  constructor(private dashService: DashboardService, private http: Http, private router: Router) {
+  constructor(private dashService: DashboardService, private http: Http, private router: Router, private mahasiswaService: MahasiswaService) {
     this.name="angular2";
-    this.status = 1;
+
+    this.status = mahasiswaService.send;
+
+
 
   }
 
