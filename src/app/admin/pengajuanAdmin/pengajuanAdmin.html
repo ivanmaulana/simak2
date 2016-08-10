@@ -11,7 +11,7 @@
       <img class="profile" src="https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png"/>
       <br /><br />
       <p>NIM : {{nim}}</p>
-      <p>Nama : Ivan Maulana Putra</p>
+      <p>Nama : {{nama}}</p>
     </ba-card>
   </div>
 
@@ -112,10 +112,10 @@
           <tr *ngFor="let res of response">
             <td class="table-id">{{ res.id }}</td>
             <td>{{ res.nim }}</td>
-            <td>G64130076</td>
+            <td>{{res.nama}}</td>
             <td>{{ res.lab}}</td>
-            <td>{{ res.dosen_1}}</td>
-            <td>{{ res.dosen_2}}</td>
+            <td>{{ res.dosen1}}</td>
+            <td>{{ res.dosen2}}</td>
             <td><button type="button" class="btn btn-primary btn-sm" (click)="openProfile(res.nim)"><i class="ion-eye"></i></button></td>
           </tr>
           </tbody>

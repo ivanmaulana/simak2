@@ -55,8 +55,8 @@ export class PengajuanAdmin implements OnInit {
         this.ipk = data[0].ipk;
         this.topik = data[0].topik;
         this.lab = data[0].lab;
-        this.dosen_1 = data[0].dosen_1;
-        this.dosen_2 = data[0].dosen_2;
+        this.dosen_1 = data[0].dosen1;
+        this.dosen_2 = data[0].dosen2;
         this.konsultasi_1 = data[0].konsultasi_1;
         this.konsultasi_2 = data[0].konsultasi_2;
         this.pertemuan_1 = data[0].pertemuan_1;
@@ -65,7 +65,6 @@ export class PengajuanAdmin implements OnInit {
         this.progress_2 = data[0].progress_2;
         this.progress_3 = data[0].progress_3;
         this.progress_4 = data[0].progress_4;
-        console.log(data);
       })
   }
 

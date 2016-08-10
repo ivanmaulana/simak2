@@ -31,8 +31,8 @@ export class Pengajuan implements OnInit{
   private progress_3: boolean = false;
   private progress_4: boolean = false;
   private creds: string = "";
-  status;
-  message;
+  private status;
+  private message;
   private dosen = [];
   private count;
 
@@ -161,6 +161,11 @@ export class Pengajuan implements OnInit{
           this.progress_2 = data[0]['progress_2'];
           this.progress_3 = data[0]['progress_3'];
           this.progress_4 = data[0]['progress_4'];
+          this.query = data[0]['dosen1'];
+          this.query2 = data[0]['dosen2'];
+          if (this.query) this.c = false;
+          if (this.query2) this.c2 = false;
+
         })
   }
 

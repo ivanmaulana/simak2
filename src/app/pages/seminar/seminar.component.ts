@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, ChangeDetectionStrategy, OnInit} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 
 import {CORE_DIRECTIVES, NgClass, NgStyle, FORM_DIRECTIVES, } from '@angular/common';
 import {TAB_DIRECTIVES, AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
@@ -17,11 +17,14 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
   encapsulation: ViewEncapsulation.None,
   providers: [MahasiswaService],
   directives: [BaCard, AlertComponent, TAB_DIRECTIVES, CORE_DIRECTIVES, FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, PROGRESSBAR_DIRECTIVES, FORM_DIRECTIVES],
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styles: [require('./seminar.scss')],
   template: require('./seminar.html'),
 })
 export class Seminar implements OnInit {
+  private tab1;
+  private tab2;
+
+
   private topik;
   private dosen_1;
   private dosen_2;

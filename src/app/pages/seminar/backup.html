@@ -1,0 +1,440 @@
+<div (click)="$event.preventDefault()">
+  <tabset [justified]="true">
+
+    <!-- TAB Seminar Bersama -->
+    <tab heading="KONFERENSI NASIONAL / INTERNASIONAL">
+        <div class="row">
+          <div class="col-md-12">
+            <ba-card title="Konferensi Nasional / Internasional" baCardClass="with-scroll">
+              <form class="row form-inline">
+
+                <!-- nama & nim-->
+                <div class="col-md-12 col-xs-12">
+
+                  <div class="col-md-5 col-sm-12">
+                    <div class="row">
+                      <div class="col-md-2">
+                        Nama
+                      </div>
+                      <div class="col-md-8">
+                        : {{nama}}
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-2">
+                        NIM
+                      </div>
+                      <div class="col-md-8">
+                        : {{nim}}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-7 col-sm-12">
+                    <div class="row">
+                      <div class="col-md-5">
+                        Pembimbing Ketua
+                      </div>
+                      <div class="col-md-7">
+                        : {{dosen_1}}
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-5">
+                        Pembimbing Anggota
+                      </div>
+                      <div class="col-md-7">
+                        : {{dosen_2}}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="col-sm-12 col-md-12 col-xs-12">
+                  <br /><br />
+                </div>
+
+                <!-- Nama Konferensi -->
+                <div class="form-group col-md-12 col-xs-12">
+                    <label>Nama Konferensi</label><br />
+                    <input class="form-control" type="text" name="konferensi" placeholder="Nama konferensi"/>
+                </div>
+
+                <!-- Judul Paper -->
+                <div class="form-group col-md-12 col-xs-12">
+                    <br /><label>Judul Paper</label><br />
+                    <textarea class="form-control" style="width:100%" [(ngModel)]="seminarBersama" placeholder="Judul paper kamu"></textarea>
+                </div>
+
+                <!-- Tempat -->
+                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                  <br /><label>Tempat</label><br />
+                  <input class="form-control" type="text" name="konferensi" placeholder="Bogor, Institut Pertanian Bogor"/>
+                </div>
+
+                <!-- Tanggal -->
+                <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                  <br /><label>Tanggal</label><br />
+                  <input type="date" [(ngModel)]="date" class="form-control" style="height:36px"/>
+                </div>
+
+                <div class="col-sm-12 col-md-12 col-xs-12">
+                  <br /><br />
+                </div>
+
+                <!-- upload makalah kolokium -->
+                <div class="form-group col-md-12 col-xs-12">
+                  <label><p href primary>Upload makalah seminar</p></label><br />
+                  <input type="file" ng2FileSelect [uploader]="uploader" />
+                </div>
+
+                <!-- upload progress -->
+                <div class="col-md-12 col-xs-12 col-sm-12" style="margin-bottom: 40px">
+                  <br />
+                    <div>
+                      <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
+                </progressbar>
+                        <button type="button" class="btn btn-success btn-s"
+                                (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                            <span class="glyphicon glyphicon-upload"></span> Upload
+                        </button>
+                        <button type="button" class="btn btn-danger btn-s"
+                                (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                            <span class="glyphicon glyphicon-trash"></span> Remove
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-12 col-xs-12">
+                  <br />
+                </div>
+
+                <!-- upload makalah kolokium -->
+                <div class="form-group col-md-12 col-xs-12">
+                  <label><p href primary>Upload sertifikat sebagai pemakalah</p></label><br />
+                  <input type="file" ng2FileSelect [uploader]="uploader" />
+                </div>
+
+                <!-- upload progress -->
+                <div class="col-md-12 col-xs-12 col-sm-12" style="margin-bottom: 40px">
+                  <br />
+                    <div>
+                      <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
+                </progressbar>
+                        <button type="button" class="btn btn-success btn-s"
+                                (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                            <span class="glyphicon glyphicon-upload"></span> Upload
+                        </button>
+                        <button type="button" class="btn btn-danger btn-s"
+                                (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                            <span class="glyphicon glyphicon-trash"></span> Remove
+                        </button>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                  <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                </div>
+              </form>
+            </ba-card>
+          </div>
+        </div>
+    </tab>
+
+
+    <!-- TAB Mini Conference  -->
+    <tab heading="MINI CONFERENCE ILMU KOMPUTER IPB">
+
+      <!-- Alert message -->
+      <alert *ngFor="let alert of alerts;let i = index" [type]="alert.type">
+        {{ alert?.msg }}. <a href="#/pages/seminar"><b><i>Download disini</i></b></a>
+      </alert>
+
+      <div class="row">
+        <div class="col-md-12">
+          <ba-card title="Mini Conference" baCardClass="with-scroll">
+            <form class="row form-inline">
+
+              <!-- nama & nim-->
+              <div class="col-md-12 col-xs-12">
+
+                <div class="col-md-5 col-sm-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      Nama
+                    </div>
+                    <div class="col-md-8">
+                      : {{nama}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      NIM
+                    </div>
+                    <div class="col-md-8">
+                      : {{nim}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-7 col-sm-12">
+                  <div class="row">
+                    <div class="col-md-5">
+                      Pembimbing Ketua
+                    </div>
+                    <div class="col-md-7">
+                      : {{dosen_1}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-5">
+                      Pembimbing Anggota
+                    </div>
+                    <div class="col-md-7">
+                      : {{dosen_2}}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-sm-12 col-md-12 col-xs-12">
+                <br /><br />
+              </div>
+
+              <!-- Judul Paper -->
+              <div class="form-group col-md-12 col-xs-12">
+                  <label>Topik</label><br />
+                  <textarea class="form-control" style="width:100%" [(ngModel)]="topik" placeholder="Judul paper kamu"></textarea>
+              </div>
+
+              <!-- Tempat -->
+              <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                <br /><label>Tempat</label><br />
+                <p>
+                  R.K. CCR (sesuai ruangan di jadwal)
+                </p>
+              </div>
+
+              <!-- Tanggal -->
+              <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                <br /><label>Tanggal</label><br />
+                <p>
+                  Kamis, 20 Juli 2016
+                </p>
+              </div>
+
+              <!-- Upload Makalah -->
+              <div class="form-group col-md-12 col-xs-12">
+                <br /><label><p href primary>Upload makalah Mini Conference</p></label><br />
+                <input type="file" ng2FileSelect [uploader]="uploader" />
+              </div>
+
+              <!-- Progress Upload -->
+              <div class="form-group col-md-12 col-xs-12">
+                <br />
+                  <div>
+                    <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
+                    </progressbar>
+                      <button type="button" class="btn btn-success btn-s"
+                              (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                          <span class="glyphicon glyphicon-upload"></span> Upload
+                      </button>
+                      <button type="button" class="btn btn-danger btn-s"
+                              (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                          <span class="glyphicon glyphicon-trash"></span> Hapus
+                      </button>
+                  </div>
+              </div>
+
+              <div class="col-sm-12 col-md-12 col-xs-12">
+                <br />
+              </div>
+
+              <!-- Upload Makalah -->
+              <div class="form-group col-md-12 col-xs-12">
+                <br /><label><p href primary>Upload poster Mini Conference</p></label><br />
+                <input type="file" ng2FileSelect [uploader]="uploader" />
+              </div>
+
+              <!-- Progress Upload -->
+              <div class="form-group col-md-12 col-xs-12">
+                <br />
+                  <div>
+                    <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
+                    </progressbar>
+                      <button type="button" class="btn btn-success btn-s"
+                              (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                          <span class="glyphicon glyphicon-upload"></span> Upload
+                      </button>
+                      <button type="button" class="btn btn-danger btn-s"
+                              (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                          <span class="glyphicon glyphicon-trash"></span> Hapus
+                      </button>
+                  </div>
+                </div>
+
+
+              <div class="section-block">
+                <label padding-left for="pembimbing">&nbsp;</label><br />
+                <button type="submit" class="btn btn-primary btn-lg">Daftar</button>
+              </div>
+            </form>
+          </ba-card>
+        </div>
+      </div>
+    </tab>
+
+    <!-- TAB Seminar Mandiri -->
+    <tab heading="SEMINAR MANDIRI">
+      <div class="row">
+        <div class="col-md-12">
+          <ba-card title="Seminar Mandiri" baCardClass="with-scroll">
+            <form class="row form-inline">
+
+              <!-- nama & nim-->
+              <div class="col-md-12 col-xs-12">
+
+                <div class="col-md-5 col-sm-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      Nama
+                    </div>
+                    <div class="col-md-8">
+                      : {{nama}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      NIM
+                    </div>
+                    <div class="col-md-8">
+                      : {{nim}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-7 col-sm-12">
+                  <div class="row">
+                    <div class="col-md-5">
+                      Pembimbing Ketua
+                    </div>
+                    <div class="col-md-7">
+                      : {{dosen_1}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-5">
+                      Pembimbing Anggota
+                    </div>
+                    <div class="col-md-7">
+                      : {{dosen_2}}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-sm-12 col-md-12 col-xs-12">
+                <br /><br />
+              </div>
+
+              <!-- Judul Paper -->
+              <div class="form-group col-md-12 col-xs-12">
+                  <label>Judul Seminar</label><br />
+                  <textarea class="form-control" style="width:100%" [(ngModel)]="topik" placeholder="Judul paper kamu"></textarea>
+              </div>
+
+              <!-- Penguji Ketua -->
+              <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                <br /><br /><label>Penguji Ketua</label><br />
+                <input class="form-control" type="text" name="konferensi" placeholder="Penguji Ketua"/>
+              </div>
+
+              <!-- Penguji Anggota -->
+              <div class="form-group col-md-6 col-sm-12 col-xs-12">
+                <br /><br /><label>Penguji Anggota</label><br />
+                <input class="form-control" type="text" name="konferensi" placeholder="Penguji Anggota"/>
+              </div>
+
+              <!-- Pembahas 1 -->
+              <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                <br /><br /><label>Pembahas 1</label><br />
+                <input class="form-control" type="text" name="konferensi" placeholder="Pembahas 1"/>
+              </div>
+
+              <!-- Pembahas 2 -->
+              <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                <br /><br /><label>Pembahas 2</label><br />
+                <input class="form-control" type="text" name="konferensi" placeholder="Pembahas 2"/>
+              </div>
+
+              <!-- Pembahas 3 -->
+              <div class="form-group col-md-4 col-sm-6 col-xs-12">
+                <br /><br /><label>Pembahas 3</label><br />
+                <input class="form-control" type="text" name="konferensi" placeholder="Pembahas 3"/>
+              </div>
+
+              <!-- Tempat -->
+              <div class="form-group col-md-4 col-sm-12 col-xs-12">
+                <br /><br /><label>Tempat</label><br />
+                <input class="form-control" type="text" name="konferensi" placeholder="Ruang Sidang Dept. Ilmu Komputer"/>
+              </div>
+
+              <!-- Tempat -->
+              <div class="form-group col-md-4 col-sm-12 col-xs-12">
+                <br /><br /><label>Jam</label><br />
+                <input class="form-control" type="text" name="konferensi" placeholder="10.30"/>
+              </div>
+
+              <!-- Tanggal -->
+              <div class="form-group col-md-4 col-sm-12 col-xs-12">
+                <br /><br /><label>Tanggal</label><br />
+                <input type="date" [(ngModel)]="date" class="form-control" style="height:36px"/>
+              </div>
+
+              <!-- Upload Makalah -->
+              <div class="form-group col-md-12 col-xs-12">
+                <br /><br /><label><p href primary>Upload makalah seminar</p></label><br />
+                <input type="file" ng2FileSelect [uploader]="uploader" />
+              </div>
+
+              <!-- Progress Upload -->
+              <div class="form-group col-md-12 col-xs-12">
+                <br />
+                  <div>
+                    <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
+                    </progressbar>
+                      <button type="button" class="btn btn-success btn-s"
+                              (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                          <span class="glyphicon glyphicon-upload"></span> Upload
+                      </button>
+                      <button type="button" class="btn btn-danger btn-s"
+                              (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                          <span class="glyphicon glyphicon-trash"></span> Hapus
+                      </button>
+                  </div>
+                </div>
+            </form>
+
+            <!-- Submit -->
+            <form class="form-group row form-inline">
+              <div class="section-block">
+                <label padding-left for="pembimbing">&nbsp;</label><br />
+                <button type="submit" class="btn btn-primary btn-lg">Daftar</button>
+              </div>
+            </form>
+          </ba-card>
+        </div>
+      </div>
+
+    </tab>
+  </tabset>
+</div>

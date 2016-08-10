@@ -131,7 +131,7 @@ count = {{count}} -->
             </span>
           </div>
           <div style="position:absolute;z-index:2" *ngIf="filteredList.length > 0">
-            <div class="row" *ngFor="#item of filteredList" class="form-control primary" (click)="select(item)">
+            <div class="row" *ngFor="let item of filteredList" class="form-control primary" (click)="select(item)">
                   {{item}}
             </div>
           </div>
@@ -179,7 +179,7 @@ count = {{count}} -->
             </span>
           </div>
           <div style="position:absolute;z-index:2" *ngIf="filteredList2.length > 0">
-            <div *ngFor="#item of filteredList2" class="form-control primary" (click)="select2(item)">
+            <div *ngFor="let item of filteredList2" class="form-control primary" (click)="select2(item)">
                   {{item}}
             </div>
           </div>
