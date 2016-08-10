@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {RouteConfig, Router} from '@angular/router-deprecated';
+import {DataService} from './data';
 
 import {BaPageTop, BaContentTop, BaSidebarAdmin, BaBackTop} from '../theme/components';
 

@@ -4,14 +4,12 @@ import {BaCard} from '../../theme/components';
 import {Http, Headers} from '@angular/http';
 
 import {Router} from '@angular/router-deprecated';
-import {AuthenticationService} from '../../auth/authentication';
 
 
 @Component({
   selector: 'dashboardAdmin',
   pipes: [],
   directives: [BaCard],
-  providers: [AuthenticationService],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./dashboardAdmin.scss')],
   template: require('./dashboardAdmin.html')
@@ -29,8 +27,7 @@ export class DashboardAdmin implements OnInit {
       })
   }
 
-  constructor(private http: Http, private router: Router, private auth: AuthenticationService) {
-    this.status = this.auth.getStatus();
+  constructor(private http: Http, private router: Router) {
   }
 
   pindah(){

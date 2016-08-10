@@ -1,6 +1,3 @@
-<p>
-  Pilih jenis seminar :
-</p>
 <div (click)="$event.preventDefault()">
   <tabset [justified]="true">
 
@@ -20,7 +17,7 @@
                         Nama
                       </div>
                       <div class="col-md-8">
-                        : Ivan Maulana Putra
+                        : {{nama}}
                       </div>
                     </div>
 
@@ -29,7 +26,7 @@
                         NIM
                       </div>
                       <div class="col-md-8">
-                        : G64130076
+                        : {{nim}}
                       </div>
                     </div>
                   </div>
@@ -40,7 +37,7 @@
                         Pembimbing Ketua
                       </div>
                       <div class="col-md-7">
-                        : Bu Imas Sitanggang
+                        : {{dosen_1}}
                       </div>
                     </div>
 
@@ -49,7 +46,7 @@
                         Pembimbing Anggota
                       </div>
                       <div class="col-md-7">
-                        : Pak Abrar Istiadi
+                        : {{dosen_2}}
                       </div>
                     </div>
                   </div>
@@ -170,7 +167,7 @@
                       Nama
                     </div>
                     <div class="col-md-8">
-                      : Ivan Maulana Putra
+                      : {{nama}}
                     </div>
                   </div>
 
@@ -179,7 +176,7 @@
                       NIM
                     </div>
                     <div class="col-md-8">
-                      : G64130076
+                      : {{nim}}
                     </div>
                   </div>
                 </div>
@@ -190,7 +187,7 @@
                       Pembimbing Ketua
                     </div>
                     <div class="col-md-7">
-                      : Bu Imas Sitanggang
+                      : {{dosen_1}}
                     </div>
                   </div>
 
@@ -199,7 +196,7 @@
                       Pembimbing Anggota
                     </div>
                     <div class="col-md-7">
-                      : Pak Abrar Istiadi
+                      : {{dosen_2}}
                     </div>
                   </div>
                 </div>
@@ -309,7 +306,7 @@
                       Nama
                     </div>
                     <div class="col-md-8">
-                      : Ivan Maulana Putra
+                      : {{nama}}
                     </div>
                   </div>
 
@@ -318,7 +315,7 @@
                       NIM
                     </div>
                     <div class="col-md-8">
-                      : G64130076
+                      : {{nim}}
                     </div>
                   </div>
                 </div>
@@ -329,7 +326,7 @@
                       Pembimbing Ketua
                     </div>
                     <div class="col-md-7">
-                      : Bu Imas Sitanggang
+                      : {{dosen_1}}
                     </div>
                   </div>
 
@@ -338,7 +335,7 @@
                       Pembimbing Anggota
                     </div>
                     <div class="col-md-7">
-                      : Pak Abrar Istiadi
+                      : {{dosen_2}}
                     </div>
                   </div>
                 </div>
@@ -353,22 +350,6 @@
               <div class="form-group col-md-12 col-xs-12">
                   <label>Judul Seminar</label><br />
                   <textarea class="form-control" style="width:100%" [(ngModel)]="topik" placeholder="Judul paper kamu"></textarea>
-              </div>
-
-              <!-- Pembimbing Ketua -->
-              <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                <br /><br /><label>Pembimbing Ketua</label><br />
-                <p>
-                  Bu Imas Sitanggang
-                </p>
-              </div>
-
-              <!-- Pembimbing Anggota -->
-              <div class="form-group col-md-6 col-sm-12 col-xs-12">
-                <br /><br /><label>Pembimbing Anggota</label><br />
-                <p>
-                  Pak Abrar Istiadi
-                </p>
               </div>
 
               <!-- Penguji Ketua -->

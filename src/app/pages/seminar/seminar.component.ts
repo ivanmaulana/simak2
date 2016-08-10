@@ -1,8 +1,9 @@
-import {Component, ViewEncapsulation, ChangeDetectionStrategy} from '@angular/core';
+import {Component, ViewEncapsulation, ChangeDetectionStrategy, OnInit} from '@angular/core';
 
 import {CORE_DIRECTIVES, NgClass, NgStyle, FORM_DIRECTIVES, } from '@angular/common';
 import {TAB_DIRECTIVES, AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload';
+import {Http, Headers} from '@angular/http';
 
 import {MahasiswaService} from '../service';
 
@@ -20,8 +21,14 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
   styles: [require('./seminar.scss')],
   template: require('./seminar.html'),
 })
-export class Seminar {
-  public topik: string;
+export class Seminar implements OnInit {
+  private topik;
+  private dosen_1;
+  private dosen_2;
+  private nim;
+  private nama;
+  private lab;
+
   public content: string;
   public date: string;
   public seminarBersama: string;
@@ -30,15 +37,29 @@ export class Seminar {
   public hasBaseDropZoneOver:boolean = false;
   public hasAnotherDropZoneOver:boolean = false;
 
-  public tabs:Array<any> = [
-  {title: 'Dynamic Title 1', content: 'Dynamic content 1'},
-  {title: 'Dynamic Title 2', content: 'Dynamic content 2', disabled: true},
-  {title: 'Dynamic Title 3', content: 'Dynamic content 3', removable: true}
-  ];
+  ngOnInit(){
+    this.getDataMahasiswa();
+  }
 
-  constructor(private data: MahasiswaService) {
-    this.topik = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quae qui non vident, nihil umquam magnum ac cognitione dignum amaverunt. Nihil ad rem! Ne sit sane";
-    this.seminarBersama = "";
+  constructor(private data: MahasiswaService, private http: Http) {
+    this.nim = this.data.nim;
+    this.nama = this.data.nama;
+    this.dosen_1 = this.data.dosen_1;
+    this.dosen_2 = this.data.dosen_2;
+    this.topik = this.data.topik;
+
+    this.getDataMahasiswa();
+  }
+
+  getDataMahasiswa(){
+    this.http.get('http://210.16.120.17:8000/ta/'+this.nim)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.topik = data[0].topik;
+        this.lab = data[0].lab;
+        this.dosen_1 = data[0].dosen1;
+        this.dosen_2 = data[0].dosen2;
+      })
   }
 
   public fileOverBase(e:any):void {
@@ -48,35 +69,5 @@ export class Seminar {
   public fileOverAnother(e:any):void {
     this.hasAnotherDropZoneOver = e;
   }
-
-  public success:Array<Object> = [
-    {
-      type: 'success',
-      msg: `Perhatian ! Jadwal praseminar2017 adalah 27 Juli 2016. Detail Lengkap`,
-      closable: true
-    }
-  ];
-
-  public danger:Array<Object> = [
-    {
-      type: 'danger',
-      msg: `Pengisian & Upload makalah praseminar akan dibuka sampai 20 Juli 2016`,
-      closable: true
-    }
-  ]
-
-  public alertMe():void {
-    setTimeout(function ():void {
-      alert('You\'ve selected the alert tab!');
-    });
-  };
-
-  public setActiveTab(index:number):void {
-    this.tabs[index].active = true;
-  };
-
-  public removeTabHandler(/*tab:any*/):void {
-    console.log('Remove Tab handler');
-  };
 
 }

@@ -42,11 +42,14 @@ export class Praseminar implements OnInit {
   max : number = 100;
 
   constructor(private http: Http, private data: MahasiswaService) {
-    this.getDataPraseminar();
-    this.getDataMahasiswa();
 
     this.nim = this.data.nim;
     this.nama = this.data.nama;
+    this.dosen_1 = this.data.dosen_1;
+    this.dosen_2 = this.data.dosen_2;
+    
+    this.getDataPraseminar();
+    this.getDataMahasiswa();
   }
 
   ngOnInit(){
@@ -58,10 +61,10 @@ export class Praseminar implements OnInit {
     this.http.get('http://210.16.120.17:8000/ta/'+this.nim)
       .map(res => res.json())
       .subscribe(data => {
-        this.topik = data[0].topik;
-        this.lab = data[0].lab;
-        this.dosen_1 = data[0].dosen1;
-        this.dosen_2 = data[0].dosen2;
+        this.topik = data[0]['topik'];
+        this.lab = data[0]['lab'];
+        this.dosen_1 = data[0]['dosen1'];
+        this.dosen_2 = data[0]['dosen2'];
       })
   }
 
