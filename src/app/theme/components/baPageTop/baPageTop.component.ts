@@ -16,11 +16,18 @@ import {Router} from '@angular/router-deprecated';
   encapsulation: ViewEncapsulation.None
 })
 export class BaPageTop {
+  private date;
 
   public isScrolled:boolean = false;
   public isMenuCollapsed:boolean = false;
 
   constructor(private _state:AppState, private route: Router) {
+    this.date = new Date();
+
+    setInterval(() => {
+      this.date = new Date();
+    }, 1000);
+
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
       this.isMenuCollapsed = isCollapsed;
     });

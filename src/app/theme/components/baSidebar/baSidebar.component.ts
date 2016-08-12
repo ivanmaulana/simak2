@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, ViewEncapsulation} from '@angular/core';
+import {Component, ElementRef, HostListener, ViewEncapsulation, Attribute} from '@angular/core';
 import {Router} from '@angular/router-deprecated';
 
 import {AppState} from '../../../app.state';
@@ -15,6 +15,7 @@ import {BaSidebarService} from './baSidebar.service';
   directives: [BaSlimScroll]
 })
 export class BaSidebar {
+  private date;
 
   public menuItems:Array<any>;
   public menuHeight:number;
@@ -32,7 +33,15 @@ export class BaSidebar {
   constructor(private _elementRef:ElementRef,
               private _router:Router,
               private _sidebarService:BaSidebarService,
-              private _state:AppState) {
+              private _state:AppState,
+              @Attribute("format") format) {
+
+    // this.format = format;
+    this.date =  new Date();
+
+    setInterval(() => {
+    this.date =  new Date();
+    }, 1000);
 
     this.menuItems = this._sidebarService.getMenuItems();
     this._onRouteChange = this._router.root.subscribe((path) => this._selectMenuItem());

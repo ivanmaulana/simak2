@@ -37,7 +37,8 @@ import {layoutPaths} from './theme/theme.constants';
   {
     path: '/mahasiswa/...',
     name: 'Pages',
-    component: Pages
+    component: Pages,
+    useAsDefault: true
   },
   {
     path: '/admin/...',
@@ -52,8 +53,7 @@ import {layoutPaths} from './theme/theme.constants';
   {
     path: '/login',
     name: 'Login',
-    component: Login,
-    useAsDefault: true
+    component: Login
   },
   // handle any non-registered route
   // and simply redirects back to dashboard page
@@ -67,17 +67,17 @@ export class App implements OnInit{
   private status;
 
   ngOnInit(){
-    this.status = localStorage.getItem('status');
-
-    if(this.status === 'dosen'){
-      this.route.navigate(['Admin']);
-    }
-    else if(this.status === 'mahasiswa'){
-      this.route.navigate(['Pages']);
-    }
-    else {
-      this.route.navigate(['Login']);
-    }
+    // this.status = localStorage.getItem('status');
+    //
+    // if(this.status === 'dosen'){
+    //   this.route.navigate(['Admin']);
+    // }
+    // else if(this.status === 'mahasiswa'){
+    //   this.route.navigate(['Pages']);
+    // }
+    // else {
+    //   this.route.navigate(['Login']);
+    // }
   }
 
   isMenuCollapsed:boolean = false;
