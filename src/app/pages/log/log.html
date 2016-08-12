@@ -1,124 +1,182 @@
-<div class="row">
-  <div class="col-md-12">
-    <ba-card title="Log Bimbingan" baCardClass="with-scroll">
-      <form class="row form-inline">
+<div class="row padding">
 
-        <!-- nama & nim-->
-        <div class="col-md-12 col-xs-12">
+  <div class="align-right">
+    <button *ngIf="!click" class="btn btn-primary" (click)="tulis()"><i class="ion-edit"></i>
+      <span *ngIf="!click" style="padding-left:5px">Tulis Log</span>
+    </button>
+    <button *ngIf="click" class="btn btn-default" (click)="tulis()"><i class="ion-arrow-right-c"></i>
+      <span style="padding-left:5px">Tutup Tulis Log</span>
+    </button>
+  </div><br />
 
-          <div class="col-md-4 col-sm-12">
-            <div class="row">
-              <div class="col-md-2">
-                Nama
+  <div *ngIf="click">
+    <div class="col-md-12">
+      <ba-card title="Log Bimbingan" baCardClass="with-scroll">
+        <form class="row form-inline">
+
+          <!-- nama & nim-->
+          <div class="col-md-12 col-xs-12">
+
+            <div class="col-md-4 col-sm-12">
+              <div class="row">
+                <div class="col-md-2">
+                  Nama
+                </div>
+                <div class="col-md-8">
+                  : {{nama}}
+                </div>
               </div>
-              <div class="col-md-8">
-                : {{nama}}
+
+              <div class="row">
+                <div class="col-md-2">
+                  NIM
+                </div>
+                <div class="col-md-8">
+                  : {{nim}}
+                </div>
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-md-2">
-                NIM
+            <div class="col-md-8 col-sm-12">
+              <div class="row">
+                <div class="col-md-5">
+                  Pembimbing Ketua
+                </div>
+                <div class="col-md-7">
+                  : {{dosen_1}}
+                </div>
               </div>
-              <div class="col-md-8">
-                : {{nim}}
+
+              <div class="row">
+                <div class="col-md-5">
+                  Pembimbing Anggota
+                </div>
+                <div class="col-md-7">
+                  : {{dosen_2}}
+                </div>
               </div>
             </div>
+
           </div>
 
-          <div class="col-md-8 col-sm-12">
-            <div class="row">
-              <div class="col-md-5">
-                Pembimbing Ketua
-              </div>
-              <div class="col-md-7">
-                : {{dosen_1}}
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-5">
-                Pembimbing Anggota
-              </div>
-              <div class="col-md-7">
-                : {{dosen_2}}
-              </div>
-            </div>
+          <div class="col-sm-12 col-md-12 col-xs-12">
+            <br /><br />
           </div>
 
-        </div>
+          <!-- tanggal -->
+          <div class="col-sm-12 col-md-4 col-xs-12">
+            <label>Tanggal</label><br />
+            <input type="date" class="form-control" [(ngModel)]="date" style="height:34px"/>
+            {{date}}
+          </div>
 
-        <div class="col-sm-12 col-md-12 col-xs-12">
-          <br /><br />
-        </div>
+          <!-- jam -->
+          <div class="col-sm-12 col-md-4 col-xs-12">
+            <label>Jam</label><br />
+            <input type="time" class="form-control" [(ngModel)]="jam" style="height:34px"/>
+            {{jam}}
+          </div>
 
-        <!-- tanggal -->
-        <div class="col-sm-12 col-md-4 col-xs-12">
-          <label>Tanggal</label><br />
-          <input type="date" class="form-control" [(ngModel)]="date" style="height:34px"/>
-          {{date}}
-        </div>
+          <!-- tempat -->
+          <div class="col-sm-12 col-md-4 col-xs-12">
+            <label>Tempat</label><br />
+            <input type="text" class="form-control" [(ngModel)]="tempat" style="height:34px"/>
+          </div>
 
-        <!-- jam -->
-        <div class="col-sm-12 col-md-4 col-xs-12">
-          <label>Jam</label><br />
-          <input type="time" class="form-control" [(ngModel)]="jam" style="height:34px"/>
-          {{jam}}
-        </div>
+          <div class="col-sm-12 col-md-12 col-xs-12">
+            <br />
+          </div>
 
-        <!-- tempat -->
-        <div class="col-sm-12 col-md-4 col-xs-12">
-          <label>Tempat</label><br />
-          <input type="text" class="form-control" [(ngModel)]="tempat" style="height:34px"/>
-        </div>
+          <!-- judul log bimbingan -->
+          <div class="form-group col-md-12 col-xs-12 ">
+              <label>Topik Log</label><br />
+              <input placeholder="Tulis progress kamu disini" class="form-control" style="width:100%" [(ngModel)]="text">
+          </div>
 
-        <div class="col-sm-12 col-md-12 col-xs-12">
-          <br />
-        </div>
+          <!-- progress yang sudah dilakukan -->
+          <div class="form-group col-md-12 col-xs-12 has-success">
+              <br /><label>Progress</label><br />
+              <textarea placeholder="Tulis progress kamu disini" class="form-control" style="width:100%" [(ngModel)]="text"></textarea>
+          </div>
 
-        <!-- judul log bimbingan -->
-        <div class="form-group col-md-12 col-xs-12 ">
-            <label>Judul Log</label><br />
-            <input placeholder="Tulis progress kamu disini" class="form-control" style="width:100%" [(ngModel)]="text">
-        </div>
+          <!-- kendala yang dihadapi -->
+          <div class="form-group col-md-12 col-xs-12 has-error">
+              <br /><label>Kendala yang dihadapi</label><br />
+              <textarea placeholder="Tulis kendala yang kamu hadapi disini" class="form-control" style="width:100%"></textarea>
+          </div><br />
 
-        <!-- progress yang sudah dilakukan -->
-        <div class="form-group col-md-12 col-xs-12 has-success">
-            <br /><label>Progress</label><br />
-            <textarea placeholder="Tulis progress kamu disini" class="form-control" style="width:100%" [(ngModel)]="text"></textarea>
-        </div>
+          <!-- tahap selanjutnya -->
+          <div class="form-group col-md-12 col-xs-12 has-warning">
+              <br /><label>Selanjutnya</label><br />
+              <textarea placeholder="Tulis apa yang akan kamu lakukan setelahnya" class="form-control" style="width:100%"></textarea>
+          </div>
 
-        <!-- kendala yang dihadapi -->
-        <div class="form-group col-md-12 col-xs-12 has-error">
-            <br /><label>Kendala yang dihadapi</label><br />
-            <textarea placeholder="Tulis kendala yang kamu hadapi disini" class="form-control" style="width:100%"></textarea>
-        </div><br />
+          <div class="col-sm-12 col-md-12 col-xs-12">
+            <br />
+          </div>
 
-        <!-- tahap selanjutnya -->
-        <div class="form-group col-md-12 col-xs-12 has-warning">
-            <br /><label>Selanjutnya</label><br />
-            <textarea placeholder="Tulis apa yang akan kamu lakukan setelahnya" class="form-control" style="width:100%"></textarea>
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-xs-12">
-          <br />
-        </div>
-
-        <!-- button submit -->
-        <div class="form-group text-right col-md-12 col-xs-12 col-sm-12">
-          <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-        </div>
-      </form><br />
-    </ba-card>
+          <!-- button submit -->
+          <div class="form-group text-right col-md-12 col-xs-12 col-sm-12">
+            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+          </div>
+        </form><br />
+      </ba-card>
+    </div>
   </div>
-</div>
 
 
-<!-- List Log -->
-<div class="row">
-  <div class="col-md-12">
-    <ba-card title="List Log Bimbingan" baCardClass="with-scroll">
-      Ini Log
-    </ba-card>
+  <!-- List Log -->
+
+  <div class="row">
+    <div class="col-lg-12 col-md-12">
+      <ba-card title="Log Bimbingan" baCardClass="with-scroll">
+          <!-- <table class="table table-condensed">
+            <thead>
+            <tr>
+              <th class="table-id">#</th>
+              <th>NIM</th>
+              <th>Nama</th>
+              <th>Lab</th>
+              <th>Dosen Pilihan 1</th>
+              <th>Dosen Pilihan 2</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let res of response">
+              <td class="table-id">{{ res.id }}</td>
+              <td>{{ res.nim }}</td>
+              <td>{{res.nama}}</td>
+              <td>{{ res.lab}}</td>
+              <td>{{ res.dosen1}}</td>
+              <td>{{ res.dosen2}}</td>
+              <td><button type="button" class="btn btn-primary btn-sm" (click)="openProfile(res.nim)"><i class="ion-eye"></i></button></td>
+            </tr>
+            </tbody>
+          </table> -->
+
+        <div class="row" *ngFor="let res of response">
+          <div class="col-md-1 col-sm-2 col-xs-3">
+            <img class="photo-icon" src="http://tabian.kpru.ac.th/home/images/User-Icon.png" />
+          </div>
+          <div class="col-md-8 col-sm-10 col-xs-9">
+            {{res.topik}}<br />
+            <span class="grey">{{timestamp}}</span>
+          </div>
+          <div class="col-sm-2 col-sm-2 col-xs-2">
+
+          </div>
+          <div class="col-md-3 col-sm-10 col-xs-10">
+            {{timestamp}}
+          </div>
+        </div>
+
+      </ba-card>
+    </div>
   </div>
+
+  <!-- <div *ngFor="let time of timestamp">
+    {{timestamp}}
+  </div> -->
+
 </div>

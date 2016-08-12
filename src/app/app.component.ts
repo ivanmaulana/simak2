@@ -83,6 +83,11 @@ export class App implements OnInit{
   isMenuCollapsed:boolean = false;
 
   constructor(private route: Router, private _state:AppState, private _imageLoader:BaImageLoaderService, private _spinner:BaThemeSpinner, private _config:BaThemeConfig) {
+    localStorage.setItem("nim", "G64130076");
+    localStorage.setItem("nama", "IVAN MAULANA PUTRA");
+    localStorage.setItem("token", "edcb8169a18d121cbdaa7a9b3b38951c");
+    localStorage.setItem("status", "5787be38ee03a9ae5360f54d9026465f");
+
     this._loadImages();
 
     this._state.subscribe('menu.isCollapsed', (isCollapsed) => {
