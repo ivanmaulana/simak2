@@ -124,16 +124,16 @@ export class Pages implements OnInit{
   }
 
   ngOnInit(){
-    this.status = this.mahasiswaService.status;
-
-    if(this.status === 'ce28eed1511f631af6b2a7bb0a85d636'){
-      this.route.navigate(['Admin']);
-    }
-    else if(this.status === '5787be38ee03a9ae5360f54d9026465f'){
-    }
-    else {
-      this.route.navigate(['Login']);
-    }
+    // this.status = this.mahasiswaService.status;
+    //
+    // if(this.status === 'ce28eed1511f631af6b2a7bb0a85d636'){
+    //   this.route.navigate(['Admin']);
+    // }
+    // else if(this.status === '5787be38ee03a9ae5360f54d9026465f'){
+    // }
+    // else {
+    //   this.route.navigate(['Login']);
+    // }
 
   }
 }

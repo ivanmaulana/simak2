@@ -54,6 +54,7 @@ export class Login implements OnInit {
     this.http.post("http://greentransport.ipb.ac.id/api/similkom", this.creds)
       .map(res => res.json())
       .subscribe(data => {
+        this.test = data['token'];
 
         localStorage.setItem('id', data['id']);
         localStorage.setItem('username', data['username']);
@@ -71,14 +72,14 @@ export class Login implements OnInit {
   }
 
   checkStatus(){
-    this.test = localStorage.getItem('status');
-
-    if (this.test === '5787be38ee03a9ae5360f54d9026465f'){
-      this.route.navigate(['Pages']);
-    }
-    else if (this.test === 'ce28eed1511f631af6b2a7bb0a85d636'){
-      this.route.navigate(['Admin']);
-    }
+    // this.test = localStorage.getItem('status');
+    //
+    // if (this.test === '5787be38ee03a9ae5360f54d9026465f'){
+    //   this.route.navigate(['Pages']);
+    // }
+    // else if (this.test === 'ce28eed1511f631af6b2a7bb0a85d636'){
+    //   this.route.navigate(['Admin']);
+    // }
   }
 
 }

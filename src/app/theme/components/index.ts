@@ -2,6 +2,7 @@ export * from './baPageTop';
 export * from './baMsgCenter';
 export * from './baSidebar';
 export * from './baSidebarAdmin';
+export * from './baSidebarDosen';
 export * from './baContentTop';
 export * from './baCard';
 export * from './baAmChart';

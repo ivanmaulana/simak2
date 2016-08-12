@@ -5,6 +5,7 @@ import {RouteConfig, Router} from '@angular/router-deprecated';
 
 import {Pages} from './pages';
 import {Admin} from './admin';
+import {Dosen} from './dosen';
 
 import {Login} from './auth/login';
 import {AppState} from './app.state';
@@ -36,8 +37,7 @@ import {layoutPaths} from './theme/theme.constants';
   {
     path: '/mahasiswa/...',
     name: 'Pages',
-    component: Pages,
-    useAsDefault: true
+    component: Pages
   },
   {
     path: '/admin/...',
@@ -45,9 +45,15 @@ import {layoutPaths} from './theme/theme.constants';
     component: Admin
   },
   {
+    path: '/dosen/...',
+    name: 'Dosen',
+    component: Dosen
+  },
+  {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    useAsDefault: true
   },
   // handle any non-registered route
   // and simply redirects back to dashboard page
