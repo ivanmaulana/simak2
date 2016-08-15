@@ -162,7 +162,7 @@ count = {{count}} -->
 
             <div class="col-md-5">
               <label>Jumlah Pertemuan</label>
-              <input class="form-control" [(ngModel)]="pertemuan_1" placeholder="Jumlah Pertemuan"/>
+              <input class="form-control" [disabled]="!konsultasi_1" [(ngModel)]="pertemuan_1" placeholder="Jumlah Pertemuan"/>
             </div>
           </div>
         </div>
@@ -209,7 +209,7 @@ count = {{count}} -->
 
             <div class="col-md-5">
               <label>Jumlah Pertemuan</label>
-              <input class="form-control" [(ngModel)]="pertemuan_2" placeholder="Jumlah Pertemuan"/>
+              <input class="form-control" [disabled]="!konsultasi_2" [(ngModel)]="pertemuan_2" placeholder="Jumlah Pertemuan"/>
             </div>
           </div>
         </div>

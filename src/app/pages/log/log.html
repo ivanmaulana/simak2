@@ -90,25 +90,25 @@
           <!-- judul log bimbingan -->
           <div class="form-group col-md-12 col-xs-12 ">
               <label>Topik Log</label><br />
-              <input placeholder="Tulis progress kamu disini" class="form-control" style="width:100%" [(ngModel)]="text">
+              <input placeholder="Tulis progress kamu disini" class="form-control" style="width:100%" [(ngModel)]="topik">
           </div>
 
           <!-- progress yang sudah dilakukan -->
           <div class="form-group col-md-12 col-xs-12 has-success">
               <br /><label>Progress</label><br />
-              <textarea placeholder="Tulis progress kamu disini" class="form-control" style="width:100%" [(ngModel)]="text"></textarea>
+              <textarea placeholder="Tulis progress kamu disini" class="form-control" style="width:100%" [(ngModel)]="progress"></textarea>
           </div>
 
           <!-- kendala yang dihadapi -->
           <div class="form-group col-md-12 col-xs-12 has-error">
               <br /><label>Kendala yang dihadapi</label><br />
-              <textarea placeholder="Tulis kendala yang kamu hadapi disini" class="form-control" style="width:100%"></textarea>
+              <textarea placeholder="Tulis kendala yang kamu hadapi disini" class="form-control" style="width:100%" [(ngModel)]="kendala"></textarea>
           </div><br />
 
           <!-- tahap selanjutnya -->
           <div class="form-group col-md-12 col-xs-12 has-warning">
               <br /><label>Selanjutnya</label><br />
-              <textarea placeholder="Tulis apa yang akan kamu lakukan setelahnya" class="form-control" style="width:100%"></textarea>
+              <textarea placeholder="Tulis apa yang akan kamu lakukan setelahnya" class="form-control" style="width:100%" [(ngModel)]="rencana"></textarea>
           </div>
 
           <div class="col-sm-12 col-md-12 col-xs-12">
@@ -130,44 +130,20 @@
   <div class="row">
     <div class="col-lg-12 col-md-12">
       <ba-card title="Log Bimbingan" baCardClass="with-scroll">
-          <!-- <table class="table table-condensed">
-            <thead>
-            <tr>
-              <th class="table-id">#</th>
-              <th>NIM</th>
-              <th>Nama</th>
-              <th>Lab</th>
-              <th>Dosen Pilihan 1</th>
-              <th>Dosen Pilihan 2</th>
-              <th>Action</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let res of response">
-              <td class="table-id">{{ res.id }}</td>
-              <td>{{ res.nim }}</td>
-              <td>{{res.nama}}</td>
-              <td>{{ res.lab}}</td>
-              <td>{{ res.dosen1}}</td>
-              <td>{{ res.dosen2}}</td>
-              <td><button type="button" class="btn btn-primary btn-sm" (click)="openProfile(res.nim)"><i class="ion-eye"></i></button></td>
-            </tr>
-            </tbody>
-          </table> -->
 
-        <div class="row" *ngFor="let res of response">
+        <div class="row" *ngFor="let res of response"><br />
           <div class="col-md-1 col-sm-2 col-xs-3">
             <img class="photo-icon" src="http://tabian.kpru.ac.th/home/images/User-Icon.png" />
           </div>
-          <div class="col-md-8 col-sm-10 col-xs-9">
+          <div class="col-md-6 col-sm-10 col-xs-9">
             {{res.topik}}<br />
-            <span class="grey">{{timestamp}}</span>
+            <span class="grey">{{res.tempat}}, {{changeTimeStamp(res.tanggal)}}</span>
           </div>
-          <div class="col-sm-2 col-sm-2 col-xs-2">
-
+          <div class="col-md-4 col-sm-10 col-xs-12">
+            <button type="button" class="btn btn-primary btn-sm" (click)="openBimbingan(res.id)"><i class="ion-forward"></i> {{res.count}} Jawaban</button> Pada : {{changeTimeStamp(res.timestamp)}}
           </div>
-          <div class="col-md-3 col-sm-10 col-xs-10">
-            {{timestamp}}
+          <div class="col-md-1 col-xs-12">
+            <button type="button" class="btn btn-primary btn-sm" (click)="openBimbingan(res.id)"><i class="ion-eye"></i></button>
           </div>
         </div>
 
@@ -175,8 +151,92 @@
     </div>
   </div>
 
-  <!-- <div *ngFor="let time of timestamp">
-    {{timestamp}}
-  </div> -->
+  <div class="row" *ngIf="res">
+    <div class="col-md-12">
+      <ba-card title="Detail Log Bimbingan" baCardClass="with-scroll">
+
+        <!-- DETAIL Mahasiswa -->
+        <div class="col-md-12" *ngFor="let res of resDetail">
+
+          <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-12">
+              <img class="photo-icon" src="http://tabian.kpru.ac.th/home/images/User-Icon.png" />
+            </div>
+            <div class="col-md-10 col-sm-9 col-xs-12">
+              <strong>Nim : </strong> {{nim}}<br />
+              <strong>Nama :</strong> {{nama}}<br />
+              <strong>Topik Tugas Akhir :</strong> {{topik}}<br /><br />
+              <strong>{{res.tempat}}</strong>, {{res.tanggal.substr(0,10)}} {{res.jam.substr(0,5)}}<br />
+              <strong>Topik Bimbingan :</strong> {{res.topik}}<br /><br />
+            </div>
+          </div>
+
+          <div class="row col-md-12">
+              <strong>progress :</strong> <br />{{res.progress}}<br /><br />
+          </div>
+          <div class="row col-md-12">
+              <strong>kendala :</strong> <br />{{res.kendala}}<br /><br />
+          </div>
+          <div class="row col-md-12">
+              <strong>rencana :</strong> <br />{{res.rencana}}<br />
+          </div>
+
+        </div>
+
+        <div class="accent">
+          &nbsp;
+        </div>
+
+        <hr />
+        <!-- DETAIL Jawaban -->
+        <div class="col-md-12 section-block" *ngFor="let res of resJawaban">
+
+          <!-- Mahasiswa -->
+          <div *ngIf="res.nim">
+            <div class="accent text-left" style="padding-right:10%">
+              <h4 class="green">{{res.jawaban}}</h4>
+            </div>
+            <div class="text-left">
+              Mahasiswa : {{nama}}
+            </div>
+            <div class="text-left">
+              {{res.timestamp.substr(0,10)}}, {{res.timestamp.substr(12,4)}}<br /><br />
+            </div>
+          </div>
+
+          <!-- Dosen -->
+          <div *ngIf="res.dosen_id">
+            <div class="accent text-right" style="padding-left:10%">
+              <h4 class="blue">{{res.jawaban}}</h4>
+            </div>
+            <div class="text-right">
+              Dosen : {{res.dosen_id}}
+            </div>
+            <div class="text-right">
+              {{res.timestamp.substr(0,10)}}, {{res.timestamp.substr(12,4)}}<br /><br />
+            </div>
+          </div>
+
+        </div>
+
+        <div class="accent">
+          &nbsp;
+        </div>
+
+        <hr />
+
+        <div class="col-md-12">
+          <textarea [(ngModel)]="balasan" style="height:150px;width:100%" class="form-control" placeholder="Ketik balasan"></textarea>
+        </div>
+
+        <div class="col-md-12 text-right">
+          <br /><button (click)="balas(id)" class="btn btn-md btn-primary">Balas</button>
+        </div>
+
+        status : {{status}}<br />
+        message : {{message}}
+      </ba-card>
+    </div>
+  </div>
 
 </div>

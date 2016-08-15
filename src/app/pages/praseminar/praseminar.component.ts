@@ -47,7 +47,7 @@ export class Praseminar implements OnInit {
     this.nama = this.data.nama;
     this.dosen_1 = this.data.dosen_1;
     this.dosen_2 = this.data.dosen_2;
-    
+
     this.getDataPraseminar();
     this.getDataMahasiswa();
   }

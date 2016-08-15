@@ -190,10 +190,12 @@ export class Pengajuan implements OnInit{
 
   radio1(input){
     this.konsultasi_1 = input;
+    this.pertemuan_1 = 0;
   }
 
   radio2(input){
     this.konsultasi_2 = input;
+    this.pertemuan_2 = 0;
   }
 
   checkbox(input){
