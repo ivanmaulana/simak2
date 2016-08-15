@@ -67,26 +67,22 @@ export class App implements OnInit{
   private status;
 
   ngOnInit(){
-    // this.status = localStorage.getItem('status');
-    //
-    // if(this.status === 'dosen'){
-    //   this.route.navigate(['Admin']);
-    // }
-    // else if(this.status === 'mahasiswa'){
-    //   this.route.navigate(['Pages']);
-    // }
-    // else {
-    //   this.route.navigate(['Login']);
-    // }
+    this.status = localStorage.getItem('status');
+
+    if(this.status === 'dosen'){
+      this.route.navigate(['Admin']);
+    }
+    else if(this.status === 'mahasiswa'){
+      this.route.navigate(['Pages']);
+    }
+    else {
+      this.route.navigate(['Login']);
+    }
   }
 
   isMenuCollapsed:boolean = false;
 
   constructor(private route: Router, private _state:AppState, private _imageLoader:BaImageLoaderService, private _spinner:BaThemeSpinner, private _config:BaThemeConfig) {
-    localStorage.setItem("nim", "G64130076");
-    localStorage.setItem("nama", "IVAN MAULANA PUTRA");
-    localStorage.setItem("token", "edcb8169a18d121cbdaa7a9b3b38951c");
-    localStorage.setItem("status", "5787be38ee03a9ae5360f54d9026465f");
 
     this._loadImages();
 

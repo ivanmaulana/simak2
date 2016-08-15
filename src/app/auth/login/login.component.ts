@@ -27,10 +27,10 @@ export class Login implements OnInit {
   ngOnInit(){
     this.status = localStorage.getItem('status');
 
-    if(this.status === 'ce28eed1511f631af6b2a7bb0a85d636'){
+    if(this.status === 'dosen'){
       this.route.navigate(['Admin']);
     }
-    else if(this.status === '5787be38ee03a9ae5360f54d9026465f'){
+    else if(this.status === 'mahasiswa'){
       this.route.navigate(['Pages']);
     }
     else {
@@ -51,7 +51,7 @@ export class Login implements OnInit {
   submit(){
     this.creds = JSON.stringify({username: this.username, password: this.password});
 
-    this.http.post("http://greentransport.ipb.ac.id/api/similkom", this.creds)
+    this.http.post("http://agricode.cs.ipb.ac.id/ivan/login.php", this.creds)
       .map(res => res.json())
       .subscribe(data => {
         this.test = data['token'];
@@ -72,14 +72,14 @@ export class Login implements OnInit {
   }
 
   checkStatus(){
-    // this.test = localStorage.getItem('status');
-    //
-    // if (this.test === '5787be38ee03a9ae5360f54d9026465f'){
-    //   this.route.navigate(['Pages']);
-    // }
-    // else if (this.test === 'ce28eed1511f631af6b2a7bb0a85d636'){
-    //   this.route.navigate(['Admin']);
-    // }
+    this.test = localStorage.getItem('status');
+
+    if (this.test === 'mahasiswa'){
+      this.route.navigate(['Pages']);
+    }
+    else if (this.test === 'dosen'){
+      this.route.navigate(['Admin']);
+    }
   }
 
 }
