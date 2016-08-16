@@ -8,6 +8,9 @@ import {bootstrap} from '@angular/platform-browser-dynamic';
  */
 import {DIRECTIVES, PIPES, PROVIDERS} from './platform/browser';
 import {ENV_PROVIDERS} from './platform/environment';
+import {AuthHttp, AuthConfig, AUTH_PROVIDERS} from 'angular2-jwt';
+import {Http} from '@angular/http';
+import {provide} from '@angular/core';
 
 /*
  * App Component
@@ -28,6 +31,18 @@ export function main(initialHmrState?: any): Promise<any> {
     ...DIRECTIVES,
     ...PIPES,
     ...APP_PROVIDERS,
+    AUTH_PROVIDERS,
+    provide(AuthHttp, {
+    useFactory: (http) => {
+      return new AuthHttp(new AuthConfig({
+        headerName: "Authorization",
+        headerPrefix: "",
+        noJwtError: true,
+        noTokenScheme: true
+      }), http);
+    },
+    deps: [Http]
+  })
   ])
   .catch(err => console.error(err));
 

@@ -1,5 +1,5 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
-import {RouteConfig, Router} from '@angular/router-deprecated';
+import {RouteConfig, Router, CanActivate} from '@angular/router-deprecated';
 
 import {BaPageTop, BaContentTop, BaSidebar, BaBackTop} from '../theme/components';
 
@@ -117,6 +117,7 @@ import {MahasiswaService} from './service';
     path: '/tables/...',
   }
 ])
+
 export class Pages implements OnInit{
   private status;
 
