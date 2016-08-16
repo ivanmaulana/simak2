@@ -118,6 +118,9 @@ import {MahasiswaService} from './service';
   }
 ])
 
+// @CanActivate(() => tokenNotExpired())
+
+
 export class Pages implements OnInit{
   private status;
 

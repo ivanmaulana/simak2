@@ -25,10 +25,12 @@ export class Login implements OnInit {
   private creds;
   private test;
 
+  private token;
+
   jwtHelper: JwtHelper = new JwtHelper();
 
   ngOnInit(){
-    this.status = localStorage.getItem('status');
+    // this.status = localStorage.getItem('status');
 
     if(this.status === 'dosen'){
       this.route.navigate(['Admin']);
@@ -44,7 +46,17 @@ export class Login implements OnInit {
   peopleTableData:Array<any>;
 
   constructor(private route: Router, private http: Http, private authHttp: AuthHttp) {
-    localStorage.setItem('id_token', "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTSU0gSWxrb20iLCJ1c2VybmFtZSI6Iml2YW5tYXVsYW5hIiwibmltIjoiRzY0MTMwMDc2IiwibmFtYSI6IklWQU4gTUFVTEFOQSBQVVRSQSJ9.Q_2Cgsx29vID0jNSwpOAr2bJJF_vuMeFsoB8dr-oHuk");
+    localStorage.setItem('id_token', "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTSU0gSWxrb20iLCJ1c2VybmFtZSI6Iml2YW5tYXVsYW5hIiwibmltIjoiRzY0MTMwMDc2IiwibmFtYSI6IklWQU4gTUFVTEFOQSBQVVRSQSJ9.HFAD1TatD97l8RZT003m_mqPxf5xe7PWDNnYt1D7y58");
+
+    // this.token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTSU0gSWxrb20iLCJ1c2VybmFtZSI6Iml2YW5tYXVsYW5hIiwibmltIjoiRzY0MTMwMDc2IiwibmFtYSI6IklWQU4gTUFVTEFOQSBQVVRSQSJ9.Q_2Cgsx29vID0jNSwpOAr2bJJF_vuMeFsoB8dr-oHuk";
+
+    // let ivan = "ivan";
+    this.token = localStorage.getItem('id_token');
+    this.status = this.jwtHelper.decodeToken(this.token);
+
+    this.status = this.status['username'];
+
+    console.log(this.status);
 
     authHttp.get('http://210.16.120.17:8000/dosen')
     .subscribe(
