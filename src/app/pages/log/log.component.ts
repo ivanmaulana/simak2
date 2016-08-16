@@ -15,7 +15,6 @@ import {Http, Headers} from '@angular/http';
 })
 export class Log implements OnInit{
   private nim;
-  private LastId;
   private nama;
   private dosen_1;
   private dosen_2;
@@ -75,7 +74,6 @@ export class Log implements OnInit{
     this.http.get('http://210.16.120.17:8000/log/'+this.nim)
       .map(res => res.json())
       .subscribe(data => {
-        this.LastId = data[0]['id'];
         this.response = data;
         this.timestamp = this.changeTimeStamp(data[0]['timestamp']);
       })

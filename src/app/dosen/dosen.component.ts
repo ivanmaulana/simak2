@@ -4,6 +4,7 @@ import {RouteConfig, Router} from '@angular/router-deprecated';
 import {BaPageTop, BaContentTop, BaSidebarDosen, BaBackTop} from '../theme/components';
 
 import {DashboardDosen} from './dashboardDosen';
+import {LogDosen} from './logDosen';
 
 @Component({
   selector: 'dosen',
@@ -34,8 +35,14 @@ import {DashboardDosen} from './dashboardDosen';
     component: DashboardDosen,
     path: '/dashboard',
     useAsDefault: true,
+  },
+  {
+    name: 'LogDosen',
+    component: LogDosen,
+    path: '/log'
   }
 ])
+
 export class Dosen implements OnInit {
   private status;
 

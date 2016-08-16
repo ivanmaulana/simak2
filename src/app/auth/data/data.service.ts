@@ -18,13 +18,17 @@ export class DataService {
     this.getLocalStorage();
   }
 
-  getLocalStorage(){
+  getLocalStorage() {
     this.id = localStorage.getItem('id');
     this.nim = localStorage.getItem('nim');
     this.nama = localStorage.getItem('nama');
     this.token = localStorage.getItem('token');
     this.username = localStorage.getItem('username');
     this.status = localStorage.getItem('status');
+  }
+
+  getDataMahasiswa() {
+
   }
 
 }

@@ -78,7 +78,7 @@ export class Login implements OnInit {
       this.route.navigate(['Pages']);
     }
     else if (this.test === 'dosen'){
-      this.route.navigate(['Admin']);
+      this.route.navigate(['Dosen']);
     }
   }
 

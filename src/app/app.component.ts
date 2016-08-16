@@ -70,7 +70,7 @@ export class App implements OnInit{
     this.status = localStorage.getItem('status');
 
     if(this.status === 'dosen'){
-      this.route.navigate(['Admin']);
+      this.route.navigate(['Dosen']);
     }
     else if(this.status === 'mahasiswa'){
       this.route.navigate(['Pages']);
