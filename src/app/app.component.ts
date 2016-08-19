@@ -2,6 +2,7 @@ import './app.loader.ts';
 
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {RouteConfig, Router} from '@angular/router-deprecated';
+import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 
 import {Pages} from './pages';
 import {Admin} from './admin';
@@ -33,12 +34,12 @@ import {layoutPaths} from './theme/theme.constants';
     </main>
   `
 })
+
 @RouteConfig([
   {
     path: '/mahasiswa/...',
     name: 'Pages',
-    component: Pages,
-    useAsDefault: true
+    component: Pages
   },
   {
     path: '/admin/...',
@@ -53,28 +54,71 @@ import {layoutPaths} from './theme/theme.constants';
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: Login,
+    useAsDefault: true
   },
   {
     path: '/**',
-    redirectTo: ['Pages']
+    redirectTo: ['Login']
   }
 ])
 export class App implements OnInit{
   private status;
+  private token;
+  private decode;
+  private role;
+
+  jwtHelper: JwtHelper = new JwtHelper();
 
   ngOnInit(){
-    this.status = localStorage.getItem('status');
 
-    if(this.status === 'dosen'){
-      this.route.navigate(['Dosen']);
-    }
-    else if(this.status === 'mahasiswa'){
-      this.route.navigate(['Pages']);
+    if (localStorage.getItem('id_token')){
+      this.token = localStorage.getItem('id_token');
+      this.decode = this.jwtHelper.decodeToken(this.token);
+      this.role = this.decode['role'];
+      console.log('ada local storage :'+this.role);
+
+      if (this.role === 1){
+        this.route.navigate(['Admin']);
+      }
+      else if(this.role === 2){
+        this.route.navigate(['Dosen']);
+      }
+      else if(this.role === 3){
+        this.route.navigate(['Pages']);
+      }
+      else if(this.role === 4){
+        this.route.navigate(['Dosen']);
+      }
+      else {
+        this.route.navigate(['Login']);
+      }
     }
     else {
       this.route.navigate(['Login']);
     }
+
+    // this.token = localStorage.getItem('id_token');
+    // this.decode = this.jwtHelper.decodeToken(this.token);
+    // this.role = this.decode['role'];
+    // console.log('ada local storage :'+this.role);
+    //
+    // if (this.role === 1){
+    //   this.route.navigate(['Admin']);
+    // }
+    // else if(this.role === 2){
+    //   this.route.navigate(['Dosen']);
+    // }
+    // else if(this.role === 3){
+    //   this.route.navigate(['Pages']);
+    // }
+    // else if(this.role === 4){
+    //   this.route.navigate(['Dosen']);
+    // }
+    // else {
+    //   this.route.navigate(['Login']);
+    // }
+
   }
 
   isMenuCollapsed:boolean = false;

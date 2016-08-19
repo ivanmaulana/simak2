@@ -23,7 +23,7 @@ count = {{count}} -->
         <div class="form-group col-md-12 col-xs-12">
           <div class="row">
             <div class="col-md-2">
-              Nama
+              Nama {{test}}<button (click)="set()">ganti</button>
             </div>
             <div class="col-md-8">
               : {{nama}}
@@ -47,7 +47,7 @@ count = {{count}} -->
         <!-- judul topik yang diusulkan -->
         <div class="form-group col-md-12 col-xs-12">
             <label>Topik yang diusulkan {{topik}}</label><br />
-            <textarea placeholder="Topik yang diusulkan" [(ngModel)]="topik" class="form-control" style="width:100%"></textarea>
+            <textarea required="required" placeholder="Topik yang diusulkan" [(ngModel)]="topik" class="form-control" style="width:100%"></textarea>
         </div>
 
         <div class="col-sm-12 col-md-12 col-xs-12">
@@ -59,19 +59,19 @@ count = {{count}} -->
             <label>Pilihan Lab Keilmuan (Pilih salah satu)</label><br /><br />
             <div class="row padding-left">
               <label class="radio-inline custom-radio nowrap">
-                <input type="radio" name="lab" [checked]="lab == 1" (click)="radioLab(1)">
+                <input type="radio" name="lab" [checked]="lab == 1" (click)="radioLab(1)" required="required">
                 <span>Net-Centric Computation</span>
               </label>
             </div><br />
             <div class="row padding-left">
               <label class="radio-inline custom-radio nowrap">
-                <input type="radio" name="lab" [checked]="lab == 2" (click)="radioLab(2)">
+                <input type="radio" name="lab" [checked]="lab == 2" (click)="radioLab(2)" required="required">
                 <span>Applied Computational Intelligence</span>
               </label>
             </div><br />
             <div class="row padding-left">
               <label class="radio-inline custom-radio nowrap">
-                <input type="radio" name="lab" [checked]="lab == 3" (click)="radioLab(3)">
+                <input type="radio" name="lab" [checked]="lab == 3" (click)="radioLab(3)" required="required">
                 <span>Software Engineering & Information System</span>
               </label>
             </div>
@@ -125,7 +125,7 @@ count = {{count}} -->
           </div>
 
           <div class="form-group row padding-left input-group">
-            <input [disabled]="!c" type="text" class="form-control validate filter-input has-error" [(ngModel)]=query (keyup)=filter() placeholder="Pilihan 1">
+            <input required="required" [disabled]="!c" type="text" class="form-control validate filter-input has-error" [(ngModel)]=query (keyup)=filter() placeholder="Pilihan 1">
             <span class="input-group-btn">
                 <button class="btn btn-danger" type="button" (click)="reset()">x</button>
             </span>

@@ -19,6 +19,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
   styles: [require('./kolokium.scss')],
   template: require('./kolokium.html')
 })
+
 export class Kolokium implements OnInit {
   private topik;
   private dosen_1;
@@ -30,6 +31,7 @@ export class Kolokium implements OnInit {
   private active;
   private jadwal;
   private deadline;
+  private test;
 
   private creds;
   private status;
@@ -62,7 +64,7 @@ export class Kolokium implements OnInit {
     this.dosen_1 = this.data.dosen_1;
     this.dosen_2 = this.data.dosen_2;
 
-    
+
     this.getDataMahasiswa();
     this.getDataKolokium();
   }

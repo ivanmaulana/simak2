@@ -12,6 +12,7 @@ import {AuthHttp, AuthConfig, AUTH_PROVIDERS} from 'angular2-jwt';
 import {Http} from '@angular/http';
 import {provide} from '@angular/core';
 
+
 /*
  * App Component
  * our top level component that holds all of our components
@@ -37,6 +38,7 @@ export function main(initialHmrState?: any): Promise<any> {
       return new AuthHttp(new AuthConfig({
         headerName: "Authorization",
         headerPrefix: "",
+        globalHeaders: [{'Content-Type':'application/json'}],
         noJwtError: true,
         noTokenScheme: true
       }), http);

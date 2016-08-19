@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
+import {Subject} from 'rxjs/Subject';
+
+import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 
 @Injectable()
 export class MahasiswaService {
@@ -14,31 +15,53 @@ export class MahasiswaService {
   public topik;
   public lab;
 
+  // URL
+  public urlTa = 'http://210.16.120.17:8100/ta/';
+  public urlDataPengajuan = 'http://210.16.120.17:8100/ta/daftar/';
+  public urlDosen = 'http://210.16.120.17:8100/dosen';
+  public urlDaftarPengajuan = 'http://210.16.120.17:8100/ta/pengajuan/';
+
+  // URL LOG
+  
+
+  // JWT
+  public decode;
+  public role;
+
+
   public dosen_1;
   public dosen_2;
 
-  public send: string = "ini mahasiswa service";
+  public send;
+  jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(private http: Http){
+  constructor(private http: Http, private authHttp: AuthHttp){
     this.getLocalStorage();
     this.getDataTA();
+
+    // this.test = 'awal';
   }
 
-  getSend(){
-    return this.send;
-  }
+  // getTest(){
+  //   return this.test;
+  // }
+  //
+  // setTest(params){
+  //   this.test.next(params);
+  // }
 
   getLocalStorage(){
-    this.id = localStorage.getItem('id');
-    this.nim = localStorage.getItem('nim');
-    this.nama = localStorage.getItem('nama');
-    this.token = localStorage.getItem('token');
-    this.username = localStorage.getItem('username');
-    this.status = localStorage.getItem('status');
+    this.token = localStorage.getItem('id_token');
+
+    this.decode = this.jwtHelper.decodeToken(this.token);
+    this.id = this.decode['id'];
+    this.nim = this.decode['nim'];
+    this.nama = this.decode['nama'];
+    this.role = this.decode['role'];
   }
 
   getDataTA(){
-    this.http.get('http://210.16.120.17:8000/ta/'+this.nim)
+    this.authHttp.get(this.urlTa+this.nim)
       .map(res => res.json())
       .subscribe(data => {
         this.topik = data[0]['topik'];
@@ -46,6 +69,16 @@ export class MahasiswaService {
         this.dosen_1 = data[0]['dosen1'];
         this.dosen_2 = data[0]['dosen2'];
       })
+  }
+
+  getSend(){
+    return this.send;
+  }
+
+  setSend(params){
+    this.send = params;
+    console.log(this.getSend());
+    return this.send;
   }
 
 

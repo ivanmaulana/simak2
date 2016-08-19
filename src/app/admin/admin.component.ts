@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
-import {RouteConfig, Router} from '@angular/router-deprecated';
+import {RouteConfig, Router, CanActivate} from '@angular/router-deprecated';
+import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 
 import {BaPageTop, BaContentTop, BaSidebarAdmin, BaBackTop} from '../theme/components';
 
@@ -78,19 +79,43 @@ import {SidangAdmin} from './sidangAdmin';
     path: '/sidang',
   }
 ])
+
+@CanActivate(() => tokenNotExpired())
+
 export class Admin implements OnInit {
   private status;
+  private token;
+  private role;
+  private decode;
+
+  jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(private route: Router) {
+
   }
 
   ngOnInit(){
-    this.status = localStorage.getItem('status');
 
-    if(this.status === 'dosen'){
-    }
-    else if(this.status === 'mahasiswa'){
-      this.route.navigate(['Pages']);
+    this.token = localStorage.getItem('id_token');
+
+    if (this.token){
+      // this.token = localStorage.getItem('id_token');
+      // this.decode = this.jwtHelper.decodeToken(this.token);
+      // this.role = this.decode['role'];
+      // console.log('ada local storage :'+this.role);
+      //
+      // if (this.role === 1){
+      //   this.route.navigate(['Admin']);
+      // }
+      // else if(this.role === 2){
+      //   this.route.navigate(['Dosen']);
+      // }
+      // else if(this.role === 3){
+      //
+      // }
+      // else if(this.role === 4){
+      //   this.route.navigate(['Dosen']);
+      // }
     }
     else {
       this.route.navigate(['Login']);

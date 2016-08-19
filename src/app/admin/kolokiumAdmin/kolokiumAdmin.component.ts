@@ -100,11 +100,9 @@ export class KolokiumAdmin implements OnInit {
   }
 
   simpan(){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
     this.creds = JSON.stringify({active: this.active, jadwal_kolokium: this.jadwal, deadline: this.deadline});
 
-    this.http.put("http://210.16.120.17:8000/jadwalKolokium", this.creds, {headers: headers})
+    this.http.put("http://210.16.120.17:8000/jadwalKolokium", this.creds)
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;

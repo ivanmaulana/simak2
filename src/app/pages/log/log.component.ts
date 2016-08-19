@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {MahasiswaService} from '../service';
+import {AuthHttp} from 'angular2-jwt';
 
 import {BaCard} from '../../theme/components';
 import {Http, Headers} from '@angular/http';
@@ -43,17 +44,17 @@ export class Log implements OnInit{
     this.getDataLog();
   }
 
-  constructor(private http: Http, private data: MahasiswaService) {
+  constructor(private http: Http, private service: MahasiswaService, private authHttp: AuthHttp) {
     // this.timestamp = new Date();
-    this.nim = this.data.nim;
-    this.nama = this.data.nama;
+    this.nim = this.service.nim;
+    this.nama = this.service.nama;
 
     this.getDataMahasiswa();
     this.getDataLog();
   }
 
   getDataMahasiswa(){
-    this.http.get('http://210.16.120.17:8000/ta/'+this.nim)
+    this.authHttp.get('http://210.16.120.17:8100/ta/'+this.nim)
       .map(res => res.json())
       .subscribe(data => {
         this.topik = data[0]['topik'];
@@ -71,7 +72,7 @@ export class Log implements OnInit{
   }
 
   getDataLog(){
-    this.http.get('http://210.16.120.17:8000/log/'+this.nim)
+    this.authHttp.get('http://210.16.120.17:8100/log/'+this.nim)
       .map(res => res.json())
       .subscribe(data => {
         this.response = data;
@@ -80,7 +81,7 @@ export class Log implements OnInit{
   }
 
   getLogCount(id){
-    return this.http.get('http://210.16.120.17/log/count/'+id)
+    return this.authHttp.get('http://210.16.120.17:8100/log/count/'+id)
       .map(res => res.json())
       .subscribe(data => {
         console.log(data);
@@ -90,14 +91,14 @@ export class Log implements OnInit{
   openBimbingan(id){
     this.id = id;
 
-    this.http.get('http://210.16.120.17:8000/log/detail/'+id)
+    this.authHttp.get('http://210.16.120.17:8100/log/detail/'+id)
       .map(res => res.json())
       .subscribe(data => {
         this.resDetail = data;
         if (this.resDetail) this.res = 1;
       })
 
-    this.http.get('http://210.16.120.17:8000/log/jawaban/'+id)
+    this.authHttp.get('http://210.16.120.17:8100/log/jawaban/'+id)
       .map(res => res.json())
       .subscribe(data => {
         this.resJawaban = data;
@@ -105,11 +106,9 @@ export class Log implements OnInit{
   }
 
   balas(id){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
     this.creds = JSON.stringify({topikId: id, nim: this.nim, jawaban: this.balasan});
 
-    this.http.post("http://210.16.120.17:8000/log/balas/mahasiswa/", this.creds, {headers: headers})
+    this.authHttp.post("http://210.16.120.17:8100/log/balas/mahasiswa/", this.creds)
       .map(res => res.json())
       .subscribe(data => {
         this.status = data['status'];

@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
-import {RouteConfig, Router} from '@angular/router-deprecated';
+import {RouteConfig, Router, CanActivate} from '@angular/router-deprecated';
+import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 
 import {BaPageTop, BaContentTop, BaSidebarDosen, BaBackTop} from '../theme/components';
 
@@ -43,19 +44,54 @@ import {LogDosen} from './logDosen';
   }
 ])
 
+@CanActivate(() => tokenNotExpired())
+
 export class Dosen implements OnInit {
   private status;
+  private token;
+  private role;
+  private decode;
+
+  jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(private route: Router) {
+    this.token = localStorage.getItem('id_token');
+    this.decode = this.jwtHelper.decodeToken(this.token);
+    this.role = this.decode['role'];
+
+    if (this.role === 1){
+      this.route.navigate(['Admin']);
+    }
+    else if(this.role === 2){
+
+    }
+    else if(this.role === 3){
+      this.route.navigate(['Pages']);
+    }
+    else if(this.role === 4){
+
+    }
+    else {
+      this.route.navigate(['Login']);
+    }
   }
 
   ngOnInit(){
-    // this.status = localStorage.getItem('status');
+    // this.token = localStorage.getItem('id_token');
+    // this.decode = this.jwtHelper.decodeToken(this.token);
+    // this.role = this.decode['role'];
     //
-    // if(this.status === 'ce28eed1511f631af6b2a7bb0a85d636'){
+    // if (this.role === '1'){
+    //   this.route.navigate(['Admin']);
     // }
-    // else if(this.status === '5787be38ee03a9ae5360f54d9026465f'){
+    // else if(this.role === '2'){
+    //
+    // }
+    // else if(this.role === '3'){
     //   this.route.navigate(['Pages']);
+    // }
+    // else if(this.role === '4'){
+    //   this.route.navigate(['Dosen']);
     // }
     // else {
     //   this.route.navigate(['Login']);

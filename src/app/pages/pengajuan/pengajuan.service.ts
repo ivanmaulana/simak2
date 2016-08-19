@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import 'rxjs/add/operator/map';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class PengajuanService {
+  private send;
+
   constructor(private http: Http){
 
   }
 
-  getResponse(): Observable<any>{
+  getResponse(){
     return this.http.get("http://localhost:8000/ta/daftar")
       .map(res => res.json());
   }
@@ -21,8 +21,13 @@ export class PengajuanService {
       .map(res => res.json())
   }
 
-  getStatus(){
-    // return this.status;
+  getSend(){
+    return this.send;
+  }
+
+  setSend(params){
+    this.send = params;
+    return this.send;
   }
 
 }

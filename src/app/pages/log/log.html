@@ -136,11 +136,11 @@
             <img class="photo-icon" src="http://tabian.kpru.ac.th/home/images/User-Icon.png" />
           </div>
           <div class="col-md-6 col-sm-10 col-xs-9">
-            {{res.topik}}<br />
-            <span class="grey">{{res.tempat}}, {{changeTimeStamp(res.tanggal)}}</span>
+            <span class="blue">{{res.topik}}</span><br />
+            <span class="grey tanggal">{{res.tempat}}, {{changeTimeStamp(res.tanggal)}}</span>
           </div>
           <div class="col-md-4 col-sm-10 col-xs-12">
-            <button type="button" class="btn btn-primary btn-sm" (click)="openBimbingan(res.id)"><i class="ion-forward"></i> {{res.count}} Jawaban</button> Pada : {{changeTimeStamp(res.timestamp)}}
+            <button type="button" class="btn btn-primary btn-sm" (click)="openBimbingan(res.id)"><i class="ion-forward"></i> {{res.count}} Jawaban</button> <span class="tanggal">Pada : {{changeTimeStamp(res.timestamp)}}</span>
           </div>
           <div class="col-md-1 col-xs-12">
             <button type="button" class="btn btn-primary btn-sm" (click)="openBimbingan(res.id)"><i class="ion-eye"></i></button>
@@ -172,13 +172,13 @@
           </div>
 
           <div class="row col-md-12">
-              <strong>progress :</strong> <br />{{res.progress}}<br /><br />
+              <strong>progress :</strong> <br /><h4 class="green">{{res.progress}}</h4><br /><br />
           </div>
           <div class="row col-md-12">
-              <strong>kendala :</strong> <br />{{res.kendala}}<br /><br />
+              <strong>kendala :</strong> <br /><h4 class="red">{{res.kendala}}</h4><br /><br />
           </div>
           <div class="row col-md-12">
-              <strong>rencana :</strong> <br />{{res.rencana}}<br />
+              <strong>rencana :</strong> <br /><h4 class="orange">{{res.rencana}}</h4><br />
           </div>
 
         </div>

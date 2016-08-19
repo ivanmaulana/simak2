@@ -34,45 +34,44 @@ export class Dashboard implements OnInit{
   message;
   status;
 
+  send = 'aaa';
+
 
   ngOnInit(){
-    this.dashService.getResponse()
-      .subscribe(data => {
-        this.response = data;
-      });
-  }
-
-  constructor(private dashService: DashboardService, private http: Http, private router: Router, private mahasiswaService: MahasiswaService) {
-    this.name="angular2";
-
-    this.status = mahasiswaService.send;
-
-
 
   }
+
+  constructor(private dashService: DashboardService, private http: Http, private router: Router, private data: MahasiswaService) {
+    // this.send = this.data.getTest();
+
+//     this.send = `{
+//   "sub": "1234567890",
+//   "name": "John Doe",
+//   "admin": true
+// }`;
+
+  }
+
+  // set(){
+  //   this.send = btoa(this.send);
+  // }
+  //
+  // tes(){
+  //   this.send = atob(this.send);
+  // }
+  //
+  // sub1(){
+  //   let temp;
+  //   temp = JSON.parse(this.send);
+  //   this.send = temp['sub'];
+  // }
 
   onSubmit(){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    this.creds = JSON.stringify({name : this.name});
-    this.http.post("http://210.16.120.17:8000/todo/", this.creds, {headers: headers})
-      .map(res => res.json())
-      .subscribe(data => {
-        this.status = data[0].status;
-        this.message = data[0].message;
-      }
-    )
 
-    this.dashService.getResponse()
-      .subscribe(data => {
-        this.response = data;
-      });
-
-    console.log(this.status);
   }
 
   pindah(){
-    this.router.navigate(['Login']);
+
   }
 
 }

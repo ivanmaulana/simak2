@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {RouteConfig, Router, CanActivate} from '@angular/router-deprecated';
+import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 
 import {BaPageTop, BaContentTop, BaSidebar, BaBackTop} from '../theme/components';
 
@@ -18,13 +19,12 @@ import {Sidang} from './sidang';
 import {Praseminar} from './praseminar';
 import {Skl} from './skl';
 
-import {MahasiswaService} from './service';
+
 
 @Component({
   selector: 'pages',
   encapsulation: ViewEncapsulation.None,
   styles: [],
-  providers: [MahasiswaService],
   directives: [BaPageTop, BaSidebar, BaContentTop, BaBackTop],
   template: `
     <ba-sidebar></ba-sidebar>
@@ -118,27 +118,39 @@ import {MahasiswaService} from './service';
   }
 ])
 
-// @CanActivate(() => tokenNotExpired())
-
+@CanActivate(() => tokenNotExpired())
 
 export class Pages implements OnInit{
-  private status;
+  private role;
+  private token;
+  private decode;
 
-  constructor(private route: Router, private mahasiswaService: MahasiswaService) {
+  jwtHelper: JwtHelper = new JwtHelper();
+
+  constructor(private route: Router) {
+
+
   }
 
   ngOnInit(){
-    this.status = this.mahasiswaService.status;
+    this.token = localStorage.getItem('id_token');
+    this.decode = this.jwtHelper.decodeToken(this.token);
+    this.role = this.decode['role'];
 
-    if(this.status === 'dosen'){
+    if (this.role === 1){
       this.route.navigate(['Admin']);
     }
-    else if(this.status === 'mahasiswa'){
-
+    else if(this.role === 2){
+      this.route.navigate(['Dosen']);
+    }
+    else if(this.role === 3){
+      this.route.navigate(['Pages']);
+    }
+    else if(this.role === 4){
+      this.route.navigate(['Dosen']);
     }
     else {
       this.route.navigate(['Login']);
     }
-
   }
 }

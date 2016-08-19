@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {Http, Headers} from '@angular/http';
+import {AuthHttp} from 'angular2-jwt';
 
 import {BaCard} from '../../theme/components';
 import {BaAppPicturePipe} from '../../theme/pipes';
@@ -42,7 +43,7 @@ export class PengajuanAdmin implements OnInit {
 
   peopleTableData:Array<any>;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private authHttp: AuthHttp) {
 
   }
 
@@ -66,6 +67,10 @@ export class PengajuanAdmin implements OnInit {
         this.progress_3 = data[0].progress_3;
         this.progress_4 = data[0].progress_4;
       })
+  }
+
+  downloadData(){
+    this.authHttp.get('http://210.16.120.17:8100/excel');
   }
 
 }

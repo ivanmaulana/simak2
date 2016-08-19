@@ -1,15 +1,16 @@
 import {Component, ViewEncapsulation, ElementRef, OnInit} from '@angular/core';
 import {BaCard} from '../../theme/components';
 import {Http, Response, HTTP_PROVIDERS, Headers} from '@angular/http';
+import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 
 import {MahasiswaService} from '../service';
+import {PengajuanService} from './pengajuan.service';
 
 @Component({
   selector: 'pengajuan',
   host: {'(document:click)': 'handleClick($event)',},
-  pipes: [],
   directives: [BaCard],
-  providers: [MahasiswaService, HTTP_PROVIDERS],
+  providers: [MahasiswaService, PengajuanService, HTTP_PROVIDERS],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./pengajuan.scss')],
   template: require('./pengajuan.html')
@@ -39,11 +40,12 @@ export class Pengajuan implements OnInit{
   private c: boolean = true;
   private c2: boolean = true;
   private response;
+  private test;
 
   private disableCheckbox: boolean = true;
 
   ngOnInit(){
-
+    this.getDataPengajuan();
   }
 
   public query = '';
@@ -52,13 +54,20 @@ export class Pengajuan implements OnInit{
   public filteredList2 = [];
   public elementRef;
 
-  constructor(private http: Http, private data: MahasiswaService, private myElement: ElementRef) {
+  constructor(private http: Http, private authHttp: AuthHttp, private pengajuanService: PengajuanService, private service: MahasiswaService, private myElement: ElementRef) {
     this.getDataDosen();
     this.elementRef = myElement;
 
-    this.nim = this.data.nim;
-    this.nama = this.data.nama;
+    this.nim = this.service.nim;
+    this.nama = this.service.nama;
     this.getDataPengajuan();
+
+    this.test = this.service.getSend();
+
+  }
+
+  set(){
+    this.test = this.service.setSend('ini ivan');
   }
 
   filter() {
@@ -122,7 +131,7 @@ export class Pengajuan implements OnInit{
   }
 
   getDataDosen(){
-    this.http.get('http://210.16.120.17:8000/dosen')
+    this.authHttp.get(this.service.urlDosen)
       .map(res => res.json())
         .subscribe( data => {
           this.count = data[0]['id'];
@@ -143,7 +152,7 @@ export class Pengajuan implements OnInit{
   }
 
   getDataPengajuan(){
-    this.http.get('http://210.16.120.17:8000/ta/daftar/'+this.nim)
+    this.authHttp.get(this.service.urlDataPengajuan+this.nim)
       .map(res => res.json())
         .subscribe( data => {
           this.count = data[0]['id'];
@@ -170,14 +179,15 @@ export class Pengajuan implements OnInit{
   }
 
   onSubmit(){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
     this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2, konsultasi_1: this.konsultasi_1, konsultasi_2: this.konsultasi_2,
     pertemuan_1: this.pertemuan_1, pertemuan_2: this.pertemuan_2, progress_1: this.progress_1, progress_2: this.progress_2, progress_3: this.progress_3, progress_4: this.progress_4});
 
-    this.http.post("http://210.16.120.17:8000/ta/pengajuan", this.creds, {headers: headers})
+    this.authHttp.post(this.service.urlDaftarPengajuan, this.creds)
       .map(res => res.json())
       .subscribe(data => {
+        // console.log(data);
         this.status = data[0].status;
         this.message = data[0].message;
       }
@@ -206,8 +216,6 @@ export class Pengajuan implements OnInit{
       this.progress_4 = false;
 
       this.disableCheckbox = !this.disableCheckbox;
-
-
     }
 
     if (input == 2){

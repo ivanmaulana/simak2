@@ -3,15 +3,19 @@ import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators, AbstractControl}
 import {Http, Headers} from '@angular/http';
 import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
+
 import {BaCard} from '../../theme/components';
 import {BaAppPicturePipe} from '../../theme/pipes';
 
 import {Router} from '@angular/router-deprecated';
 
+
 @Component({
   selector: 'login',
   pipes: [BaAppPicturePipe],
   directives: [BaCard],
+  providers: [ToastsManager],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./login.scss')],
   template: require('./login.html')
@@ -24,110 +28,90 @@ export class Login implements OnInit {
   private message;
   private creds;
   private test;
+  private role;
+
+  private decode;
 
   private token;
+  private urlLogin = 'http://agricode.cs.ipb.ac.id/ivan/simak.php';
+  private test2;
 
   jwtHelper: JwtHelper = new JwtHelper();
 
   ngOnInit(){
-    // this.status = localStorage.getItem('status');
-
-    if(this.status === 'dosen'){
-      this.route.navigate(['Admin']);
-    }
-    else if(this.status === 'mahasiswa'){
-      this.route.navigate(['Pages']);
-    }
-    else {
-      this.route.navigate(['Login']);
+    if (localStorage.getItem('id_token')){
+      this.token = localStorage.getItem('id_token');
+      this.decode = this.jwtHelper.decodeToken(this.token);
+      this.role = this.decode['role'];
+      //
+      this.checkStatus();
     }
   }
 
-  peopleTableData:Array<any>;
+  constructor(private route: Router, private http: Http, private authHttp: AuthHttp, private toastr: ToastsManager) {
+    // localStorage.setItem('test', "test");
 
-  constructor(private route: Router, private http: Http, private authHttp: AuthHttp) {
-    localStorage.setItem('id_token', "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTSU0gSWxrb20iLCJ1c2VybmFtZSI6Iml2YW5tYXVsYW5hIiwibmltIjoiRzY0MTMwMDc2IiwibmFtYSI6IklWQU4gTUFVTEFOQSBQVVRSQSJ9.HFAD1TatD97l8RZT003m_mqPxf5xe7PWDNnYt1D7y58");
+    let test = localStorage.getItem('test');
+    console.log(test);
 
-    // this.token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJTSU0gSWxrb20iLCJ1c2VybmFtZSI6Iml2YW5tYXVsYW5hIiwibmltIjoiRzY0MTMwMDc2IiwibmFtYSI6IklWQU4gTUFVTEFOQSBQVVRSQSJ9.Q_2Cgsx29vID0jNSwpOAr2bJJF_vuMeFsoB8dr-oHuk";
+    console.log(localStorage.getItem('test2'));
+    // console.log(this.test2);
+    if (!localStorage.getItem('test2')) console.log('ga ada test2');
 
-    // let ivan = "ivan";
-    this.token = localStorage.getItem('id_token');
-    this.status = this.jwtHelper.decodeToken(this.token);
-
-    this.status = this.status['username'];
-
-    console.log(this.status);
-
-    authHttp.get('http://210.16.120.17:8000/dosen')
-    .subscribe(
-      data => this.test = data,
-      err => console.log(err),
-      () => console.log(this.test)
-    );
-
-  }
-
-  pindah(){
-    this.route.navigate(['Pages']);
   }
 
   submit(){
-    // // this.creds = JSON.stringify({username: this.username, password: this.password});
-    // var myHeader = new Headers();
-    // myHeader.append('Content-Type', 'application/json');
-    // //
-    // // // this.authHttp.get('http://agricode.cs.ipb.ac.id/ivan/login.php', { headers: myHeader} )
-    // // // .subscribe(
-    // // //   data => this.test = data,
-    // // //   err => console.log(err),
-    // // //   () => console.log(this.test)
-    // // // );
-    // //
-    // //
-    // //
-    // // // Pass it after the body in a POST request
-    //
-    // this.creds = JSON.stringify({username: this.username, password: this.password});
-    // this.http.post('http://sbrc.ipb.ac.id/api/simak.php', this.creds)
-    //   .subscribe(
-    //     data => this.test = data,
-    //     err => console.log(err),
-    //     () => console.log(this.test)
-    //   );
-    //   // this.route.navigate(['Pages']);
-
-
     this.creds = JSON.stringify({username: this.username, password: this.password});
 
-    this.http.post("http://agricode.cs.ipb.ac.id/ivan/login.php", this.creds)
+    this.http.post(this.urlLogin, this.creds)
       .map(res => res.json())
       .subscribe(data => {
-        this.test = data['token'];
+        this.status = data['status'];
+        this.message = data['message'];
+        console.log(this.status);
 
-        localStorage.setItem('id', data['id']);
-        localStorage.setItem('username', data['username']);
-        localStorage.setItem('nim', data['nim']);
-        localStorage.setItem('nip', data['nip']);
-        localStorage.setItem('nama', data['nama']);
-        localStorage.setItem('email', data['email']);
-        localStorage.setItem('angkatan', data['angkatan']);
-        localStorage.setItem('status', data['status']);
-        localStorage.setItem('token', data['token']);
+        // gagal login
+        if (!this.status) this.showError();
 
-        this.checkStatus();
+        // berhasil login
+        else {
+          this.showSuccess();
+
+          this.token = data['token'];
+          localStorage.setItem('id_token', this.token);
+
+          this.decode = this.jwtHelper.decodeToken(this.token);
+          this.role = this.decode['role'];
+
+          this.checkStatus();
+        }
       }
     )
   }
 
-  checkStatus(){
-    this.test = localStorage.getItem('status');
+  showError() {
+    this.toastr.error(this.message, 'Error!');
+  }
 
-    if (this.test === 'mahasiswa'){
+  showSuccess() {
+    this.toastr.success("Selamat datang di SIM Ilkom", 'Success !');
+  }
+
+  checkStatus(){
+
+    if (this.role === 3){
       this.route.navigate(['Pages']);
     }
-    else if (this.test === 'dosen'){
+    else if (this.role === 2){
+      this.route.navigate(['Dosen']);
+    }
+    else if (this.role === 4){
+      this.route.navigate(['Dosen']);
+    }
+    else if (this.role === 1){
       this.route.navigate(['Admin']);
     }
+
   }
 
 }
