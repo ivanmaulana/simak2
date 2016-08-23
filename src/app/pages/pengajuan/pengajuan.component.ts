@@ -63,7 +63,6 @@ export class Pengajuan implements OnInit{
     this.getDataPengajuan();
 
     this.test = this.service.getSend();
-
   }
 
   set(){
@@ -111,6 +110,7 @@ export class Pengajuan implements OnInit{
       this.dosen_2 = this.getIdDosen(this.query2);
   }
 
+
   reset2(){
     this.c2 = true;
     this.query2 = "";
@@ -136,17 +136,23 @@ export class Pengajuan implements OnInit{
         .subscribe( data => {
           this.count = data[0]['id'];
           this.response = data;
+          console.log(this.response);
           for (var i = 0; i < this.count; i++){
             this.dosen.push(data[i]['nama']);
           }
         })
+
+
   }
 
   getIdDosen(nama){
     let id;
-    for (var i = 0; i < this.count; i++){
-      if (nama === this.response[i]['nama'])
-      id =  this.response[i]['id'];
+    console.log("nama :"+nama);
+    for (var i = 0; i < this.response.length; i++){
+      if (nama === this.response[i]['nama']) {
+        id =  this.response[i]['id'];
+        console.log(id+" : "+nama);
+      }
     }
     return id;
   }
@@ -179,8 +185,6 @@ export class Pengajuan implements OnInit{
   }
 
   onSubmit(){
-    // let headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
     this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2, konsultasi_1: this.konsultasi_1, konsultasi_2: this.konsultasi_2,
     pertemuan_1: this.pertemuan_1, pertemuan_2: this.pertemuan_2, progress_1: this.progress_1, progress_2: this.progress_2, progress_3: this.progress_3, progress_4: this.progress_4});
 

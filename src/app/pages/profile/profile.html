@@ -1,131 +1,117 @@
 <div class="row">
-  <div class="col-md-4 col-sm-12 col-xs-12">
-    <ba-card title="Profil Mahasiswa" baCardClass="with-scroll">
-      <ba-picture-uploader [picture]="profile.picture" [defaultPicture]="defaultPicture" [uploaderOptions]="uploaderOptions">
-      </ba-picture-uploader>
-      <br />
-      <p>
-        Ivan Maulana Putra
-      </p>
-      <p>
-        IPK : x.xx
-      </p>
-    </ba-card>
-  </div>
-
-  <div class="col-md-8 col-sm-12 col-xs-12">
-    <ba-card title="Profil Mahasiswa" baCardClass="with-scroll" style="background-color: blue">
-      <form class="row form-inline">
-
-        <!-- NIM -->
-        <div class="form-group col-md-3 col-sm-5 col-xs-12">
-          NIM
-        </div>
-
-        <div class="form-group col-md-9 col-sm-7 col-xs-12">
-          <input [(ngModel)]="nim" class="form-control"/>
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-xs-12">
-          <br />
-        </div>
-
-        <!-- Nama -->
-        <div class="form-group col-md-3 col-sm-5 col-xs-12">
-          Nama Lengkap
-        </div>
-
-        <div class="form-group col-md-9 col-sm-7 col-xs-12">
-          <input [(ngModel)]="nama" class="form-control"/>
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-xs-12">
-          <br />
-        </div>
-
-        <!-- Nama -->
-        <div class="form-group col-md-3 col-sm-5 col-xs-12">
-          No. HP
-        </div>
-
-        <div class="form-group col-md-9 col-sm-7 col-xs-12">
-          <input [(ngModel)]="no" class="form-control"/>
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-xs-12">
-          <br />
-        </div>
-
-        <!-- Alamat -->
-        <div class="form-group col-md-3 col-sm-5 col-xs-12">
-          Alamat
-        </div>
-
-        <div class="form-group col-md-9 col-sm-7 col-xs-12">
-          <textarea class="form-control" [(ngModel)]="no" style="width:100%"></textarea>
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-xs-12">
-          <br />
-        </div>
-
-        <!-- Email -->
-        <div class="form-group col-md-3 col-sm-5 col-xs-12">
-          Email
-        </div>
-
-        <div class="form-group col-md-9 col-sm-7 col-xs-12">
-          <input [(ngModel)]="no" class="form-control"/>
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-xs-12">
-          <br />
-        </div>
-
-      </form>
-    </ba-card>
-  </div>
-</div>
-
-<div class="row">
   <div class="col-md-12 col-sm-12 col-xs-12">
-    <ba-card title="Data Orang Tua" baCardClass="with-scroll">
-      <form class="row form-inline">
+    <ba-card title="Profil Mahasiswa" baCardClass="with-scroll">
+      <div class="col-md-4 col-sm-12 col-xs-12">
+        <ba-picture-uploader [picture]="profile.picture" [defaultPicture]="defaultPicture" [uploaderOptions]="uploaderOptions">
+        </ba-picture-uploader>
+        <br />
+      </div>
 
-        <!-- Nama Ayah -->
-        <div class="form-group col-md-6 col-sm-6 col-xs-12">
-          <label>Nama Ayah</label>
-          <input [(ngModel)]="nim" class="form-control"/>
+      <form class="form-inline">
+        <div class="col-md-8 col-xs-12 col-sm-12">
+
+          <!-- Nama -->
+          <div class="form-group col-md-3 col-sm-5 col-xs-12">
+            Nama
+          </div>
+
+          <div class="form-group col-md-9 col-sm-7 col-xs-12">
+            {{nama}}
+          </div>
+
+          <div class="col-sm-12 col-md-12 col-xs-12">
+            <br />
+          </div>
+
+          <!-- Nama -->
+          <div class="form-group col-md-3 col-sm-5 col-xs-12 padding-top">
+            No. HP
+          </div>
+
+          <div class="form-group col-md-9 col-sm-7 col-xs-12">
+            <input [(ngModel)]="no" class="form-control"/>
+          </div>
+
+          <div class="col-sm-12 col-md-12 col-xs-12">
+            <br />
+          </div>
+
+          <!-- Alamat -->
+          <div class="form-group col-md-3 col-sm-5 col-xs-12">
+            Alamat
+          </div>
+
+          <div class="form-group col-md-9 col-sm-7 col-xs-12">
+            <textarea class="form-control" [(ngModel)]="alamat" style="width:100%"></textarea>
+          </div>
+
+          <div class="col-sm-12 col-md-12 col-xs-12">
+            <br />
+          </div>
+
+          <!-- Email -->
+          <div class="form-group col-md-3 col-sm-5 col-xs-12">
+            Email
+          </div>
+
+          <div class="form-group col-md-9 col-sm-7 col-xs-12">
+            <input [(ngModel)]="email" class="form-control"/>
+          </div>
+
+          <div class="col-sm-12 col-md-12 col-xs-12">
+            <br /><br /><br />
+          </div>
         </div>
 
-        <!-- Nama Ibu -->
-        <div class="form-group col-md-6 col-sm-6 col-xs-12">
-          <label>Nama Ibu</label>
-          <input [(ngModel)]="nim" class="form-control"/>
-        </div>
+        <!-- PISAH -->
 
-        <div class="col-sm-12 col-md-12 col-xs-12">
-          <br />
-        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <!-- Nama Ayah -->
+          <div class="form-group col-md-6 col-sm-6 col-xs-12">
+            <label>Nama Ayah</label>
+            <input [(ngModel)]="nama_ayah" class="form-control"/>
+          </div>
 
-        <!-- Nama Ayah -->
-        <div class="form-group col-md-6 col-sm-6 col-xs-12">
-          <label>No. Orang Tua</label>
-          <input [(ngModel)]="nim" class="form-control"/>
-        </div>
+          <!-- Nama Ibu -->
+          <div class="form-group col-md-6 col-sm-6 col-xs-12">
+            <label>Nama Ibu</label>
+            <input [(ngModel)]="nama_ibu" class="form-control"/>
+          </div>
 
-        <!-- Nama Ayah -->
-        <div class="form-group col-md-6 col-sm-6 col-xs-12">
-          <label>Alamat Orang Tua</label>
-          <textarea class="form-control" style="width: 100%" [(ngModel)]="nim"></textarea>
-        </div>
+          <div class="col-sm-12 col-md-12 col-xs-12">
+            <br />
+          </div>
 
-        <!-- submit -->
-        <div class="form-group section-block text-right padding-right">
-          <button type="submit" class="btn btn-primary btn-lg">OK</button>
+          <!-- Nama Ayah -->
+          <div class="form-group col-md-6 col-sm-6 col-xs-12">
+            <label>No. Orang Tua</label>
+            <input [(ngModel)]="no_ortu" class="form-control"/>
+          </div>
+
+          <!-- Alamat Ortu -->
+          <div class="form-group col-md-6 col-sm-6 col-xs-12">
+            <label>Alamat Orang Tua</label>
+            <textarea class="form-control" style="width: 100%" [(ngModel)]="alamat_ortu"></textarea>
+          </div>
+
+          <div class="col-sm-12 col-md-12 col-xs-12">
+            <br />
+          </div>
+
+
+
+          <!-- submit -->
+          <div class="col-md-12 col-xs-12 col-sm-12 text-right">
+            <button class="btn btn-lg btn-primary" type="submit" (click)="simpan()">Simpan</button>
+          </div>
         </div>
 
       </form>
+
     </ba-card>
   </div>
+
 </div>
+
+status: {{status}}<br />
+message: {{message}}

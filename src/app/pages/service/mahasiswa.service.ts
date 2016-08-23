@@ -20,9 +20,10 @@ export class MahasiswaService {
   public urlDataPengajuan = 'http://210.16.120.17:8100/ta/daftar/';
   public urlDosen = 'http://210.16.120.17:8100/dosen';
   public urlDaftarPengajuan = 'http://210.16.120.17:8100/ta/pengajuan/';
+  public urlProfile = 'http://210.16.120.17:8100/profile/';
 
   // URL LOG
-  
+
 
   // JWT
   public decode;
