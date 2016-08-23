@@ -4,6 +4,7 @@ import {AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload';
 import {Http, Headers} from '@angular/http';
 import {MahasiswaService} from '../service';
+import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 
 import {BaCard} from '../../theme/components';
 
@@ -57,7 +58,7 @@ export class Kolokium implements OnInit {
     this.hasAnotherDropZoneOver = e;
   }
 
-  constructor(private http: Http, private data: MahasiswaService) {
+  constructor(private http: Http, private data: MahasiswaService, private authHttp: AuthHttp) {
     this.nim = this.data.nim;
     this.nama = this.data.nama;
     this.topik = this.data.topik;
@@ -70,7 +71,7 @@ export class Kolokium implements OnInit {
   }
 
   getDataMahasiswa(){
-    this.http.get('http://210.16.120.17:8000/ta/'+this.nim)
+    this.authHttp.get('http://210.16.120.17:8100/ta/')
       .map(res => res.json())
       .subscribe(data => {
         this.topik = data[0]['topik'];

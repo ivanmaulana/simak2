@@ -2,6 +2,7 @@ import {Component, ViewEncapsulation, ElementRef, OnInit} from '@angular/core';
 import {BaCard} from '../../theme/components';
 import {Http, Response, HTTP_PROVIDERS, Headers} from '@angular/http';
 import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 import {MahasiswaService} from '../service';
 import {PengajuanService} from './pengajuan.service';
@@ -10,7 +11,7 @@ import {PengajuanService} from './pengajuan.service';
   selector: 'pengajuan',
   host: {'(document:click)': 'handleClick($event)',},
   directives: [BaCard],
-  providers: [MahasiswaService, PengajuanService, HTTP_PROVIDERS],
+  providers: [MahasiswaService, PengajuanService, HTTP_PROVIDERS, ToastsManager],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./pengajuan.scss')],
   template: require('./pengajuan.html')
@@ -54,7 +55,8 @@ export class Pengajuan implements OnInit{
   public filteredList2 = [];
   public elementRef;
 
-  constructor(private http: Http, private authHttp: AuthHttp, private pengajuanService: PengajuanService, private service: MahasiswaService, private myElement: ElementRef) {
+  constructor(private http: Http, private authHttp: AuthHttp, private pengajuanService: PengajuanService,
+    private service: MahasiswaService, private myElement: ElementRef, private toastr: ToastsManager) {
     this.getDataDosen();
     this.elementRef = myElement;
 
@@ -136,7 +138,7 @@ export class Pengajuan implements OnInit{
         .subscribe( data => {
           this.count = data[0]['id'];
           this.response = data;
-          console.log(this.response);
+          // console.log(this.response);
           for (var i = 0; i < this.count; i++){
             this.dosen.push(data[i]['nama']);
           }
@@ -147,18 +149,18 @@ export class Pengajuan implements OnInit{
 
   getIdDosen(nama){
     let id;
-    console.log("nama :"+nama);
+    // console.log("nama :"+nama);
     for (var i = 0; i < this.response.length; i++){
       if (nama === this.response[i]['nama']) {
         id =  this.response[i]['id'];
-        console.log(id+" : "+nama);
+        // console.log(id+" : "+nama);
       }
     }
     return id;
   }
 
   getDataPengajuan(){
-    this.authHttp.get(this.service.urlDataPengajuan+this.nim)
+    this.authHttp.get('http://210.16.120.17:8100/ta/daftar/detail/')
       .map(res => res.json())
         .subscribe( data => {
           this.count = data[0]['id'];
@@ -194,8 +196,19 @@ export class Pengajuan implements OnInit{
         // console.log(data);
         this.status = data[0].status;
         this.message = data[0].message;
+
+        if (this.status) this.showSuccess();
+        else this.showError();
       }
     )
+  }
+
+  showError() {
+    this.toastr.error('Pengajuan Topik Gagal', 'Error!');
+  }
+
+  showSuccess() {
+    this.toastr.success("Pengajuan Topik Berhasil", 'Success !');
   }
 
   radioLab(input){

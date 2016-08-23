@@ -40,16 +40,10 @@ export class MahasiswaService {
     this.getLocalStorage();
     this.getDataTA();
 
+    console.log('ini service');
+
     // this.test = 'awal';
   }
-
-  // getTest(){
-  //   return this.test;
-  // }
-  //
-  // setTest(params){
-  //   this.test.next(params);
-  // }
 
   getLocalStorage(){
     this.token = localStorage.getItem('id_token');
@@ -62,7 +56,7 @@ export class MahasiswaService {
   }
 
   getDataTA(){
-    this.authHttp.get(this.urlTa+this.nim)
+    this.authHttp.get(this.urlTa)
       .map(res => res.json())
       .subscribe(data => {
         this.topik = data[0]['topik'];
