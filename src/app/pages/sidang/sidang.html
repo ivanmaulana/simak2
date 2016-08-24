@@ -1,7 +1,6 @@
 <ba-card title="Sidang" baCardClass="with-scroll">
   <form class="row form-inline">
 
-
     <!-- nama & nim-->
     <div class="col-md-12 col-xs-12">
 
@@ -54,7 +53,7 @@
     <!-- Judul Paper -->
     <div class="form-group col-md-12 col-xs-12">
         <label>Topik</label><br />
-        <textarea class="form-control" style="width:100%" placeholder="Judul paper kamu" [(ngModel)]="topik"></textarea>
+        <textarea class="form-control" style="width:100%" placeholder="Judul paper kamu" [(ngModel)]="topik" required></textarea>
     </div>
 
     <div class="col-sm-12 col-md-12 col-xs-12">
@@ -74,7 +73,7 @@
 
     <div class="form-group col-md-6 col-sm-12 col-xs-12">
       <label>Tempat</label><br />
-      <input class="form-control" type="text" name="konferensi" placeholder="R. Sidang Ilkom" [(ngModel)]="tempat"/>
+      <input class="form-control" type="text" name="konferensi" placeholder="R. Sidang Ilkom" [(ngModel)]="tempat" required="required"/>
     </div>
 
     <div class="col-sm-12 col-md-12 col-xs-12">
@@ -95,7 +94,7 @@
         </span>
       </div>
       <div style="position:absolute;z-index:2" *ngIf="filteredList.length > 0">
-        <div class="row" *ngFor="#item of filteredList" class="form-control primary" (click)="select(item)">
+        <div class="row" *ngFor="let item of filteredList" class="form-control primary" (click)="select(item)">
               {{item}}
         </div>
       </div>
@@ -113,7 +112,7 @@
         </span>
       </div>
       <div style="position:absolute;z-index:1" *ngIf="filteredList2.length > 0">
-        <div *ngFor="#item of filteredList2" class="form-control primary" (click)="select2(item)">
+        <div *ngFor="let item of filteredList2" class="form-control primary" (click)="select2(item)">
               {{item}}
         </div>
       </div>

@@ -4,6 +4,8 @@ import {AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload';
 import {Http, Headers} from '@angular/http';
 import {MahasiswaService} from '../service';
+import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 import {BaCard} from '../../theme/components';
 
@@ -13,7 +15,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 @Component({
   selector: 'praseminar',
   encapsulation: ViewEncapsulation.None,
-  providers: [MahasiswaService],
+  providers: [MahasiswaService, ToastsManager],
   directives: [BaCard, AlertComponent, FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, CORE_DIRECTIVES, FORM_DIRECTIVES, PROGRESSBAR_DIRECTIVES],
   styles: [require('./praseminar.scss')],
   template: require('./praseminar.html'),
@@ -41,7 +43,7 @@ export class Praseminar implements OnInit {
 
   max : number = 100;
 
-  constructor(private http: Http, private data: MahasiswaService) {
+  constructor(private http: Http, private data: MahasiswaService, private toastr: ToastsManager, private authHttp: AuthHttp) {
 
     this.nim = this.data.nim;
     this.nama = this.data.nama;
@@ -58,7 +60,7 @@ export class Praseminar implements OnInit {
   }
 
   getDataMahasiswa(){
-    this.http.get('http://210.16.120.17:8000/ta/'+this.nim)
+    this.authHttp.get('http://210.16.120.17:8100/ta/')
       .map(res => res.json())
       .subscribe(data => {
         this.topik = data[0]['topik'];
@@ -69,7 +71,7 @@ export class Praseminar implements OnInit {
   }
 
   getDataPraseminar(){
-    this.http.get('http://210.16.120.17:8000/jadwalPraseminar')
+    this.authHttp.get('http://210.16.120.17:8100/jadwalPraseminar')
       .map(res => res.json())
       .subscribe(data => {
         this.active = data[0]['active'];
@@ -81,17 +83,26 @@ export class Praseminar implements OnInit {
   }
 
   simpan(){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    this.creds = JSON.stringify({nim: this.nim, topik: this.topik});
+    this.creds = JSON.stringify({topik: this.topik});
 
-    this.http.put("http://210.16.120.17:8000/ta/update/", this.creds, {headers: headers})
+    this.authHttp.put("http://210.16.120.17:8100/ta/update/", this.creds)
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;
         this.message = data[0].message;
+
+        if(this.status) this.showSuccess();
+        else this.showError();
       }
     )
+  }
+
+  showError() {
+    this.toastr.error('Update Topik Gagal', 'Error!');
+  }
+
+  showSuccess() {
+    this.toastr.success("Update Topik Berhasil", 'Success !');
   }
 
   public fileOverBase(e:any):void {

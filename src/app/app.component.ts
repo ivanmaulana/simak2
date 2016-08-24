@@ -76,7 +76,7 @@ export class App implements OnInit{
       this.token = localStorage.getItem('id_token');
       this.decode = this.jwtHelper.decodeToken(this.token);
       this.role = this.decode['role'];
-      console.log('ada local storage :'+this.role);
+      // console.log('ada local storage :'+this.role);
 
       if (this.role === 1){
         this.route.navigate(['Admin']);

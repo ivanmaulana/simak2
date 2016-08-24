@@ -2,7 +2,7 @@
 <div *ngIf="response">
   <!-- Alert message -->
   <alert type="success" *ngIf="active">
-    Perhatian ! Jadwal kolokium adalah {{jadwal}}. Silahkan  <a href="#/pages/seminar"><b><i>Download jadwal disini</i></b></a>
+    Perhatian ! Jadwal kolokium adalah {{data.ubahTanggal(jadwal)}}. Silahkan  <a href="#/pages/seminar"><b><i>Download jadwal disini</i></b></a>
   </alert>
 
   <alert type="danger" *ngIf="!active">
@@ -10,7 +10,7 @@
   </alert>
 
   <alert type="danger" *ngIf="active">
-    Pengisian & Upload makalah kolokium akan dibuka sampai  {{deadline}}
+    Pengisian & Upload makalah kolokium akan dibuka sampai  {{data.ubahTanggal(deadline)}}
   </alert>
 
   <div class="row" *ngIf="active">
@@ -69,7 +69,7 @@
 
           <!-- judul topik -->
           <div class="form-group col-md-12 col-xs-12">
-              <label><p href primary>Topik kamu. status : {{status}}, message: {{message}}</p></label><br />
+              <label><p href primary>Topik kamu</p></label><br />
               <textarea [(ngModel)]="topik" style="width: 100%" class="form-control"></textarea>
           </div>
 
@@ -88,29 +88,6 @@
           <!-- upload makalah kolokium -->
           <div class="form-group col-md-12 col-xs-12">
             <label><p href primary>Upload makalah</p></label><br />
-            <input type="file" ng2FileSelect [uploader]="uploader" />
-          </div>
-
-          <!-- upload progress -->
-          <div class="col-md-12 col-xs-12 col-sm-12" style="margin-bottom: 40px">
-            <br />
-              <div>
-                <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
-  </progressbar>
-                  <button type="button" class="btn btn-success btn-s"
-                          (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-                      <span class="glyphicon glyphicon-upload"></span> Upload
-                  </button>
-                  <button type="button" class="btn btn-danger btn-s"
-                          (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                      <span class="glyphicon glyphicon-trash"></span> Remove
-                  </button>
-              </div>
-          </div>
-
-          <!-- upload makalah kolokium -->
-          <div class="form-group col-md-12 col-xs-12">
-            <label><p href primary>Upload makalah kolokium hasil revisi</p></label><br />
             <input type="file" ng2FileSelect [uploader]="uploader" />
           </div>
 

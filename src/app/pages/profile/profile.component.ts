@@ -71,7 +71,7 @@ export class Profile implements OnInit{
     this.authHttp.post(this.service.urlProfile, this.creds)
       .map(res => res.json())
       .subscribe(data => {
-        console.log(data);
+        // console.log(data);
         this.status = data['status'];
         this.message = data['message'];
 

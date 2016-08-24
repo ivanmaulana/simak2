@@ -2,12 +2,16 @@ import {Component, ViewEncapsulation, OnInit, ElementRef} from '@angular/core';
 import {CORE_DIRECTIVES, NgClass, NgStyle, FORM_DIRECTIVES, } from '@angular/common';
 import {TAB_DIRECTIVES, DATEPICKER_DIRECTIVES, AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
 import {Http, Headers} from '@angular/http';
+import {MahasiswaService} from '../service';
+import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 import {BaCard} from '../../theme/components';
 
 @Component({
   selector: 'sidang',
   pipes: [],
+  providers: [MahasiswaService, ToastsManager],
   directives: [BaCard, AlertComponent, TAB_DIRECTIVES, CORE_DIRECTIVES, NgClass, NgStyle, PROGRESSBAR_DIRECTIVES, FORM_DIRECTIVES],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./sidang.scss')],
@@ -38,7 +42,8 @@ export class Sidang {
   private message;
 
 
-  constructor(private http: Http, private myElement: ElementRef) {
+  constructor(private http: Http, private myElement: ElementRef, private authHttp: AuthHttp, private service: MahasiswaService,
+  private toastr: ToastsManager) {
     this.elementRef = myElement;
     this.getDataMahasiswa();
     this.getDataDosen();
@@ -57,8 +62,8 @@ export class Sidang {
         this.nim = data[0].nim;
         this.nama = data[0].nama;
         this.topik = data[0].topik;
-        this.dosen_1 = data[0].dosen_1;
-        this.dosen_2 = data[0].dosen_2;
+        this.dosen_1 = data[0].dosen1;
+        this.dosen_2 = data[0].dosen2;
       })
   }
 

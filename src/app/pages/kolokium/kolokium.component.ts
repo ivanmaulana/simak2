@@ -5,16 +5,17 @@ import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload';
 import {Http, Headers} from '@angular/http';
 import {MahasiswaService} from '../service';
 import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 import {BaCard} from '../../theme/components';
 
 // const URL = '/api/';
-const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
+const URL = 'http://210.16.120.17:8100/upload';
 
 @Component({
   selector: 'kolokium',
   pipes: [],
-  providers: [MahasiswaService],
+  providers: [MahasiswaService, ToastsManager],
   directives: [BaCard, AlertComponent, FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, CORE_DIRECTIVES, FORM_DIRECTIVES, PROGRESSBAR_DIRECTIVES],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./kolokium.scss')],
@@ -58,7 +59,7 @@ export class Kolokium implements OnInit {
     this.hasAnotherDropZoneOver = e;
   }
 
-  constructor(private http: Http, private data: MahasiswaService, private authHttp: AuthHttp) {
+  constructor(private http: Http, private data: MahasiswaService, private authHttp: AuthHttp, private toastr: ToastsManager) {
     this.nim = this.data.nim;
     this.nama = this.data.nama;
     this.topik = this.data.topik;
@@ -82,7 +83,7 @@ export class Kolokium implements OnInit {
   }
 
   getDataKolokium(){
-    this.http.get('http://210.16.120.17:8000/jadwalKolokium')
+    this.authHttp.get('http://210.16.120.17:8100/jadwalKolokium')
       .map(res => res.json())
       .subscribe(data => {
         this.active = data[0]['active'];
@@ -94,17 +95,27 @@ export class Kolokium implements OnInit {
   }
 
   simpan(){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    this.creds = JSON.stringify({nim: this.nim, topik: this.topik});
+    this.creds = JSON.stringify({topik: this.topik});
 
-    this.http.put("http://210.16.120.17:8000/ta/update/", this.creds, {headers: headers})
+    this.authHttp.put("http://210.16.120.17:8100/ta/update/", this.creds)
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;
         this.message = data[0].message;
+
+        if(this.status) this.showSuccess();
+        else this.showError();
+
       }
     )
+  }
+
+  showError() {
+    this.toastr.error('Update Topik Gagal', 'Error!');
+  }
+
+  showSuccess() {
+    this.toastr.success("Update Topik Berhasil", 'Success !');
   }
 
 }
