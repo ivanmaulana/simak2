@@ -11,7 +11,7 @@ import {ENV_PROVIDERS} from './platform/environment';
 import {AuthHttp, AuthConfig, AUTH_PROVIDERS} from 'angular2-jwt';
 import {Http} from '@angular/http';
 import {provide} from '@angular/core';
-
+import {FileUploader} from 'ng2-file-upload';
 
 /*
  * App Component

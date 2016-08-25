@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit, NgZone} from '@angular/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload';
@@ -9,8 +9,6 @@ import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 import {BaCard} from '../../theme/components';
 
-// const URL = '/api/';
-const URL = 'http://210.16.120.17:8100/upload';
 
 @Component({
   selector: 'kolokium',
@@ -42,13 +40,23 @@ export class Kolokium implements OnInit {
 
   max : number = 100;
 
-  public uploader:FileUploader = new FileUploader({url: URL});
+  private token = this.data.token;
+
+  public uploader : FileUploader = new FileUploader({});
   public hasBaseDropZoneOver:boolean = false;
   public hasAnotherDropZoneOver:boolean = false;
 
   ngOnInit(){
     this.getDataMahasiswa();
     this.getDataKolokium();
+
+// && item.type == 'application/pdf'
+    this.uploader.setOptions({
+      filters: [{ fn: item => {
+        return item.size < 1024 * 1024 * 10 && item.type == 'application/pdf'
+      }}]
+    })
+    console.log(this.uploader);
   }
 
   public fileOverBase(e:any):void {
@@ -66,6 +74,16 @@ export class Kolokium implements OnInit {
     this.dosen_1 = this.data.dosen_1;
     this.dosen_2 = this.data.dosen_2;
 
+    this.uploader.setOptions({
+      authToken: this.data.token,
+      url: 'http://210.16.120.17/upload/kolokium.php',
+      withCredentials: true,
+      disableMultipart: true,
+      headers: [{
+        name: 'Authorization',
+        value: this.data.token
+      }]
+    });
 
     this.getDataMahasiswa();
     this.getDataKolokium();

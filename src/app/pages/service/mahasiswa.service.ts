@@ -22,9 +22,6 @@ export class MahasiswaService {
   public urlDaftarPengajuan = 'http://210.16.120.17:8100/ta/pengajuan/';
   public urlProfile = 'http://210.16.120.17:8100/profile/';
 
-  // URL LOG
-
-
   // JWT
   public decode;
   public role;
