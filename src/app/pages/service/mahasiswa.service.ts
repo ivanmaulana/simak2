@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers} from '@angular/http';
 import {Subject} from 'rxjs/Subject';
 
 import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
@@ -33,7 +32,7 @@ export class MahasiswaService {
   public send = 1;
   jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(private http: Http, private authHttp: AuthHttp){
+  constructor(private authHttp: AuthHttp){
     this.getLocalStorage();
     this.getDataTA();
   }

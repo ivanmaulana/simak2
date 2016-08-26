@@ -4,14 +4,12 @@ import {AuthHttp} from 'angular2-jwt';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 import {BaCard} from '../../theme/components';
-import {Http, Headers} from '@angular/http';
 
 @Component({
   selector: 'log',
   pipes: [],
   directives: [BaCard],
   providers: [MahasiswaService, ToastsManager],
-  encapsulation: ViewEncapsulation.None,
   styles: [require('./log.scss')],
   template: require('./log.html')
 })
@@ -59,7 +57,7 @@ export class Log implements OnInit{
     this.getDataLog();
   }
 
-  constructor(private http: Http, private service: MahasiswaService, private authHttp: AuthHttp, private toastr: ToastsManager) {
+  constructor(private service: MahasiswaService, private authHttp: AuthHttp, private toastr: ToastsManager) {
     // this.timestamp = new Date();
     this.nim = this.service.nim;
     this.nama = this.service.nama;

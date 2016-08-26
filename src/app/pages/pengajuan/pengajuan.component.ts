@@ -1,18 +1,16 @@
-import {Component, ViewEncapsulation, ElementRef, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {BaCard} from '../../theme/components';
-import {Http, Response, HTTP_PROVIDERS, Headers} from '@angular/http';
+import {HTTP_PROVIDERS} from '@angular/http';
 import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 import {MahasiswaService} from '../service';
-import {PengajuanService} from './pengajuan.service';
 
 @Component({
   selector: 'pengajuan',
   host: {'(document:click)': 'handleClick($event)',},
   directives: [BaCard],
-  providers: [MahasiswaService, PengajuanService, HTTP_PROVIDERS, ToastsManager],
-  encapsulation: ViewEncapsulation.None,
+  providers: [MahasiswaService, HTTP_PROVIDERS, ToastsManager],
   styles: [require('./pengajuan.scss')],
   template: require('./pengajuan.html')
 })
@@ -55,8 +53,11 @@ export class Pengajuan implements OnInit{
   public filteredList2 = [];
   public elementRef;
 
-  constructor(private http: Http, private authHttp: AuthHttp, private pengajuanService: PengajuanService,
-    private service: MahasiswaService, private myElement: ElementRef, private toastr: ToastsManager) {
+  constructor(private authHttp: AuthHttp,
+    private service: MahasiswaService,
+    private myElement: ElementRef,
+    private toastr: ToastsManager) {
+
     this.getDataDosen();
     this.elementRef = myElement;
 

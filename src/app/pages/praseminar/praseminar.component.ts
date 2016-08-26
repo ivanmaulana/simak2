@@ -1,20 +1,17 @@
-import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/common';
 import {AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload';
-import {Http, Headers} from '@angular/http';
 import {MahasiswaService} from '../service';
 import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 import {BaCard} from '../../theme/components';
 
-// const URL = '/api/';
 const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 
 @Component({
   selector: 'praseminar',
-  encapsulation: ViewEncapsulation.None,
   providers: [MahasiswaService, ToastsManager],
   directives: [BaCard, AlertComponent, FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, CORE_DIRECTIVES, FORM_DIRECTIVES, PROGRESSBAR_DIRECTIVES],
   styles: [require('./praseminar.scss')],
@@ -43,7 +40,7 @@ export class Praseminar implements OnInit {
 
   max : number = 100;
 
-  constructor(private http: Http, private data: MahasiswaService, private toastr: ToastsManager, private authHttp: AuthHttp) {
+  constructor(private data: MahasiswaService, private toastr: ToastsManager, private authHttp: AuthHttp) {
 
     this.nim = this.data.nim;
     this.nama = this.data.nama;

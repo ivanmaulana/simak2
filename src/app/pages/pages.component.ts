@@ -5,10 +5,6 @@ import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {BaPageTop, BaContentTop, BaSidebar, BaBackTop} from '../theme/components';
 
 import {Dashboard} from './dashboard';
-import {Ui} from './ui';
-import {Maps} from './maps';
-import {Forms} from './forms';
-import {Tables} from './tables';
 import {Menu} from './menu';
 import {Pengajuan} from './pengajuan';
 import {Log} from './log';
@@ -18,8 +14,6 @@ import {Seminar} from './seminar';
 import {Sidang} from './sidang';
 import {Praseminar} from './praseminar';
 import {Skl} from './skl';
-
-
 
 @Component({
   selector: 'pages',
@@ -50,11 +44,6 @@ import {Skl} from './skl';
     component: Dashboard,
     path: '/dashboard',
     useAsDefault: true,
-  },
-  {
-    name: 'Ui',
-    component: Ui,
-    path: '/ui/...',
   },
   {
     name: 'Seminar',
@@ -100,21 +89,6 @@ import {Skl} from './skl';
     name: 'Log',
     component: Log,
     path: '/log',
-  },
-  {
-    name: 'Maps',
-    component: Maps,
-    path: '/maps/...',
-  },
-  {
-    name: 'Forms',
-    component: Forms,
-    path: '/forms/...',
-  },
-  {
-    name: 'Tables',
-    component: Tables,
-    path: '/tables/...',
   }
 ])
 

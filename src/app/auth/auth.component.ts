@@ -1,6 +1,5 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {RouteConfig, Router} from '@angular/router-deprecated';
-// import {DataService} from './data';
 
 import {BaPageTop, BaContentTop, BaSidebarAdmin, BaBackTop} from '../theme/components';
 
@@ -29,11 +28,7 @@ import {BaPageTop, BaContentTop, BaSidebarAdmin, BaBackTop} from '../theme/compo
 })
 
 @RouteConfig([
-  // {
-  //   name: 'Login',
-  //   component: TaAdmin,
-  //   path: '/ta',
-  // }
+
 ])
 
 export class Auth implements OnInit{
