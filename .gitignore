@@ -2,6 +2,7 @@
 
 # Logs
 logs
+dist-backup/api
 *.log
 
 # Runtime data
