@@ -12,11 +12,11 @@ $text-color: #ffffff;
 }
 
 .auth-block {
-  width: 540px;
+  width: 400px;
   margin: 0 auto;
   border-radius: 5px;
   background: #2980b9;
-  //@include bg-translucent-dark(0.55);
+  @include bg-translucent-dark(0.2);
   color: #fff;
   padding: 32px;
   h1 {
@@ -125,5 +125,5 @@ a.forgot-pass {
 }
 
 .btn-auth {
-  color: #ffffff!important;
+  color: #ecf0f1!important;
 }

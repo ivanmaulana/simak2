@@ -40,7 +40,7 @@
     "ng2-bootstrap": "^1.0.24",
     "ng2-file-upload": "^1.0.3",
     "ng2-toastr": "^0.3.1",
-    "ng2-uploader": "^0.5.10",
+    "ng2-uploader": "^0.5.14",
     "normalize.css": "^4.1.1",
     "postcss-loader": "^0.9.1",
     "reflect-metadata": "^0.1.3",

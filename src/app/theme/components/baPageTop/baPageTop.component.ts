@@ -5,6 +5,8 @@ import {BaProfilePicturePipe} from '../../pipes';
 import {BaMsgCenter} from '../../components/baMsgCenter';
 import {BaScrollPosition} from '../../directives';
 
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
+
 import {Router} from '@angular/router-deprecated';
 
 @Component({
@@ -12,6 +14,7 @@ import {Router} from '@angular/router-deprecated';
   styles: [require('./baPageTop.scss')],
   template: require('./baPageTop.html'),
   directives: [BaMsgCenter, BaScrollPosition],
+  providers: [ToastsManager],
   pipes: [BaProfilePicturePipe],
   encapsulation: ViewEncapsulation.None
 })
@@ -21,7 +24,7 @@ export class BaPageTop {
   public isScrolled:boolean = false;
   public isMenuCollapsed:boolean = false;
 
-  constructor(private _state:AppState, private route: Router) {
+  constructor(private _state:AppState, private route: Router, private toastr: ToastsManager) {
     this.date = new Date();
 
     setInterval(() => {
@@ -44,7 +47,11 @@ export class BaPageTop {
 
   signOut(){
     localStorage.clear();
-
+    this.showSuccess();
     this.route.navigate(['Login']);
+  }
+
+  showSuccess() {
+    this.toastr.success("Anda Berhasil Logout", 'Success !');
   }
 }

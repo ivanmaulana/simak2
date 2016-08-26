@@ -17,7 +17,7 @@ import {Router} from '@angular/router-deprecated';
   directives: [BaCard],
   providers: [ToastsManager],
   encapsulation: ViewEncapsulation.None,
-  styles: [require('./login.scss')],
+  styles: [require('./login.scss'),require('./style.css'),require('./responsive.css')],
   template: require('./login.html')
 })
 
@@ -49,14 +49,6 @@ export class Login implements OnInit {
   }
 
   constructor(private route: Router, private http: Http, private authHttp: AuthHttp, private toastr: ToastsManager) {
-    // localStorage.setItem('test', "test");
-
-    let test = localStorage.getItem('test');
-    console.log(test);
-
-    console.log(localStorage.getItem('test2'));
-    // console.log(this.test2);
-    if (!localStorage.getItem('test2')) console.log('ga ada test2');
 
   }
 
@@ -68,7 +60,6 @@ export class Login implements OnInit {
       .subscribe(data => {
         this.status = data['status'];
         this.message = data['message'];
-        console.log(this.status);
 
         // gagal login
         if (!this.status) this.showError();

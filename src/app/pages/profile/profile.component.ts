@@ -41,7 +41,7 @@ export class Profile implements OnInit{
   };
 
   public uploaderOptions:any = {
-    // url: 'http://website.com/upload'
+    url: 'http://210.16.120.17/upload/testUpload.php'
   };
 
   ngOnInit() {
