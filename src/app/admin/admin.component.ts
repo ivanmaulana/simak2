@@ -97,25 +97,20 @@ export class Admin implements OnInit {
   ngOnInit(){
 
     this.token = localStorage.getItem('id_token');
+    this.decode = this.jwtHelper.decodeToken(this.token);
+    this.role = this.decode['role'];
 
-    if (this.token){
-      // this.token = localStorage.getItem('id_token');
-      // this.decode = this.jwtHelper.decodeToken(this.token);
-      // this.role = this.decode['role'];
-      // console.log('ada local storage :'+this.role);
-      //
-      // if (this.role === 1){
-      //   this.route.navigate(['Admin']);
-      // }
-      // else if(this.role === 2){
-      //   this.route.navigate(['Dosen']);
-      // }
-      // else if(this.role === 3){
-      //
-      // }
-      // else if(this.role === 4){
-      //   this.route.navigate(['Dosen']);
-      // }
+    if (this.role === 1){
+      // this.route.navigate(['Admin']);
+    }
+    else if(this.role === 2){
+      this.route.navigate(['Dosen']);
+    }
+    else if(this.role === 3){
+      this.route.navigate(['Pages']);
+    }
+    else if(this.role === 4){
+
     }
     else {
       this.route.navigate(['Login']);

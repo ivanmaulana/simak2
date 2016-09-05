@@ -1,3 +1,5 @@
+{{test}}
+
 <ba-card title="Sidang" baCardClass="with-scroll">
   <form class="row form-inline">
 
@@ -10,7 +12,7 @@
             Nama
           </div>
           <div class="col-md-8">
-            : Ivan Maulana Putra
+            : {{service.nama}}
           </div>
         </div>
 
@@ -19,7 +21,7 @@
             NIM
           </div>
           <div class="col-md-8">
-            : {{nim}}
+            : {{service.nim}}
           </div>
         </div>
       </div>
@@ -30,7 +32,7 @@
             Pembimbing Ketua
           </div>
           <div class="col-md-7">
-            : {{dosen_1}}
+            : {{service.dosen_1}}
           </div>
         </div>
 
@@ -39,7 +41,7 @@
             Pembimbing Anggota
           </div>
           <div class="col-md-7">
-            : {{dosen_2}}
+            : {{service.dosen_2}}
           </div>
         </div>
       </div>

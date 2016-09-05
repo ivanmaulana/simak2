@@ -14,20 +14,37 @@ export class MahasiswaService {
   public topik;
   public lab;
 
+  // JWT
+  public decode;
+  public role;
+
+  // DOSEN
+  public dosen_1;
+  public dosen_2;
+
+  // PROFILE
+  public no;
+  public email;
+  public nama_ayah;
+  public nama_ibu;
+  public alamat;
+  public alamat_ortu;
+  public no_ortu;
+
+  // SIDANG
+  public tanggal;
+  public jam;
+  public tempat;
+  public penguji_ketua;
+  public penguji_anggota;
+
   // URL
   public urlTa = 'http://210.16.120.17:8100/ta/';
   public urlDataPengajuan = 'http://210.16.120.17:8100/ta/daftar/';
   public urlDosen = 'http://210.16.120.17:8100/dosen';
   public urlDaftarPengajuan = 'http://210.16.120.17:8100/ta/pengajuan/';
   public urlProfile = 'http://210.16.120.17:8100/profile/';
-
-  // JWT
-  public decode;
-  public role;
-
-
-  public dosen_1;
-  public dosen_2;
+  public urlSidang = 'http://210.16.120.17:8100/sidang/';
 
   public send = 1;
   jwtHelper: JwtHelper = new JwtHelper();
@@ -35,6 +52,8 @@ export class MahasiswaService {
   constructor(private authHttp: AuthHttp){
     this.getLocalStorage();
     this.getDataTA();
+    this.getProfile();
+    this.getSidang();
   }
 
   getLocalStorage(){
@@ -58,14 +77,41 @@ export class MahasiswaService {
       })
   }
 
+  getProfile() {
+    this.authHttp.get(this.urlProfile)
+      .map(res => res.json())
+        .subscribe( data => {
+          this.no = data[0]['no_hp'];
+          this.email = data[0]['email'];
+          this.alamat = data[0]['alamat'];
+          this.nama_ayah = data[0]['nama_ayah'];
+          this.nama_ibu = data[0]['nama_ibu'];
+          this.alamat_ortu = data[0]['alamat_ortu'];
+          this.no_ortu = data[0]['no_ortu'];
+        })
+  }
+
+  getSidang() {
+    this.authHttp.get(this.urlSidang)
+      .map(res => res.json())
+        .subscribe( data => {
+          this.tanggal = data[0]['tanggal'];
+          this.jam = data[0]['jam'];
+          this.tempat = data[0]['tempat'];
+          this.penguji_ketua = data[0]['penguji_ketua'];
+          this.penguji_anggota = data[0]['penguji_anggota'];
+          // this.no = data[0]['no_hp'];
+        })
+  }
+
   getSend(){
     return this.send;
   }
 
   setSend(params){
     this.send = params;
-    console.log(this.getSend());
-    return this.send;
+    // console.log(this.getSend());
+    // return this.send;
   }
 
   ubahTanggal(date){
