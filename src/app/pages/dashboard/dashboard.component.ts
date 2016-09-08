@@ -26,6 +26,10 @@ export class Dashboard implements OnInit{
   message;
   status;
 
+  nama_ayah;
+
+  statusProfile;
+
   ngOnInit(){
 
     // this.authHttp.get('http://210.16.120.17:8100/test/')
@@ -37,9 +41,11 @@ export class Dashboard implements OnInit{
     //
     //   if(!this.status) this.showWarning();
 
+    this.getStatus();
+
   }
 
-  constructor(private http: Http, private router: Router, private data: MahasiswaService, private authHttp: AuthHttp,
+  constructor(private http: Http, private router: Router, public data: MahasiswaService, private authHttp: AuthHttp,
   private toastr: ToastsManager) {
 
   }
@@ -55,5 +61,17 @@ export class Dashboard implements OnInit{
   pindah(){
 
   }
+
+
+  // DASHBOARD SERVICE
+  getStatus() {
+    this.authHttp.get(this.data.urlStatus)
+      .map(res => res.json())
+      .subscribe( data => {
+        this.statusProfile = data[0]['statusProfile'];
+        // console.log(this.statusProfile);
+      })
+  }
+
 
 }

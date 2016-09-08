@@ -3,13 +3,14 @@ import {BaCard} from '../../theme/components';
 import {HTTP_PROVIDERS} from '@angular/http';
 import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
+import {AlertComponent} from 'ng2-bootstrap';
 
 import {MahasiswaService} from '../service';
 
 @Component({
   selector: 'pengajuan',
   host: {'(document:click)': 'handleClick($event)',},
-  directives: [BaCard],
+  directives: [BaCard, AlertComponent],
   providers: [MahasiswaService, HTTP_PROVIDERS, ToastsManager],
   styles: [require('./pengajuan.scss')],
   template: require('./pengajuan.html')
@@ -40,6 +41,10 @@ export class Pengajuan implements OnInit{
   private c2: boolean = true;
   private response;
   private test;
+
+  //status
+  private statusProfile;
+  private statusDaftar;
 
   private disableCheckbox: boolean = true;
 
@@ -144,8 +149,6 @@ export class Pengajuan implements OnInit{
             this.dosen.push(data[i]['nama']);
           }
         })
-
-
   }
 
   getIdDosen(nama){
@@ -203,6 +206,18 @@ export class Pengajuan implements OnInit{
       }
     )
   }
+
+  // DASHBOARD SERVICE
+  getStatus() {
+    this.authHttp.get(this.service.urlStatus)
+      .map(res => res.json())
+      .subscribe( data => {
+        this.statusProfile = data[0]['statusProfile'];
+        this.statusDaftar = data[0]['statusDaftar'];
+        // console.log(this.statusProfile);
+      })
+  }
+
 
   showError() {
     this.toastr.error('Pengajuan Topik Gagal', 'Error!');

@@ -1,0 +1,7 @@
+(
+SELECT EXISTS (
+SELECT *
+FROM ta_daftar
+WHERE nim =  'G64130076'
+)
+)

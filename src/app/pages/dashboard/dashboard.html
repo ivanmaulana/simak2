@@ -4,4 +4,26 @@
 
 {{data.alamat}} -->
 
-<alert type="danger">Kamu belum melengkapi data diri kamu. Silahkan lengkapi <a href="#/mahasiswa/profile"><i>Disini</i></a></alert>
+<div *ngIf="!statusProfile" >
+  <alert type="danger">Kamu belum melengkapi data diri kamu. Silahkan lengkapi <a href="#/mahasiswa/profile"><i>Disini</i></a></alert>
+</div>
+<!-- {{nama_ayah}} -->
+
+<!-- <div *ngIf="!statusProfile">
+  <div class="small-box bg-red">
+    Kamu Belum Melengkapi Data Profile Kamu.
+  </div>
+</div> -->
+
+<!-- <div class="col-md-3">
+  <div class="fd-tile detail clean tile-purple">
+    <div class="content"><h1 class="text-left">170</h1><p>New Visitors</p></div>
+    <a class="details" href="#">Jadwal Kolokium <span><i class="fa fa-arrow-circle-right pull-right"></i></span></a>
+  </div>
+</div> -->
+
+<!-- <div class="row">
+  <ba-card title="Info / Pengumuman">
+
+  </ba-card>
+</div> -->

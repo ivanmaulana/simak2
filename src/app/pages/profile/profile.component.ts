@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation, OnInit} from '@angular/core';
+import {Component, ViewEncapsulation, OnInit, NgZone } from '@angular/core';
 
 import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
@@ -34,26 +34,43 @@ export class Profile implements OnInit{
   private creds;
   private status;
   private message;
+  zone: NgZone;
+
+  response;
+  progress;
 
   public defaultPicture = 'assets/img/theme/no-photo.png';
   public profile:any = {
-    picture: 'assets/img/app/profile/Nasta.png'
+    picture: 'http://simak.apps.cs.ipb.ac.id/upload/filePhoto/foto-'+this.service.nim+'-'+this.service.nama+'.png'
   };
 
   public uploaderOptions:any = {
-    url: 'http://210.16.120.17/upload/testUpload.php'
+    url: 'http://simak.apps.cs.ipb.ac.id/upload/photo.php',
+    authToken: localStorage.getItem('id_token'),
+    authTokenPrefix: '',
+    filterExtensions: true,
+    allowedExtensions: ['image/png', 'image/jpg'],
+    calculateSpeed: true,
   };
 
+  handleUpload(data: any): void {
+    this.zone.run(() => {
+      this.response = data;
+      this.progress = Math.floor(data.progress.percent / 100);
+    });
+  }
+
   ngOnInit() {
+    this.zone = new NgZone({ enableLongStackTrace: false });
     this.authHttp.get(this.service.urlProfile)
       .map(res => res.json())
         .subscribe( data => {
-          this.no = data[0]['no_hp'];
+          this.no = data[0]['hp'];
           this.email = data[0]['email'];
           this.alamat = data[0]['alamat'];
-          this.nama_ayah = data[0]['nama_ayah'];
-          this.nama_ibu = data[0]['nama_ibu'];
-          this.alamat_ortu = data[0]['alamat_ortu'];
+          this.nama_ayah = data[0]['namaayah'];
+          this.nama_ibu = data[0]['namaibu'];
+          this.alamat_ortu = data[0]['alamatortu'];
           this.no_ortu = data[0]['no_ortu'];
         })
   }

@@ -1,4 +1,8 @@
-<div class="row">
+<div *ngIf="!statusProfile" >
+  <alert type="danger">Kamu belum melengkapi data diri kamu. Silahkan lengkapi <a href="#/mahasiswa/profile"><i>Disini</i></a></alert>
+</div>
+
+<div class="row" *ngIf="statusProfile">
   <div class="col-md-12">
     <ba-card title="Pengajuan Topik" baCardClass="with-scroll">
       <form class="row form-inline">

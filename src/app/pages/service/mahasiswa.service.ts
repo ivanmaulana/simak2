@@ -38,13 +38,16 @@ export class MahasiswaService {
   public penguji_ketua;
   public penguji_anggota;
 
+  private aaa = 'aaa';
+
   // URL
-  public urlTa = 'http://210.16.120.17:8100/ta/';
-  public urlDataPengajuan = 'http://210.16.120.17:8100/ta/daftar/';
-  public urlDosen = 'http://210.16.120.17:8100/dosen';
-  public urlDaftarPengajuan = 'http://210.16.120.17:8100/ta/pengajuan/';
-  public urlProfile = 'http://210.16.120.17:8100/profile/';
-  public urlSidang = 'http://210.16.120.17:8100/sidang/';
+  public urlTa = 'http://simak.apps.cs.ipb.ac.id:2016/ta/';
+  public urlDataPengajuan = 'http://simak.apps.cs.ipb.ac.id:2016/ta/daftar/';
+  public urlDosen = 'http://simak.apps.cs.ipb.ac.id:2016/dosen';
+  public urlDaftarPengajuan = 'http://simak.apps.cs.ipb.ac.id:2016/ta/pengajuan/';
+  public urlProfile = 'http://simak.apps.cs.ipb.ac.id:2016/profile/';
+  public urlSidang = 'http://simak.apps.cs.ipb.ac.id:2016/sidang/';
+  public urlStatus = 'http://simak.apps.cs.ipb.ac.id:2016/status';
 
   public send = 1;
   jwtHelper: JwtHelper = new JwtHelper();
@@ -81,14 +84,19 @@ export class MahasiswaService {
     this.authHttp.get(this.urlProfile)
       .map(res => res.json())
         .subscribe( data => {
-          this.no = data[0]['no_hp'];
+          this.no = data[0]['hp'];
           this.email = data[0]['email'];
           this.alamat = data[0]['alamat'];
-          this.nama_ayah = data[0]['nama_ayah'];
-          this.nama_ibu = data[0]['nama_ibu'];
-          this.alamat_ortu = data[0]['alamat_ortu'];
+          this.nama_ayah = data[0]['namaayah'];
+          // console.log(this.nama_ayah);
+          this.nama_ibu = data[0]['namaibu'];
+          this.alamat_ortu = data[0]['alamatortu'];
           this.no_ortu = data[0]['no_ortu'];
         })
+  }
+
+  getAyah() {
+    return this.nama_ayah;
   }
 
   getSidang() {
@@ -110,8 +118,6 @@ export class MahasiswaService {
 
   setSend(params){
     this.send = params;
-    // console.log(this.getSend());
-    // return this.send;
   }
 
   ubahTanggal(date){
@@ -137,7 +143,6 @@ export class MahasiswaService {
     let kirim = tanggal+' '+bulan+' '+tahun;
 
     return kirim;
-
   }
 
 

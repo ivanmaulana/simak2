@@ -25,3 +25,66 @@
 .btn-md{
   width:175px
 }
+
+.small-box {
+    border-radius: 2px;
+    position: relative;
+    display: block;
+    height: 155px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    color: white;
+}
+
+.bg-green {
+  background-color: #1abc9c!important;
+}
+
+.bg-red {
+  background-color: #e74c3c!important;
+}
+
+.bg-blue {
+  background-color: #3498db!important;
+}
+
+// box with bottom
+.fd-tile.detail {
+    position: relative;
+    overflow: hidden;
+}
+.fd-tile.clean {
+    background-color: #fff;
+    color: #888;
+}
+.fd-tile {
+    background-color: #fff;
+    color: #555;
+    margin-bottom: 15px;
+}
+.fd-tile.tile-purple {
+    // background-color: #7761a7;
+    color: black;
+}
+
+.fd-tile.detail .content {
+    background: transparent;
+    padding: 10px 10px 13px;
+    display: inline-block;
+    position: relative;
+    z-index: 3;
+}
+.icon {
+  font-size: 30px;
+}
+.fd-tile.clean.tile-purple .details {
+    background-color: #7761a7;
+}
+.fd-tile.detail .details {
+    clear: both;
+    display: block;
+    padding: 5px 10px;
+    color: #fff;
+    text-transform: uppercase;
+    background-color: rgba(0, 0, 0, 0.1);
+}
