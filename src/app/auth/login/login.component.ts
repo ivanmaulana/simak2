@@ -33,7 +33,7 @@ export class Login implements OnInit {
   private decode;
 
   private token;
-  private urlLogin = 'http://agricode.cs.ipb.ac.id/ivan/simak.php';
+  private urlLogin = 'http://simak.apps.cs.ipb.ac.id/login/';
   private test2;
 
   jwtHelper: JwtHelper = new JwtHelper();

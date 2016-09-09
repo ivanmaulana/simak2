@@ -29,6 +29,7 @@ export class Profile implements OnInit{
   private nama_ayah;
   private nama_ibu;
   private no_ortu;
+  private telp_ortu;
   private alamat_ortu;
 
   private creds;
@@ -65,13 +66,15 @@ export class Profile implements OnInit{
     this.authHttp.get(this.service.urlProfile)
       .map(res => res.json())
         .subscribe( data => {
+
           this.no = data[0]['hp'];
           this.email = data[0]['email'];
           this.alamat = data[0]['alamat'];
           this.nama_ayah = data[0]['namaayah'];
           this.nama_ibu = data[0]['namaibu'];
           this.alamat_ortu = data[0]['alamatortu'];
-          this.no_ortu = data[0]['no_ortu'];
+          this.no_ortu = data[0]['noortu'];
+          this.telp_ortu = data[0]['telportu'];
         })
   }
 
@@ -82,24 +85,36 @@ export class Profile implements OnInit{
   }
 
   simpan() {
-    this.creds = JSON.stringify({nim: this.nim, alamat: this.alamat, no_hp: this.no, email: this.email, nama_ayah: this.nama_ayah,
-    nama_ibu: this.nama_ibu, no_ortu: this.no_ortu, alamat_ortu: this.alamat_ortu});
+    this.creds = JSON.stringify({nim: this.nim, alamat: this.alamat, hp: this.no, email: this.email, namaayah: this.nama_ayah,
+    namaibu: this.nama_ibu, noortu: this.no_ortu, telportu: this.telp_ortu, alamatortu: this.alamat_ortu});
 
-    this.authHttp.post(this.service.urlProfile, this.creds)
-      .map(res => res.json())
-      .subscribe(data => {
-        // console.log(data);
-        this.status = data['status'];
-        this.message = data['message'];
+    console.log(this.creds);
 
-        if (this.status) this.showSuccess();
-        else this.showError();
-      }
-    )
+    if(!this.alamat || !this.email || !this.no || !this.nama_ayah || !this.nama_ibu || !this.no_ortu || !this.telp_ortu || !this.alamat_ortu) {
+      this.showKurang();
+    }
+    else {
+      this.authHttp.post(this.service.urlProfile, this.creds)
+        .map(res => res.json())
+        .subscribe(data => {
+          // console.log(data);
+          this.status = data['status'];
+          this.message = data['message'];
+
+          if (this.status) this.showSuccess();
+          else this.showError();
+        }
+      )
+    }
+
   }
 
   showError() {
     this.toastr.error('Gagal Update Profile', 'Error!');
+  }
+
+  showKurang() {
+    this.toastr.error('Data Belum Lengkap', 'Error!');
   }
 
   showSuccess() {

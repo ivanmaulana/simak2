@@ -1,12 +1,25 @@
-<!-- {{data.send}}
+<div *ngIf="!status">
+  <div class="spinner" *ngIf="!noConn">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+  </div>
 
-<button class="btn btn-primary" (click)="data.setSend(2)">dwadwa</button>
+  <div *ngIf="noConn">
+    <div class="text-center">
+      <h5 class="red">No Internet Connection</h5>
+      <button class="btn btn-danger btn-icon" type="button" (click)="refresh()"><i class="ion-refresh"></i>Reload</button>
+    </div>
+  </div>
 
-{{data.alamat}} -->
-
-<div *ngIf="!statusProfile" >
-  <alert type="danger">Kamu belum melengkapi data diri kamu. Silahkan lengkapi <a href="#/mahasiswa/profile"><i>Disini</i></a></alert>
 </div>
+
+
+<div *ngIf="status">
+  <div *ngIf="!statusProfile" >
+    <alert type="danger">Kamu belum melengkapi data diri kamu. Silahkan lengkapi <a href="#/mahasiswa/profile"><i>Disini</i></a></alert>
+  </div>
+</div>
+
 <!-- {{nama_ayah}} -->
 
 <!-- <div *ngIf="!statusProfile">

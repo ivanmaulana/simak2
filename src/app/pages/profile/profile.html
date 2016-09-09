@@ -2,8 +2,10 @@
   <div class="col-md-12 col-sm-12 col-xs-12">
     <ba-card title="Profil Mahasiswa" baCardClass="with-scroll">
       <div class="col-md-4 col-sm-12 col-xs-12">
-        <ba-picture-uploader [picture]="profile.picture" [defaultPicture]="defaultPicture" (onUpload)="handleUpload($event)" [uploaderOptions]="uploaderOptions">
-        </ba-picture-uploader>
+        <div class="text-center">
+          <ba-picture-uploader [picture]="profile.picture" [defaultPicture]="defaultPicture" (onUpload)="handleUpload($event)" [uploaderOptions]="uploaderOptions">
+          </ba-picture-uploader>
+        </div>
 
         <br />
       </div>
@@ -13,8 +15,7 @@
 
           <!-- Nama -->
           <div class="form-group col-md-3 col-sm-5 col-xs-12">
-            Nama        {{progress}}<br />
-                    {{response}}
+            Nama
           </div>
 
           <div class="form-group col-md-9 col-sm-7 col-xs-12">
@@ -40,7 +41,7 @@
 
           <!-- Alamat -->
           <div class="form-group col-md-3 col-sm-5 col-xs-12">
-            Alamat
+            Alamat Sekarang
           </div>
 
           <div class="form-group col-md-9 col-sm-7 col-xs-12">
@@ -86,8 +87,10 @@
 
           <!-- Nama Ayah -->
           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-            <label>No. Orang Tua</label>
+            <label>No. HP Orang Tua</label>
             <input [(ngModel)]="no_ortu" class="form-control"/>
+            <label><br />Telp. Rumah Orang Tua</label>
+            <input [(ngModel)]="telp_ortu" class="form-control"/>
           </div>
 
           <!-- Alamat Ortu -->
@@ -100,11 +103,9 @@
             <br />
           </div>
 
-
-
           <!-- submit -->
           <div class="col-md-12 col-xs-12 col-sm-12 text-right">
-            <button class="btn btn-lg btn-primary" type="submit" (click)="simpan()">Simpan</button>
+            <button [disabled]="!alamat || !email || !no || !nama_ayah || !nama_ibu || !no_ortu || !telp_ortu || !alamat_ortu" class="btn btn-lg btn-primary" type="submit" (click)="simpan()">Simpan</button>
           </div>
         </div>
 

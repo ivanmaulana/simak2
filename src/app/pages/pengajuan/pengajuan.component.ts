@@ -50,6 +50,7 @@ export class Pengajuan implements OnInit{
 
   ngOnInit(){
     this.getDataPengajuan();
+    this.getStatus();
   }
 
   public query = '';

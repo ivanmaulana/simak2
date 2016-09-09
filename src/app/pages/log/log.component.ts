@@ -2,6 +2,7 @@ import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {MahasiswaService} from '../service';
 import {AuthHttp} from 'angular2-jwt';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
+// import { NG2_SMART_TABLE_DIRECTIVES } from 'ng2-smart-table';
 
 import {BaCard} from '../../theme/components';
 
@@ -51,6 +52,49 @@ export class Log implements OnInit{
   // RESPONSE
   private status;
   private message;
+
+  // SMART TABLE
+  settings = {
+    columns: {
+      id: {
+        title: 'ID'
+      },
+      name: {
+        title: 'Full Name'
+      },
+      username: {
+        title: 'User Name'
+      },
+      email: {
+        title: 'Email'
+      }
+    }
+  };
+
+  data = [
+    {
+      id: 1,
+      name: "Leanne Graham",
+      username: "Bret",
+      email: "Sincere@april.biz"
+    },
+    {
+      id: 2,
+      name: "Ervin Howell",
+      username: "Antonette",
+      email: "Shanna@melissa.tv"
+    },
+
+    // ... list of items
+
+    {
+      id: 11,
+      name: "Nicholas DuBuque",
+      username: "Nicholas.Stanton",
+      email: "Rey.Padberg@rosamond.biz"
+    }
+  ];
+
 
   ngOnInit(){
     this.getDataMahasiswa();

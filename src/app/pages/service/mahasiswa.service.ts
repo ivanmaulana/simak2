@@ -48,6 +48,7 @@ export class MahasiswaService {
   public urlProfile = 'http://simak.apps.cs.ipb.ac.id:2016/profile/';
   public urlSidang = 'http://simak.apps.cs.ipb.ac.id:2016/sidang/';
   public urlStatus = 'http://simak.apps.cs.ipb.ac.id:2016/status';
+  public urlTest = 'http://simak.apps.cs.ipb.ac.id:2016/test';
 
   public send = 1;
   jwtHelper: JwtHelper = new JwtHelper();

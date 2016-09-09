@@ -26,23 +26,38 @@ export class Dashboard implements OnInit{
   message;
   status;
 
-  nama_ayah;
+  noConn = 0;
 
+  nama_ayah;
   statusProfile;
 
   ngOnInit(){
-
-    // this.authHttp.get('http://210.16.120.17:8100/test/')
-    //   .map(res => res.json())
-    //   .subscribe(data => {
-    //     this.status = data;
-    //     console.log(this.status);
-    //   })
-    //
-    //   if(!this.status) this.showWarning();
-
+    this.getConnection();
     this.getStatus();
+  }
 
+  getConnection() {
+    this.noConn = 0;
+
+    this.authHttp.get(this.data.urlTest)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.status = data['status'];
+        // console.log(this.status);
+      })
+
+    setTimeout(() => {
+      if (!this.status) {
+        this.status = 0;
+        this.noConn = 1;
+        this.showNoConn();
+      }
+    }, 5000)
+  }
+
+  refresh() {
+    this.getConnection();
+    this.getStatus();
   }
 
   constructor(private http: Http, private router: Router, public data: MahasiswaService, private authHttp: AuthHttp,
@@ -52,6 +67,10 @@ export class Dashboard implements OnInit{
 
   showWarning() {
     this.toastr.warning("Sedang Mengunduh Data", 'Loading');
+  }
+
+  showNoConn() {
+    this.toastr.warning("No Connection", 'Error');
   }
 
   onSubmit(){
