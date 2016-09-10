@@ -62,20 +62,42 @@ export class Profile implements OnInit{
   }
 
   ngOnInit() {
-    this.zone = new NgZone({ enableLongStackTrace: false });
-    this.authHttp.get(this.service.urlProfile)
-      .map(res => res.json())
-        .subscribe( data => {
+    this.getConnection();
+    this.getProfile();
 
-          this.no = data[0]['hp'];
-          this.email = data[0]['email'];
-          this.alamat = data[0]['alamat'];
-          this.nama_ayah = data[0]['namaayah'];
-          this.nama_ibu = data[0]['namaibu'];
-          this.alamat_ortu = data[0]['alamatortu'];
-          this.no_ortu = data[0]['noortu'];
-          this.telp_ortu = data[0]['telportu'];
-        })
+  }
+
+  private noConn = 0;
+  private statusConn = 0;
+  getConnection() {
+    this.noConn = 0;
+
+    // console.log('cek koneksi');
+
+    this.authHttp.get(this.service.urlTest)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.statusConn = data['status'];
+        // console.log(this.status);
+      })
+
+    setTimeout(() => {
+      if (!this.statusConn) {
+        this.statusConn = 0;
+        this.noConn = 1;
+        this.showNoConn();
+      }
+    }, 5000)
+  }
+
+  refresh() {
+    this.getConnection();
+    this.getProfile();
+    // this.getDataPengajuan();
+  }
+
+  showNoConn() {
+    this.toastr.warning("No Internet Connection", 'Error');
   }
 
   constructor(private authHttp: AuthHttp, private service: MahasiswaService, private toastr: ToastsManager) {
@@ -85,6 +107,15 @@ export class Profile implements OnInit{
   }
 
   simpan() {
+    let koneksi = 0;
+
+    this.authHttp.get(this.service.urlTest)
+      .map(res => res.json())
+      .subscribe(data => {
+        koneksi = data['status'];
+
+      })
+
     this.creds = JSON.stringify({nim: this.nim, alamat: this.alamat, hp: this.no, email: this.email, namaayah: this.nama_ayah,
     namaibu: this.nama_ibu, noortu: this.no_ortu, telportu: this.telp_ortu, alamatortu: this.alamat_ortu});
 
@@ -107,6 +138,29 @@ export class Profile implements OnInit{
       )
     }
 
+    setTimeout(() => {
+      if (!koneksi) {
+        this.showNoConn();
+      }
+    }, 2000)
+
+  }
+
+  getProfile() {
+    this.zone = new NgZone({ enableLongStackTrace: false });
+    this.authHttp.get(this.service.urlProfile)
+      .map(res => res.json())
+        .subscribe( data => {
+
+          this.no = data[0]['hp'];
+          this.email = data[0]['email'];
+          this.alamat = data[0]['alamat'];
+          this.nama_ayah = data[0]['namaayah'];
+          this.nama_ibu = data[0]['namaibu'];
+          this.alamat_ortu = data[0]['alamatortu'];
+          this.no_ortu = data[0]['noortu'];
+          this.telp_ortu = data[0]['telportu'];
+        })
   }
 
   showError() {

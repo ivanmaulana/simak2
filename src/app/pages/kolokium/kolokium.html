@@ -1,115 +1,143 @@
-<div *ngIf="response">
-  <!-- Alert message -->
-  <alert type="success" *ngIf="active">
-    Perhatian ! Jadwal kolokium adalah {{data.ubahTanggal(jadwal)}}. Silahkan  <a href="#/pages/seminar"><b><i>Download jadwal disini</i></b></a>
-  </alert>
+<div *ngIf="!statusConn">
+  <div class="spinner" *ngIf="!noConn">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+  </div>
 
-  <alert type="danger" *ngIf="!active">
-    Maaf. Laman kolokium tidak sedang dibuka.
-  </alert>
-
-  <alert type="danger" *ngIf="active">
-    Pengisian & Upload makalah kolokium akan dibuka sampai  {{data.ubahTanggal(deadline)}}
-  </alert>
-
-  <div class="row" *ngIf="active">
-    <div class="col-md-12">
-      <ba-card title="Makalah Kolokium" baCardClass="with-scroll">
-        <form class="row form-inline">
-
-          <!-- nama & nim-->
-          <div class="col-md-12 col-xs-12">
-
-            <div class="col-md-4 col-sm-12">
-              <div class="row">
-                <div class="col-md-2">
-                  Nama
-                </div>
-                <div class="col-md-8">
-                  : {{nama}}
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-2">
-                  NIM
-                </div>
-                <div class="col-md-8">
-                  : {{nim}}
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-8 col-sm-12">
-              <div class="row">
-                <div class="col-md-5">
-                  Pembimbing Ketua
-                </div>
-                <div class="col-md-7">
-                  : {{dosen_1}}
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-5">
-                  Pembimbing Anggota
-                </div>
-                <div class="col-md-7">
-                  : {{dosen_2}}
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="col-sm-12 col-md-12 col-xs-12">
-            <br /><br />
-          </div>
-
-          <!-- judul topik -->
-          <div class="form-group col-md-12 col-xs-12">
-              <label><p href primary>Topik kamu</p></label><br />
-              <textarea [(ngModel)]="topik" style="width: 100%" class="form-control"></textarea>
-          </div>
-
-          <div class="col-sm-12 col-md-12 col-xs-12">
-            <br />
-          </div>
-
-          <div class="col-md-12 col-xs-12 col-sm-12 text-right">
-            <button class="btn btn-lg btn-primary" type="submit" (click)="simpan()">Ubah Topik</button>
-          </div>
-
-          <div class="col-sm-12 col-md-12 col-xs-12">
-            <br /><br />
-          </div>
-
-          <!-- upload makalah kolokium -->
-          <div class="form-group col-md-12 col-xs-12">
-            <label><p href primary>Upload makalah</p></label><br />
-            <input type="file" name="file" ng2FileSelect [uploader]="uploader"/>
-          </div>
-
-          <!-- upload progress -->
-          <div class="col-md-12 col-xs-12 col-sm-12" style="margin-bottom: 40px">
-            <br />
-              <div>
-                <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
-  </progressbar>
-                  <button type="button" class="btn btn-success btn-s"
-                          (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-                      <span class="glyphicon glyphicon-upload"></span> Upload
-                  </button>
-                  <button type="button" class="btn btn-danger btn-s"
-                          (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                      <span class="glyphicon glyphicon-trash"></span> Remove
-                  </button>
-              </div>
-          </div>
-
-        </form>
-      </ba-card>
+  <div *ngIf="noConn">
+    <div class="text-center">
+      <h5 class="red">No Internet Connection</h5>
+      <button class="btn btn-danger" type="button" (click)="refresh()"><i class="ion-refresh"></i> Reload</button>
     </div>
   </div>
+</div>
+
+
+<div *ngIf="statusConn">
+
+  <div *ngIf="!statusTa">
+    <alert type="danger"><h4>Topik TA kamu <b>belum disetujui</b> <i>atau</i> Dosen Pembimbing kamu <b>belum ditentukan</b> oleh Departemen.</h4><br />
+      Silahkan tunggu sampai ada pengumuman berikutnya.
+    </alert>
+  </div>
+
+  <div *ngIf="statusTa">
+    <div *ngIf="response">
+      <!-- Alert message -->
+      <alert type="success" *ngIf="active">
+        Perhatian ! Jadwal kolokium adalah {{data.ubahTanggal(jadwal)}}. Silahkan  <a href="#/pages/seminar"><b><i>Download jadwal disini</i></b></a>
+      </alert>
+
+      <alert type="danger" *ngIf="!active">
+        Maaf. Laman kolokium tidak sedang dibuka.
+      </alert>
+
+      <alert type="danger" *ngIf="active">
+        Pengisian & Upload makalah kolokium akan dibuka sampai  {{data.ubahTanggal(deadline)}}
+      </alert>
+
+      <div class="row" *ngIf="active">
+        <div class="col-md-12">
+          <ba-card title="Makalah Kolokium" baCardClass="with-scroll">
+            <form class="row form-inline">
+
+              <!-- nama & nim-->
+              <div class="col-md-12 col-xs-12">
+
+                <div class="col-md-4 col-sm-12">
+                  <div class="row">
+                    <div class="col-md-2">
+                      Nama
+                    </div>
+                    <div class="col-md-8">
+                      : {{nama}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      NIM
+                    </div>
+                    <div class="col-md-8">
+                      : {{nim}}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-8 col-sm-12">
+                  <div class="row">
+                    <div class="col-md-5">
+                      Pembimbing Ketua
+                    </div>
+                    <div class="col-md-7">
+                      : {{dosen_1}}
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-5">
+                      Pembimbing Anggota
+                    </div>
+                    <div class="col-md-7">
+                      : {{dosen_2}}
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-sm-12 col-md-12 col-xs-12">
+                <br /><br />
+              </div>
+
+              <!-- judul topik -->
+              <div class="form-group col-md-12 col-xs-12">
+                  <label><p href primary>Topik kamu</p></label><br />
+                  <textarea [(ngModel)]="topik" style="width: 100%" class="form-control"></textarea>
+              </div>
+
+              <div class="col-sm-12 col-md-12 col-xs-12">
+                <br />
+              </div>
+
+              <div class="col-md-12 col-xs-12 col-sm-12 text-right">
+                <button class="btn btn-lg btn-primary" type="submit" (click)="simpan()">Ubah Topik</button>
+              </div>
+
+              <div class="col-sm-12 col-md-12 col-xs-12">
+                <br /><br />
+              </div>
+
+              <!-- upload makalah kolokium -->
+              <div class="form-group col-md-12 col-xs-12">
+                <label><p href primary>Upload makalah</p></label><br />
+                <input type="file" name="file" ng2FileSelect [uploader]="uploader"/>
+              </div>
+
+              <!-- upload progress -->
+              <div class="col-md-12 col-xs-12 col-sm-12" style="margin-bottom: 40px">
+                <br />
+                  <div>
+                    <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}}</span>
+      </progressbar>
+                      <button type="button" class="btn btn-success btn-s"
+                              (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                          <span class="glyphicon glyphicon-upload"></span> Upload
+                      </button>
+                      <button type="button" class="btn btn-danger btn-s"
+                              (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                          <span class="glyphicon glyphicon-trash"></span> Remove
+                      </button>
+                  </div>
+              </div>
+
+            </form>
+          </ba-card>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 
 </div>

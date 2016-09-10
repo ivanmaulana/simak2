@@ -36,6 +36,10 @@ export class Kolokium implements OnInit {
   private message;
   private response: boolean = false;
 
+  //STATUS
+  private statusProfile = 0;
+  private statusTa = 0;
+
   max : number = 100;
 
   private token = this.data.token;
@@ -45,16 +49,74 @@ export class Kolokium implements OnInit {
   public hasAnotherDropZoneOver:boolean = false;
 
   ngOnInit(){
-    this.getDataMahasiswa();
-    this.getDataKolokium();
+    this.getConnection();
+    this.getStatus();
 
-// && item.type == 'application/pdf'
-    this.uploader.setOptions({
-      filters: [{ fn: item => {
-        return item.size < 1024 * 1024 * 10 && item.type == 'application/pdf'
-      }}]
-    })
-    console.log(this.uploader);
+    if (this.statusTa) {
+      this.getDataMahasiswa();
+      this.getDataKolokium();
+
+  // && item.type == 'application/pdf'
+      this.uploader.setOptions({
+        filters: [{ fn: item => {
+          return item.size < 1024 * 1024 * 10 && item.type == 'application/pdf'
+        }}]
+      })
+    }
+
+  }
+
+  private noConn = 0;
+  private statusConn = 0;
+  getConnection() {
+    this.noConn = 0;
+
+    this.authHttp.get(this.data.urlTest)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.statusConn = data['status'];
+        // console.log(this.status);
+      })
+
+    setTimeout(() => {
+      if (!this.statusConn) {
+        this.statusConn = 0;
+        this.noConn = 1;
+        this.showNoConn();
+      }
+    }, 5000)
+  }
+
+  // DASHBOARD SERVICE
+  getStatus() {
+    this.authHttp.get(this.data.urlStatus)
+      .map(res => res.json())
+      .subscribe( data => {
+        this.statusProfile = data[0]['statusProfile'];
+        this.statusTa= data[0]['statusTa'];
+        // console.log(this.statusProfile);
+      })
+  }
+
+  refresh() {
+    this.getConnection();
+    this.getStatus();
+
+    if (this.statusTa) {
+      this.getDataMahasiswa();
+      this.getDataKolokium();
+
+  // && item.type == 'application/pdf'
+      this.uploader.setOptions({
+        filters: [{ fn: item => {
+          return item.size < 1024 * 1024 * 10 && item.type == 'application/pdf'
+        }}]
+      })
+    }
+  }
+
+  showNoConn() {
+    this.toastr.warning("No Internet Connection", 'Error');
   }
 
   public fileOverBase(e:any):void {
@@ -83,12 +145,10 @@ export class Kolokium implements OnInit {
       }]
     });
 
-    this.getDataMahasiswa();
-    this.getDataKolokium();
   }
 
   getDataMahasiswa(){
-    this.authHttp.get('http://210.16.120.17:8100/ta/')
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/')
       .map(res => res.json())
       .subscribe(data => {
         this.topik = data[0]['topik'];
@@ -99,7 +159,7 @@ export class Kolokium implements OnInit {
   }
 
   getDataKolokium(){
-    this.authHttp.get('http://210.16.120.17:8100/jadwalKolokium')
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/jadwalKolokium')
       .map(res => res.json())
       .subscribe(data => {
         this.active = data[0]['active'];
@@ -113,7 +173,7 @@ export class Kolokium implements OnInit {
   simpan(){
     this.creds = JSON.stringify({topik: this.topik});
 
-    this.authHttp.put("http://210.16.120.17:8100/ta/update/", this.creds)
+    this.authHttp.put("http://simak.apps.cs.ipb.ac.id:2016/ta/update/", this.creds)
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;

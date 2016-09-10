@@ -1,95 +1,126 @@
-<div class="row">
-  <div class="col-md-12">
-    <ba-card title="Surat Keterangan Lulus" baCardClass="with-scroll">
-      <form class="row form-inline">
-
-        <!-- nama & nim-->
-        <div class="col-md-12 col-xs-12">
-
-          <div class="col-md-6 col-sm-12">
-            <div class="row">
-              <div class="col-md-2">
-                Nama
-              </div>
-              <div class="col-md-8">
-                : Ivan Maulana Putra
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-2">
-                NIM
-              </div>
-              <div class="col-md-8">
-                : G64130076
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-sm-12">
-            <div class="row">
-              <div class="col-md-5">
-                Pembimbing Ketua
-              </div>
-              <div class="col-md-7">
-                : Bu Imas Sitanggang
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-md-5">
-                Pembimbing Anggota
-              </div>
-              <div class="col-md-7">
-                : Pak Abrar Istiadi
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-xs-12">
-          <br /><br />
-        </div>
-
-        <!-- judul topik -->
-        <div class="form-group col-md-6 col-xs-6">
-            <label><p href primary>Tanggal SKL (Tanggal lulus berdasarkan SKL)</p></label><br />
-            <input type="date" class="form-control" [(ngModel)]="date" style="height:34px"/>
-        </div>
-
-        <div class="col-sm-12 col-md-12 col-xs-12">
-          <br /><br />
-        </div>
-
-        <!-- upload makalah kolokium -->
-        <div class="form-group col-md-12 col-xs-12">
-          <label><p href primary>Upload makalah praseminar</p></label><br />
-          <input type="file" ng2FileSelect [uploader]="uploader" />
-        </div>
-
-        <!-- upload progress -->
-        <div class="col-md-12 col-xs-12 col-sm-12" style="margin-bottom: 40px">
-          <br />
-            <div>
-              <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}} %</span>
-</progressbar>
-                <button type="button" class="btn btn-success btn-s"
-                        (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-                    <span class="glyphicon glyphicon-upload"></span> Upload
-                </button>
-                <button type="button" class="btn btn-danger btn-s"
-                        (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                    <span class="glyphicon glyphicon-trash"></span> Remove
-                </button>
-            </div>
-        </div>
-
-        <div class="col-md-12 col-xs-12 col-sm-12 text-right">
-          <button class="btn btn-lg btn-primary" type="submit">Submit</button>
-        </div>
-
-      </form>
-    </ba-card>
+<div *ngIf="!statusConn">
+  <div class="spinner" *ngIf="!noConn">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
   </div>
+
+  <div *ngIf="noConn">
+    <div class="text-center">
+      <h5 class="red">No Internet Connection</h5>
+      <button class="btn btn-danger" type="button" (click)="refresh()"><i class="ion-refresh"></i> Reload</button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="statusConn">
+
+  <div *ngIf="!statusSidang">
+    <alert type="danger"><h4>Kamu belum melaksanakan <b>Sidang</b>.</h4><br />
+      Silahkan laksanakan sidang terlebih dahulu untuk menggunakan fitur ini.
+    </alert>
+  </div>
+
+  <div *ngIf="statusSidang">
+
+    <div class="row">
+      <div class="col-md-12">
+        <ba-card title="Surat Keterangan Lulus" baCardClass="with-scroll">
+          <form class="row form-inline">
+
+            <!-- nama & nim-->
+            <div class="col-md-12 col-xs-12">
+
+              <div class="col-md-6 col-sm-12">
+                <div class="row">
+                  <div class="col-md-2">
+                    Nama
+                  </div>
+                  <div class="col-md-8">
+                    : Ivan Maulana Putra
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-2">
+                    NIM
+                  </div>
+                  <div class="col-md-8">
+                    : G64130076
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 col-sm-12">
+                <div class="row">
+                  <div class="col-md-5">
+                    Pembimbing Ketua
+                  </div>
+                  <div class="col-md-7">
+                    : Bu Imas Sitanggang
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-5">
+                    Pembimbing Anggota
+                  </div>
+                  <div class="col-md-7">
+                    : Pak Abrar Istiadi
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-xs-12">
+              <br /><br />
+            </div>
+
+            <!-- judul topik -->
+            <div class="form-group col-md-6 col-xs-6">
+                <label><p href primary>Tanggal SKL (Tanggal lulus berdasarkan SKL)</p></label><br />
+                <input type="date" class="form-control" [(ngModel)]="date" style="height:34px"/>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-xs-12">
+              <br /><br />
+            </div>
+
+            <!-- upload makalah kolokium -->
+            <div class="form-group col-md-12 col-xs-12">
+              <label><p href primary>Upload makalah praseminar</p></label><br />
+              <input type="file" ng2FileSelect [uploader]="uploader" />
+            </div>
+
+            <!-- upload progress -->
+            <div class="col-md-12 col-xs-12 col-sm-12" style="margin-bottom: 40px">
+              <br />
+                <div>
+                  <progressbar class="progress-striped active" type="success" [max]="max" [value]="uploader.progress"><span style="color:white; white-space:nowrap;">{{uploader.progress}} / {{max}} %</span>
+    </progressbar>
+                    <button type="button" class="btn btn-success btn-s"
+                            (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                        <span class="glyphicon glyphicon-upload"></span> Upload
+                    </button>
+                    <button type="button" class="btn btn-danger btn-s"
+                            (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                        <span class="glyphicon glyphicon-trash"></span> Remove
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-md-12 col-xs-12 col-sm-12 text-right">
+              <button class="btn btn-lg btn-primary" type="submit">Submit</button>
+            </div>
+
+          </form>
+        </ba-card>
+      </div>
+    </div>
+
+  </div>
+
+
+
+
 </div>

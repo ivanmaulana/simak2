@@ -1,8 +1,22 @@
-<div class="row">
-  <div class="col-md-12 col-sm-12 col-xs-12">
+<div *ngIf="!statusConn">
+  <div class="spinner" *ngIf="!noConn">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+  </div>
+
+  <div *ngIf="noConn">
+    <div class="text-center">
+      <h5 class="red">No Internet Connection</h5>
+      <button class="btn btn-danger" type="button" (click)="refresh()"><i class="ion-refresh"></i> Reload</button>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="statusConn">
+  <div>
     <ba-card title="Profil Mahasiswa" baCardClass="with-scroll">
       <div class="col-md-4 col-sm-12 col-xs-12">
-        <div class="text-center">
+        <div class="picture">
           <ba-picture-uploader [picture]="profile.picture" [defaultPicture]="defaultPicture" (onUpload)="handleUpload($event)" [uploaderOptions]="uploaderOptions">
           </ba-picture-uploader>
         </div>
@@ -10,11 +24,11 @@
         <br />
       </div>
 
-      <form class="form-inline">
+      <form class="form-inline" (onSubmit)="simpan()">
         <div class="col-md-8 col-xs-12 col-sm-12">
 
           <!-- Nama -->
-          <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          <div class="form-group col-md-3 col-sm-5 col-xs-12" style="color: #2980b9">
             Nama
           </div>
 
@@ -27,7 +41,7 @@
           </div>
 
           <!-- Nama -->
-          <div class="form-group col-md-3 col-sm-5 col-xs-12 padding-top">
+          <div class="form-group col-md-3 col-sm-5 col-xs-12 padding-top" style="color: #2980b9">
             No. HP
           </div>
 
@@ -40,7 +54,7 @@
           </div>
 
           <!-- Alamat -->
-          <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          <div class="form-group col-md-3 col-sm-5 col-xs-12" style="color: #2980b9">
             Alamat Sekarang
           </div>
 
@@ -53,7 +67,7 @@
           </div>
 
           <!-- Email -->
-          <div class="form-group col-md-3 col-sm-5 col-xs-12">
+          <div class="form-group col-md-3 col-sm-5 col-xs-12" style="color: #2980b9">
             Email
           </div>
 
@@ -62,22 +76,23 @@
           </div>
 
           <div class="col-sm-12 col-md-12 col-xs-12">
-            <br /><br /><br />
+            <br /><br /><br />        <hr />
           </div>
         </div>
 
         <!-- PISAH -->
 
+
         <div class="col-md-12 col-sm-12 col-xs-12">
           <!-- Nama Ayah -->
           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-            <label>Nama Ayah</label>
+            <label style="color: #2980b9">Nama Ayah</label>
             <input [(ngModel)]="nama_ayah" class="form-control"/>
           </div>
 
           <!-- Nama Ibu -->
           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-            <label>Nama Ibu</label>
+            <label style="color: #2980b9">Nama Ibu</label>
             <input [(ngModel)]="nama_ibu" class="form-control"/>
           </div>
 
@@ -87,15 +102,15 @@
 
           <!-- Nama Ayah -->
           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-            <label>No. HP Orang Tua</label>
+            <label style="color: #2980b9">No. HP Orang Tua</label>
             <input [(ngModel)]="no_ortu" class="form-control"/>
-            <label><br />Telp. Rumah Orang Tua</label>
+            <label style="color: #2980b9"><br />Telp. Rumah Orang Tua</label>
             <input [(ngModel)]="telp_ortu" class="form-control"/>
           </div>
 
           <!-- Alamat Ortu -->
           <div class="form-group col-md-6 col-sm-6 col-xs-12">
-            <label>Alamat Orang Tua</label>
+            <label style="color: #2980b9">Alamat Orang Tua</label>
             <textarea class="form-control" style="width: 100%" [(ngModel)]="alamat_ortu"></textarea>
           </div>
 

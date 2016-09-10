@@ -2,6 +2,7 @@ import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {MahasiswaService} from '../service';
 import {AuthHttp} from 'angular2-jwt';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
+import {AlertComponent} from 'ng2-bootstrap';
 // import { NG2_SMART_TABLE_DIRECTIVES } from 'ng2-smart-table';
 
 import {BaCard} from '../../theme/components';
@@ -9,7 +10,7 @@ import {BaCard} from '../../theme/components';
 @Component({
   selector: 'log',
   pipes: [],
-  directives: [BaCard],
+  directives: [BaCard, AlertComponent],
   providers: [MahasiswaService, ToastsManager],
   styles: [require('./log.scss')],
   template: require('./log.html')
@@ -52,6 +53,11 @@ export class Log implements OnInit{
   // RESPONSE
   private status;
   private message;
+
+  // STATUS
+  private statusProfile = 0;
+  private statusTa = 0;
+
 
   // SMART TABLE
   settings = {
@@ -97,21 +103,57 @@ export class Log implements OnInit{
 
 
   ngOnInit(){
-    this.getDataMahasiswa();
-    this.getDataLog();
+    this.getConnection();
+    this.getStatus();
+    if (this.statusTa) {
+      this.getDataMahasiswa();
+      this.getDataLog();
+    }
+
+  }
+
+  private noConn = 0;
+  private statusConn = 0;
+  getConnection() {
+    this.noConn = 0;
+
+    this.authHttp.get(this.service.urlTest)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.statusConn = data['status'];
+        // console.log(this.status);
+      })
+
+    setTimeout(() => {
+      if (!this.statusConn) {
+        this.statusConn = 0;
+        this.noConn = 1;
+        this.showNoConn();
+      }
+    }, 5000)
+  }
+
+  refresh() {
+    this.getConnection();
+    this.getStatus();
+    if (this.statusTa) {
+      this.getDataMahasiswa();
+      this.getDataLog();
+    }
+  }
+
+  showNoConn() {
+    this.toastr.warning("No Internet Connection", 'Error');
   }
 
   constructor(private service: MahasiswaService, private authHttp: AuthHttp, private toastr: ToastsManager) {
     // this.timestamp = new Date();
     this.nim = this.service.nim;
     this.nama = this.service.nama;
-
-    this.getDataMahasiswa();
-    this.getDataLog();
   }
 
   getDataMahasiswa(){
-    this.authHttp.get('http://210.16.120.17:8100/ta/')
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/')
       .map(res => res.json())
       .subscribe(data => {
         this.topik = data[0]['topik'];
@@ -125,7 +167,7 @@ export class Log implements OnInit{
   kirim(){
     this.creds2 = JSON.stringify({dosen_1: this.dosen_1, dosen_2: this.dosen_2, tanggal: this.date, jam: this.jam, tempat: this.tempat, topik: this.topik_log, progress: this.progress, kendala: this.kendala, rencana: this.rencana});
 
-    this.authHttp.post('http://210.16.120.17:8100/log/', this.creds2)
+    this.authHttp.post('http://simak.apps.cs.ipb.ac.id:2016/log/', this.creds2)
       .map(res => res.json())
       .subscribe(data => {
         this.statusKirim = data['status'];
@@ -139,6 +181,17 @@ export class Log implements OnInit{
         else {
           this.showKirimError();
         }
+      })
+  }
+
+  // DASHBOARD SERVICE
+  getStatus() {
+    this.authHttp.get(this.service.urlStatus)
+      .map(res => res.json())
+      .subscribe( data => {
+        this.statusProfile = data[0]['statusProfile'];
+        this.statusTa = data[0]['statusTa'];
+        // console.log(this.statusProfile);
       })
   }
 
@@ -159,7 +212,7 @@ export class Log implements OnInit{
   }
 
   getDataLog(){
-    this.authHttp.get('http://210.16.120.17:8100/log/')
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/log/')
       .map(res => res.json())
       .subscribe(data => {
         this.response = data;
@@ -167,7 +220,7 @@ export class Log implements OnInit{
   }
 
   getLogCount(id){
-    return this.authHttp.get('http://210.16.120.17:8100/log/count/'+id)
+    return this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/log/count/'+id)
       .map(res => res.json())
       .subscribe(data => {
         // console.log(data);
@@ -177,14 +230,14 @@ export class Log implements OnInit{
   openBimbingan(id){
     this.id = id;
 
-    this.authHttp.get('http://210.16.120.17:8100/log/detail/'+id)
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/log/detail/'+id)
       .map(res => res.json())
       .subscribe(data => {
         this.resDetail = data;
         if (this.resDetail) this.res = 1;
       })
 
-    this.authHttp.get('http://210.16.120.17:8100/log/jawaban/'+id)
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/log/jawaban/'+id)
       .map(res => res.json())
       .subscribe(data => {
         this.resJawaban = data;
@@ -194,7 +247,7 @@ export class Log implements OnInit{
   balas(id){
     this.creds = JSON.stringify({topikId: id, nim: this.nim, jawaban: this.balasan});
 
-    this.authHttp.post("http://210.16.120.17:8100/log/balas/mahasiswa/", this.creds)
+    this.authHttp.post("http://simak.apps.cs.ipb.ac.id:2016/log/balas/mahasiswa/", this.creds)
       .map(res => res.json())
       .subscribe(data => {
         this.status = data['status'];

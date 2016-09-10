@@ -46,12 +46,47 @@ export class Pengajuan implements OnInit{
   private statusProfile;
   private statusDaftar;
 
+
+
   private disableCheckbox: boolean = true;
 
   ngOnInit(){
-    this.getDataPengajuan();
+    this.getConnection();
     this.getStatus();
+    this.getDataPengajuan();
   }
+
+  private noConn = 0;
+  private statusConn = 0;
+  getConnection() {
+    this.noConn = 0;
+
+    this.authHttp.get(this.service.urlTest)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.statusConn = data['status'];
+        // console.log(this.status);
+      })
+
+    setTimeout(() => {
+      if (!this.statusConn) {
+        this.statusConn = 0;
+        this.noConn = 1;
+        this.showNoConn();
+      }
+    }, 5000)
+  }
+
+  refresh() {
+    this.getConnection();
+    this.getStatus();
+    this.getDataPengajuan();
+  }
+
+  showNoConn() {
+    this.toastr.warning("No Internet Connection", 'Error');
+  }
+
 
   public query = '';
   public query2 = '';
@@ -71,11 +106,6 @@ export class Pengajuan implements OnInit{
     this.nama = this.service.nama;
     this.getDataPengajuan();
 
-    this.test = this.service.getSend();
-  }
-
-  set(){
-    this.test = this.service.setSend('ini ivan');
   }
 
   filter() {
@@ -99,6 +129,7 @@ export class Pengajuan implements OnInit{
   reset(){
     this.c = true;
     this.query = "";
+    this.dosen_1 = "0";
   }
 
   filter2() {
@@ -123,6 +154,7 @@ export class Pengajuan implements OnInit{
   reset2(){
     this.c2 = true;
     this.query2 = "";
+    this.dosen_2 = "0";
   }
 
   handleClick(event){
@@ -165,7 +197,7 @@ export class Pengajuan implements OnInit{
   }
 
   getDataPengajuan(){
-    this.authHttp.get('http://210.16.120.17:8100/ta/daftar/detail/')
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar/detail/')
       .map(res => res.json())
         .subscribe( data => {
           this.count = data[0]['id'];
@@ -192,8 +224,19 @@ export class Pengajuan implements OnInit{
   }
 
   onSubmit(){
+    let koneksi = 0;
+
+    this.authHttp.get(this.service.urlTest)
+      .map(res => res.json())
+      .subscribe(data => {
+        koneksi = data['status'];
+
+      })
+
     this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2, konsultasi_1: this.konsultasi_1, konsultasi_2: this.konsultasi_2,
     pertemuan_1: this.pertemuan_1, pertemuan_2: this.pertemuan_2, progress_1: this.progress_1, progress_2: this.progress_2, progress_3: this.progress_3, progress_4: this.progress_4});
+
+    console.log(this.creds);
 
     this.authHttp.post(this.service.urlDaftarPengajuan, this.creds)
       .map(res => res.json())
@@ -206,6 +249,12 @@ export class Pengajuan implements OnInit{
         else this.showError();
       }
     )
+
+    setTimeout(() => {
+      if (!koneksi) {
+        this.showNoConn();
+      }
+    }, 2000)
   }
 
   // DASHBOARD SERVICE

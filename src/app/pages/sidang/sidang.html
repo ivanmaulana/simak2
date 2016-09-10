@@ -1,141 +1,167 @@
-{{test}}
+<div *ngIf="!statusConn">
+  <div class="spinner" *ngIf="!noConn">
+    <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+  </div>
 
-<ba-card title="Sidang" baCardClass="with-scroll">
-  <form class="row form-inline">
+  <div *ngIf="noConn">
+    <div class="text-center">
+      <h5 class="red">No Internet Connection</h5>
+      <button class="btn btn-danger" type="button" (click)="refresh()"><i class="ion-refresh"></i> Reload</button>
+    </div>
+  </div>
+</div>
 
-    <!-- nama & nim-->
-    <div class="col-md-12 col-xs-12">
+<div *ngIf="statusConn">
 
-      <div class="col-md-4 col-sm-12">
-        <div class="row">
-          <div class="col-md-2">
-            Nama
+  <div *ngIf="!statusSeminar">
+    <alert type="danger"><h4>Kamu belum melaksanakan <b>Seminar</b>.</h4><br />
+      Silahkan laksanakan seminar terlebih dahulu untuk menggunakan fitur ini.
+    </alert>
+  </div>
+
+  <div *ngIf="statusSeminar">
+
+    <ba-card title="Sidang" baCardClass="with-scroll">
+      <form class="row form-inline">
+
+        <!-- nama & nim-->
+        <div class="col-md-12 col-xs-12">
+
+          <div class="col-md-4 col-sm-12">
+            <div class="row">
+              <div class="col-md-2">
+                Nama
+              </div>
+              <div class="col-md-8">
+                : {{nama}}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2">
+                NIM
+              </div>
+              <div class="col-md-8">
+                : {{nim}}
+              </div>
+            </div>
           </div>
-          <div class="col-md-8">
-            : {{service.nama}}
+
+          <div class="col-md-8 col-sm-12">
+            <div class="row">
+              <div class="col-md-5">
+                Pembimbing Ketua
+              </div>
+              <div class="col-md-7">
+                : {{dosen_1}}
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5">
+                Pembimbing Anggota
+              </div>
+              <div class="col-md-7">
+                : {{dosen_2}}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br /><br />
+        </div>
+
+        <!-- Judul Paper -->
+        <div class="form-group col-md-12 col-xs-12">
+            <label>Topik</label><br />
+            <textarea class="form-control" style="width:100%" placeholder="Judul paper kamu" [(ngModel)]="topik" required></textarea>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br /><br />
+        </div>
+
+        <!-- Tempat -->
+        <div class="form-group col-md-3 col-sm-8 col-xs-12">
+          <label>Tanggal {{tanggal}}</label><br />
+          <input class="form-control" type="date" name="date" style="height:36px" [(ngModel)]="tanggal"/>
+        </div>
+
+        <div class="form-group col-md-3 col-sm-4 col-xs-12">
+          <label>Jam</label><br />
+          <input class="form-control" type="time" name="konferensi" placeholder="10.00" style="height:35px" [(ngModel)]="jam"/>
+        </div>
+
+        <div class="form-group col-md-6 col-sm-12 col-xs-12">
+          <label>Tempat</label><br />
+          <input class="form-control" type="text" name="konferensi" placeholder="R. Sidang Ilkom" [(ngModel)]="tempat" required="required"/>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br /><br />
+        </div>
+
+
+        <!-- Penguji -->
+        <div class="form-group col-sm-12 col-md-6 col-xs-12 padding-left">
+          <div class="row padding-left">
+            Penguji 1 {{query}}
+          </div>
+
+          <div class="form-group row padding-left input-group">
+            <input type="text" class="form-control validate filter-input has-error" [(ngModel)]=query (keyup)=filter() placeholder="Penguji 1">
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" (click)="reset()">x</button>
+            </span>
+          </div>
+          <div style="position:absolute;z-index:2" *ngIf="filteredList.length > 0">
+            <div class="row" *ngFor="let item of filteredList" class="form-control primary" (click)="select(item)">
+                  {{item}}
+            </div>
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-2">
-            NIM
+        <div class="form-group col-sm-12 col-md-6 col-xs-12">
+          <div class="row padding-left">
+            Penguji 2 {{query2}}
           </div>
-          <div class="col-md-8">
-            : {{service.nim}}
-          </div>
-        </div>
-      </div>
 
-      <div class="col-md-8 col-sm-12">
-        <div class="row">
-          <div class="col-md-5">
-            Pembimbing Ketua
+          <div class="form-group row padding-left input-group">
+            <input type="text" class="form-control validate filter-input has-error" [(ngModel)]=query2 (keyup)=filter2() placeholder="Penguji 2">
+            <span class="input-group-btn">
+                <button class="btn btn-danger" type="button" (click)="reset2()">x</button>
+            </span>
           </div>
-          <div class="col-md-7">
-            : {{service.dosen_1}}
+          <div style="position:absolute;z-index:1" *ngIf="filteredList2.length > 0">
+            <div *ngFor="let item of filteredList2" class="form-control primary" (click)="select2(item)">
+                  {{item}}
+            </div>
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-5">
-            Pembimbing Anggota
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          <br /><br />
+        </div>
+
+
+        <!-- Submit -->
+        <div class="col-md-12 col-sm-12">
+          <div class="section-block text-right padding-right">
+            <button type="submit" class="btn btn-primary btn-lg" (click)="onSubmit()">Submit</button>
           </div>
-          <div class="col-md-7">
-            : {{service.dosen_2}}
-          </div>
         </div>
-      </div>
 
-    </div>
-
-    <div class="col-sm-12 col-md-12 col-xs-12">
-      <br /><br />
-    </div>
-
-    <!-- Judul Paper -->
-    <div class="form-group col-md-12 col-xs-12">
-        <label>Topik</label><br />
-        <textarea class="form-control" style="width:100%" placeholder="Judul paper kamu" [(ngModel)]="topik" required></textarea>
-    </div>
-
-    <div class="col-sm-12 col-md-12 col-xs-12">
-      <br /><br />
-    </div>
-
-    <!-- Tempat -->
-    <div class="form-group col-md-3 col-sm-8 col-xs-12">
-      <label>Tanggal {{tanggal}}</label><br />
-      <input class="form-control" type="date" name="date" style="height:36px" [(ngModel)]="tanggal"/>
-    </div>
-
-    <div class="form-group col-md-3 col-sm-4 col-xs-12">
-      <label>Jam</label><br />
-      <input class="form-control" type="time" name="konferensi" placeholder="10.00" style="height:35px" [(ngModel)]="jam"/>
-    </div>
-
-    <div class="form-group col-md-6 col-sm-12 col-xs-12">
-      <label>Tempat</label><br />
-      <input class="form-control" type="text" name="konferensi" placeholder="R. Sidang Ilkom" [(ngModel)]="tempat" required="required"/>
-    </div>
-
-    <div class="col-sm-12 col-md-12 col-xs-12">
-      <br /><br />
-    </div>
-
-
-    <!-- Penguji -->
-    <div class="form-group col-sm-12 col-md-6 col-xs-12 padding-left">
-      <div class="row padding-left">
-        Penguji 1 {{query}}
-      </div>
-
-      <div class="form-group row padding-left input-group">
-        <input type="text" class="form-control validate filter-input has-error" [(ngModel)]=query (keyup)=filter() placeholder="Penguji 1">
-        <span class="input-group-btn">
-            <button class="btn btn-danger" type="button" (click)="reset()">x</button>
-        </span>
-      </div>
-      <div style="position:absolute;z-index:2" *ngIf="filteredList.length > 0">
-        <div class="row" *ngFor="let item of filteredList" class="form-control primary" (click)="select(item)">
-              {{item}}
+        <div class="col-sm-12 col-md-12 col-xs-12">
+          status : {{status}}<br />
+          message : {{message}}
         </div>
-      </div>
-    </div>
 
-    <div class="form-group col-sm-12 col-md-6 col-xs-12">
-      <div class="row padding-left">
-        Penguji 2 {{query2}}
-      </div>
+      </form>
+    </ba-card>
 
-      <div class="form-group row padding-left input-group">
-        <input type="text" class="form-control validate filter-input has-error" [(ngModel)]=query2 (keyup)=filter2() placeholder="Penguji 2">
-        <span class="input-group-btn">
-            <button class="btn btn-danger" type="button" (click)="reset2()">x</button>
-        </span>
-      </div>
-      <div style="position:absolute;z-index:1" *ngIf="filteredList2.length > 0">
-        <div *ngFor="let item of filteredList2" class="form-control primary" (click)="select2(item)">
-              {{item}}
-        </div>
-      </div>
-    </div>
+  </div>
 
-    <div class="col-sm-12 col-md-12 col-xs-12">
-      <br /><br />
-    </div>
-
-
-    <!-- Submit -->
-    <div class="col-md-12 col-sm-12">
-      <div class="section-block text-right padding-right">
-        <button type="submit" class="btn btn-primary btn-lg" (click)="onSubmit()">Submit</button>
-      </div>
-    </div>
-
-    <div class="col-sm-12 col-md-12 col-xs-12">
-      status : {{status}}<br />
-      message : {{message}}
-    </div>
-
-  </form>
-</ba-card>
+</div>

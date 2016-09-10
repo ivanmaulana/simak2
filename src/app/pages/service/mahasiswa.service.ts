@@ -55,9 +55,7 @@ export class MahasiswaService {
 
   constructor(private authHttp: AuthHttp){
     this.getLocalStorage();
-    this.getDataTA();
-    this.getProfile();
-    this.getSidang();
+
   }
 
   getLocalStorage(){
@@ -68,57 +66,6 @@ export class MahasiswaService {
     this.nim = this.decode['nim'];
     this.nama = this.decode['nama'];
     this.role = this.decode['role'];
-  }
-
-  getDataTA(){
-    this.authHttp.get(this.urlTa)
-      .map(res => res.json())
-      .subscribe(data => {
-        this.topik = data[0]['topik'];
-        this.lab = data[0]['lab'];
-        this.dosen_1 = data[0]['dosen1'];
-        this.dosen_2 = data[0]['dosen2'];
-      })
-  }
-
-  getProfile() {
-    this.authHttp.get(this.urlProfile)
-      .map(res => res.json())
-        .subscribe( data => {
-          this.no = data[0]['hp'];
-          this.email = data[0]['email'];
-          this.alamat = data[0]['alamat'];
-          this.nama_ayah = data[0]['namaayah'];
-          // console.log(this.nama_ayah);
-          this.nama_ibu = data[0]['namaibu'];
-          this.alamat_ortu = data[0]['alamatortu'];
-          this.no_ortu = data[0]['no_ortu'];
-        })
-  }
-
-  getAyah() {
-    return this.nama_ayah;
-  }
-
-  getSidang() {
-    this.authHttp.get(this.urlSidang)
-      .map(res => res.json())
-        .subscribe( data => {
-          this.tanggal = data[0]['tanggal'];
-          this.jam = data[0]['jam'];
-          this.tempat = data[0]['tempat'];
-          this.penguji_ketua = data[0]['penguji_ketua'];
-          this.penguji_anggota = data[0]['penguji_anggota'];
-          // this.no = data[0]['no_hp'];
-        })
-  }
-
-  getSend(){
-    return this.send;
-  }
-
-  setSend(params){
-    this.send = params;
   }
 
   ubahTanggal(date){

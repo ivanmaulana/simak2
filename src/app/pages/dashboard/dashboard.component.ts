@@ -1,7 +1,7 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {Http, Response, HTTP_PROVIDERS, Headers} from '@angular/http';
-import {AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
+import {AlertComponent} from 'ng2-bootstrap';
 import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 import {BaCard} from '../../theme/components';
@@ -70,7 +70,7 @@ export class Dashboard implements OnInit{
   }
 
   showNoConn() {
-    this.toastr.warning("No Connection", 'Error');
+    this.toastr.warning("No Internet Connection", 'Error');
   }
 
   onSubmit(){

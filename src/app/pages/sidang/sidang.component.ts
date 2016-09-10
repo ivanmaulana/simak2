@@ -22,6 +22,7 @@ export class Sidang {
   private nim;
   private nama;
   private topik;
+  private lab;
   private dosen_1;
   private dosen_2;
   private tanggal;
@@ -43,17 +44,82 @@ export class Sidang {
 
   test;
 
+  //STATUS
+  private statusProfile = 0;
+  private statusSeminar = 0;
+
+
   constructor(private http: Http, private myElement: ElementRef, private authHttp: AuthHttp, private service: MahasiswaService,
   private toastr: ToastsManager) {
-    this.test = 'dwadwad';
-    this.tanggal = this.service.tanggal;
 
-    this.test = this.service.topik;
+    this.nim = this.service.nim;
+    this.nama = this.service.nama;
 
   }
 
   ngOnInit(){
+    this.getConnection();
+    this.getStatus();
+    if(this.statusSeminar) {
+      this.getDataMahasiswa();
+    }
 
+  }
+
+  private noConn = 0;
+  private statusConn = 0;
+  getConnection() {
+    this.noConn = 0;
+
+    this.authHttp.get(this.service.urlTest)
+      .map(res => res.json())
+      .subscribe(data => {
+        this.statusConn = data['status'];
+        // console.log(this.status);
+      })
+
+    setTimeout(() => {
+      if (!this.statusConn) {
+        this.statusConn = 0;
+        this.noConn = 1;
+        this.showNoConn();
+      }
+    }, 5000)
+  }
+
+  refresh() {
+    this.getConnection();
+    this.getStatus();
+    if(this.statusSeminar) {
+      this.getDataMahasiswa();
+    }
+
+  }
+
+  // DASHBOARD SERVICE
+  getStatus() {
+    this.authHttp.get(this.service.urlStatus)
+      .map(res => res.json())
+      .subscribe( data => {
+        this.statusProfile = data[0]['statusProfile'];
+        this.statusSeminar = data[0]['statusSeminar'];
+        // console.log(this.statusProfile);
+      })
+  }
+
+  showNoConn() {
+    this.toastr.warning("No Internet Connection", 'Error');
+  }
+
+  getDataMahasiswa(){
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/')
+      .map(res => res.json())
+      .subscribe(data => {
+        this.topik = data[0]['topik'];
+        this.lab = data[0]['lab'];
+        this.dosen_1 = data[0]['dosen1'];
+        this.dosen_2 = data[0]['dosen2'];
+      })
   }
 
   onSubmit(){
