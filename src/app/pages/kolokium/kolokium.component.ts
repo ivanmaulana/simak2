@@ -52,17 +52,12 @@ export class Kolokium implements OnInit {
     this.getConnection();
     this.getStatus();
 
-    if (this.statusTa) {
-      this.getDataMahasiswa();
-      this.getDataKolokium();
-
-  // && item.type == 'application/pdf'
-      this.uploader.setOptions({
-        filters: [{ fn: item => {
-          return item.size < 1024 * 1024 * 10 && item.type == 'application/pdf'
-        }}]
-      })
-    }
+    // && item.type == 'application/pdf'
+    this.uploader.setOptions({
+      filters: [{ fn: item => {
+        return item.size < 1024 * 1024 * 10 && item.type == 'application/pdf'
+      }}]
+    })
 
   }
 
@@ -95,6 +90,12 @@ export class Kolokium implements OnInit {
         this.statusProfile = data[0]['statusProfile'];
         this.statusTa= data[0]['statusTa'];
         // console.log(this.statusProfile);
+
+        if(this.statusTa) {
+          this.getDataMahasiswa();
+          this.getDataKolokium();
+        }
+
       })
   }
 
@@ -102,17 +103,6 @@ export class Kolokium implements OnInit {
     this.getConnection();
     this.getStatus();
 
-    if (this.statusTa) {
-      this.getDataMahasiswa();
-      this.getDataKolokium();
-
-  // && item.type == 'application/pdf'
-      this.uploader.setOptions({
-        filters: [{ fn: item => {
-          return item.size < 1024 * 1024 * 10 && item.type == 'application/pdf'
-        }}]
-      })
-    }
   }
 
   showNoConn() {

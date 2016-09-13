@@ -5,7 +5,7 @@ import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {BaPageTop, BaContentTop, BaSidebarDosen, BaBackTop} from '../theme/components';
 
 import {DashboardDosen} from './dashboardDosen';
-import {LogDosen} from './logDosen';
+// import {LogDosen} from './logDosen';
 
 @Component({
   selector: 'dosen',
@@ -37,11 +37,11 @@ import {LogDosen} from './logDosen';
     path: '/dashboard',
     useAsDefault: true,
   },
-  {
-    name: 'LogDosen',
-    component: LogDosen,
-    path: '/log'
-  }
+  // {
+  //   name: 'LogDosen',
+  //   component: LogDosen,
+  //   path: '/log'
+  // }
 ])
 
 @CanActivate(() => tokenNotExpired())

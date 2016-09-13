@@ -53,10 +53,6 @@ export class Praseminar implements OnInit {
   ngOnInit(){
     this.getConnection();
     this.getStatus();
-    if (this.statusKolokium) {
-      this.getDataMahasiswa();
-      this.getDataPraseminar();
-    }
 
   }
 
@@ -84,10 +80,6 @@ export class Praseminar implements OnInit {
   refresh() {
     this.getConnection();
     this.getStatus();
-    if (this.statusKolokium) {
-      this.getDataMahasiswa();
-      this.getDataPraseminar();
-    }
   }
 
   // DASHBOARD SERVICE
@@ -97,6 +89,11 @@ export class Praseminar implements OnInit {
       .subscribe( data => {
         this.statusProfile = data[0]['statusProfile'];
         this.statusKolokium = data[0]['statusKolokium'];
+
+        if(this.statusKolokium) {
+          this.getDataMahasiswa();
+          this.getDataPraseminar();
+        }
         // console.log(this.statusProfile);
       })
   }

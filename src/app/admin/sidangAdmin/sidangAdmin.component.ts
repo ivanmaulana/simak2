@@ -1,5 +1,6 @@
 import {Component, ViewEncapsulation, OnInit} from '@angular/core';
 import {Http, Headers} from '@angular/http';
+import {AuthHttp} from 'angular2-jwt';
 
 import {BaCard} from '../../theme/components';
 
@@ -37,12 +38,12 @@ export class SidangAdmin implements OnInit {
 
   peopleTableData:Array<any>;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private authHttp: AuthHttp) {
     this.getDataSidang();
   }
 
   getDataSidang(){
-    this.http.get('http://210.16.120.17:8000/sidang')
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/sidang')
       .map(res => res.json())
       .subscribe(data => {
         this.response = data;
@@ -50,7 +51,7 @@ export class SidangAdmin implements OnInit {
   }
 
   openProfile(input){
-    this.http.get('http://210.16.120.17:8000/ta/daftar/'+input)
+    this.http.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar/'+input)
       .map(res => res.json())
       .subscribe(data => {
         this.nim = data[0].nim;

@@ -105,10 +105,6 @@ export class Log implements OnInit{
   ngOnInit(){
     this.getConnection();
     this.getStatus();
-    if (this.statusTa) {
-      this.getDataMahasiswa();
-      this.getDataLog();
-    }
 
   }
 
@@ -136,10 +132,6 @@ export class Log implements OnInit{
   refresh() {
     this.getConnection();
     this.getStatus();
-    if (this.statusTa) {
-      this.getDataMahasiswa();
-      this.getDataLog();
-    }
   }
 
   showNoConn() {
@@ -191,6 +183,11 @@ export class Log implements OnInit{
       .subscribe( data => {
         this.statusProfile = data[0]['statusProfile'];
         this.statusTa = data[0]['statusTa'];
+
+        if(this.statusTa) {
+          this.getDataMahasiswa();
+          this.getDataLog();
+        }
         // console.log(this.statusProfile);
       })
   }

@@ -2,11 +2,13 @@ import {Component, ViewEncapsulation, ElementRef, OnInit} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {BaCard} from '../../theme/components';
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'taAdmin',
   host: {'(document:click)': 'handleClick($event)',},
   directives: [BaCard],
+  providers: [ToastsManager],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./taAdmin.scss')],
   template: require('./taAdmin.html')
@@ -47,18 +49,18 @@ export class TaAdmin implements OnInit {
   private elementRef;
 
   ngOnInit(){
-    this.getDataTA();
+    // this.getDataTA();
   }
 
   peopleTableData:Array<any>;
 
-  constructor(private http: Http, private myElement: ElementRef, private authHttp: AuthHttp) {
+  constructor(private http: Http, private myElement: ElementRef, private authHttp: AuthHttp, private toastr: ToastsManager) {
     this.elementRef = myElement;
     this.getDataDosen();
   }
 
   getDataDosen(){
-    this.http.get('http://simak.apps.cs.ipb.ac.id:2016/dosen')
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/dosen')
       .map(res => res.json())
         .subscribe( data => {
           this.count = data[0]['id'];
@@ -79,7 +81,7 @@ export class TaAdmin implements OnInit {
   }
 
   getDataTA(){
-    this.http.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar')
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar')
       .map(res => res.json())
       .subscribe(data => {
         this.response = data;
@@ -87,7 +89,7 @@ export class TaAdmin implements OnInit {
   }
 
   openProfile(input){
-    this.http.get('http://simak.apps.cs.ipb.ac.id:2016/ta/'+input)
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar/detail/'+input)
       .map(res => res.json())
       .subscribe(data => {
         this.nim = data[0]['nim'];
@@ -105,15 +107,19 @@ export class TaAdmin implements OnInit {
   }
 
   simpan(){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
     this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2});
 
-    this.http.put("http://simak.apps.cs.ipb.ac.id:2016/ta/edit/", this.creds, {headers: headers})
+    this.authHttp.put("http://simak.apps.cs.ipb.ac.id:2016/ta/edit/", this.creds)
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;
         this.message = data[0].message;
+
+        if(this.status) {
+          this.showSuccess();
+        }
       }
     )
   }
@@ -180,5 +186,14 @@ export class TaAdmin implements OnInit {
         this.filteredList = [];
     }
   }
+
+  showError() {
+    this.toastr.error('Update Topik Gagal', 'Error!');
+  }
+
+  showSuccess() {
+    this.toastr.success("Penentuan TA Berhasil", 'Success !');
+  }
+
 
 }

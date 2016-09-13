@@ -40,7 +40,7 @@ export class PengajuanAdmin implements OnInit {
       .map(res => res.json())
       .subscribe(data => {
         this.response = data;
-        console.log(data);
+        // console.log(data);
       })
   }
 
@@ -51,8 +51,6 @@ export class PengajuanAdmin implements OnInit {
   }
 
   openProfile(input){
-
-
     this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar/detail/'+input)
       .map(res => res.json())
       .subscribe(data => {
@@ -81,8 +79,12 @@ export class PengajuanAdmin implements OnInit {
   downloadData(){
     this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/excel')
       .map(res => res.blob())
+  }
 
-
+  dataLab(input) {
+    if (input == 1) return 'Net Centric Computing';
+    else if (input == 2) return 'Applied Computing & Computational Intelligence';
+    else if (input == 3) return 'Software Engineering & Information System';
   }
 
 }

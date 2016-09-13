@@ -1,98 +1,102 @@
-<div class="col-lg-12 col-md-12 col-sm-12">
-  <ba-card title="Penentuan TA" baCardClass="with-scroll table-panel">
-    <form (onSubmit)="openProfile(input)">
+<div class="row">
+  <div class="row col-lg-12 col-md-12 col-sm-12">
+    <ba-card title="Penentuan TA" baCardClass="with-scroll table-panel">
+      <form (onSubmit)="openProfile(input)">
+        <div class="row">
+          <div class="col-md-3 col-sm-12 padding-top"><p>Cari Berdasarkan NIM : </p></div>
+          <div class="form-group col-md-5 col-sm-12">
+            <input [(ngModel)]="input" class="form-control"/>
+          </div>
+          <div class="form-group col-md-2 col-sm-12">
+            <button type="submit" class="btn btn-primary btn-md" (click)="openProfile(input)">Cari</button>
+          </div>
+        </div>
+      </form>
+    </ba-card>
+  </div>
+
+  <div class="row col-lg-12 col-md-12 col-sm-12" *ngIf="nim">
+    <ba-card title="Profile Mahasiswa">
+      <div class="col-md-4 col-sm-12 col-xs-12">
+        <br /><br />
+        <img src="https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png" class="profile" />
+        <div class="col-md-12"><br />
+          NIM : {{nim}}
+        </div>
+        <div class="col-md-12">
+          Nama : {{nama}}
+        </div>
+      </div>
+      <div class="col-md-8 col-sm-12 col-xs-12">
+        <!-- Topik -->
+        <div class="form-group col-md-2 col-sm-5 col-xs-12 padding-top">
+          Topik
+        </div>
+
+        <div class="form-group col-md-10 col-sm-7 col-xs-12">
+          <textarea class="form-control" [(ngModel)]="topik"></textarea>
+        </div>
+
+        <!-- Lab -->
+        <div class="form-group col-md-2 col-sm-5 col-xs-12 padding-top">
+          Lab
+        </div>
+
+        <div class="form-group col-md-10 col-sm-7 col-xs-12">
+          <select [(ngModel)]="lab" class="form-control" style="height:35px">
+            <option value="1">Net Centric Computing</option>
+            <option value="2">Applied & Computational Intelligence</option>
+            <option value="3">Software Engineering & Information System</option>
+          </select>
+          <!-- <input [(ngModel)]="lab" class="form-control"/> -->
+        </div>
+
+        <div class="form-group col-md-5 col-sm-5 col-xs-12 padding-top">
+          Pembimbing Ketua
+        </div>
+
+        <div class="form-group col-md-7 col-sm-7 col-xs-12 input-group">
+          <input [disabled]="!c" type="text" class="form-control validate filter-input has-error" [(ngModel)]=query (keyup)=filter() placeholder="Pembimbing Ketua">
+          <span class="input-group-btn">
+              <button class="btn btn-danger" type="button" (click)="reset()">x</button>
+          </span>
+        </div>
+        <div style="position:absolute;z-index:2" *ngIf="filteredList.length > 0">
+          <div class="row" *ngFor="let item of filteredList" class="form-control primary" (click)="select(item)">
+                {{item}}
+          </div>
+        </div>
+
+
+        <div class="form-group col-md-5 col-sm-5 col-xs-12 padding-top">
+          Pembimbing Anggota
+        </div>
+
+        <div class="form-group col-md-7 col-sm-7 col-xs-12 input-group">
+          <input [disabled]="!c2" type="text" class="form-control validate filter-input has-error" [(ngModel)]=query2 (keyup)=filter2() placeholder="Pembimbing Anggota">
+          <span class="input-group-btn">
+              <button class="btn btn-danger" type="button" (click)="reset2()">x</button>
+          </span>
+        </div>
+        <div style="position:absolute;z-index:2" *ngIf="filteredList2.length > 0">
+          <div class="row" *ngFor="let item of filteredList2" class="form-control primary" (click)="select2(item)">
+                {{item}}
+          </div>
+        </div>
+
+      </div>
       <div class="row">
-        <div class="col-md-3 col-sm-12 padding-top"><p>Cari Berdasarkan NIM : </p></div>
-        <div class="form-group col-md-5 col-sm-12">
-          <input [(ngModel)]="input" class="form-control"/>
-        </div>
-        <div class="form-group col-md-2 col-sm-12">
-          <button type="submit" class="btn btn-primary btn-md" (click)="openProfile(input)">Cari</button>
+        <div class="form-group col-md-12 col-sm-12 align-right padding-right">
+          <button type="button" class="btn btn-primary btn-lg" (click)="simpan()">Simpan</button>
         </div>
       </div>
-    </form>
-  </ba-card>
+    </ba-card>
+  </div>
 </div>
 
-<div class="col-lg-12 col-md-12 col-sm-12" *ngIf="nim">
-  <ba-card title="Profile Mahasiswa">
-    <div class="col-md-4 col-sm-12 col-xs-12">
-      <br /><br />
-      <img src="https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png" class="profile" />
-      <div class="col-md-12"><br />
-        NIM : {{nim}}
-      </div>
-      <div class="col-md-12">
-        Nama : {{nama}}
-      </div>
-    </div>
-    <div class="col-md-8 col-sm-12 col-xs-12">
-      <!-- Topik -->
-      <div class="form-group col-md-2 col-sm-5 col-xs-12 padding-top">
-        Topik
-      </div>
 
-      <div class="form-group col-md-10 col-sm-7 col-xs-12">
-        <textarea class="form-control" [(ngModel)]="topik"></textarea>
-      </div>
-
-      <!-- Lab -->
-      <div class="form-group col-md-2 col-sm-5 col-xs-12 padding-top">
-        Lab
-      </div>
-
-      <div class="form-group col-md-10 col-sm-7 col-xs-12">
-        <select [(ngModel)]="lab" class="form-control" style="height:35px">
-          <option value="1">Net Centric Computing</option>
-          <option value="2">Applied & Computational Intelligence</option>
-          <option value="3">Software Engineering & Information System</option>
-        </select>
-        <!-- <input [(ngModel)]="lab" class="form-control"/> -->
-      </div>
-
-      <div class="form-group col-md-5 col-sm-5 col-xs-12 padding-top">
-        Pembimbing Ketua
-      </div>
-
-      <div class="form-group col-md-7 col-sm-7 col-xs-12 input-group">
-        <input [disabled]="!c" type="text" class="form-control validate filter-input has-error" [(ngModel)]=query (keyup)=filter() placeholder="Pembimbing Ketua">
-        <span class="input-group-btn">
-            <button class="btn btn-danger" type="button" (click)="reset()">x</button>
-        </span>
-      </div>
-      <div style="position:absolute;z-index:2" *ngIf="filteredList.length > 0">
-        <div class="row" *ngFor="let item of filteredList" class="form-control primary" (click)="select(item)">
-              {{item}}
-        </div>
-      </div>
-
-      <div class="form-group col-md-5 col-sm-5 col-xs-12 padding-top">
-        Pembimbing Ketua
-      </div>
-
-      <div class="form-group col-md-7 col-sm-7 col-xs-12 input-group">
-        <input [disabled]="!c2" type="text" class="form-control validate filter-input has-error" [(ngModel)]=query2 (keyup)=filter2() placeholder="Pembimbing Anggota">
-        <span class="input-group-btn">
-            <button class="btn btn-danger" type="button" (click)="reset2()">x</button>
-        </span>
-      </div>
-      <div style="position:absolute;z-index:2" *ngIf="filteredList2.length > 0">
-        <div class="row" *ngFor="let item of filteredList2" class="form-control primary" (click)="select2(item)">
-              {{item}}
-        </div>
-      </div>
-
-    </div>
-    <div class="row">
-      <div class="form-group col-md-12 col-sm-12 align-right padding-right">
-        <button type="button" class="btn btn-primary btn-lg" (click)="simpan()">Simpan</button>
-      </div>
-    </div>
-  </ba-card>
-</div>
-
-dosen 1 : {{dosen_1}} : {{query}}<br />
+<!-- dosen 1 : {{dosen_1}} : {{query}}<br />
 dosen_2 : {{dosen_2}} : {{query2}}<br />
 
 status : {{status}}<br />
-message : {{message}}
+message : {{message}} -->

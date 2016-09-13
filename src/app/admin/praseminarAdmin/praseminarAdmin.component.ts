@@ -3,6 +3,8 @@ import {CORE_DIRECTIVES, FORM_DIRECTIVES, NgClass, NgStyle} from '@angular/commo
 import {Http, Headers} from '@angular/http';
 import {AlertComponent, PROGRESSBAR_DIRECTIVES} from 'ng2-bootstrap';
 import {FILE_UPLOAD_DIRECTIVES, FileUploader} from 'ng2-file-upload';
+import {AuthHttp} from 'angular2-jwt';
+import {ToastsManager} from 'ng2-toastr/ng2-toastr';
 
 import {BaCard} from '../../theme/components';
 import {BaAppPicturePipe} from '../../theme/pipes';
@@ -13,6 +15,7 @@ const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 @Component({
   selector: 'praseminarAdmin',
   pipes: [BaAppPicturePipe],
+  providers: [ToastsManager],
   directives: [BaCard, AlertComponent, FILE_UPLOAD_DIRECTIVES, NgClass, NgStyle, CORE_DIRECTIVES, FORM_DIRECTIVES, PROGRESSBAR_DIRECTIVES],
   encapsulation: ViewEncapsulation.None,
   styles: [require('./praseminarAdmin.scss')],
@@ -61,7 +64,7 @@ export class PraseminarAdmin implements OnInit {
   }
 
   ngOnInit(){
-    this.http.get('http://210.16.120.17:8000/jadwalPraseminar')
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/jadwalPraseminar')
       .map(res => res.json())
       .subscribe(data => {
         this.active = data[0]['active'];
@@ -72,12 +75,12 @@ export class PraseminarAdmin implements OnInit {
 
   peopleTableData:Array<any>;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private authHttp: AuthHttp, private toastr: ToastsManager) {
 
   }
 
   openProfile(input){
-    this.http.get('http://localhost:8000/ta/'+input)
+    this.http.get('http://simak.apps.cs.ipb.ac.id:2016/ta/'+input)
       .map(res => res.json())
       .subscribe(data => {
         this.nim = data[0].nim;
@@ -102,17 +105,29 @@ export class PraseminarAdmin implements OnInit {
   simpan(){
     this.creds = JSON.stringify({active: this.active, jadwal_seminar: this.jadwal, deadline: this.deadline});
 
-    this.http.put("http://210.16.120.17:8000/jadwalPraseminar", this.creds)
+    this.authHttp.put("http://simak.apps.cs.ipb.ac.id:2016/jadwalPraseminar", this.creds)
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;
         this.message = data[0].message;
+
+        if(this.status) {
+          this.showSuccess();
+        }
       }
     )
   }
 
   activate(){
     this.active = !this.active;
+  }
+
+  showError() {
+    this.toastr.error('Update Topik Gagal', 'Error!');
+  }
+
+  showSuccess() {
+    this.toastr.success("Penentuan Praseminar Berhasil", 'Success !');
   }
 
 }
