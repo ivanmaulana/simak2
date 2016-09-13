@@ -1,6 +1,11 @@
 @import '../../sass/conf/conf';
 @import '../../components/baMsgCenter/baMsgCenter';
 
+.admin {
+  color: white;
+  padding-top: 20px;
+}
+
 .page-top {
   background-color: $sidebar;
   position: fixed;

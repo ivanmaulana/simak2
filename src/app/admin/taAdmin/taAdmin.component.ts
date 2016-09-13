@@ -1,6 +1,6 @@
 import {Component, ViewEncapsulation, ElementRef, OnInit} from '@angular/core';
 import {Http, Headers} from '@angular/http';
-
+import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {BaCard} from '../../theme/components';
 
 @Component({
@@ -52,13 +52,13 @@ export class TaAdmin implements OnInit {
 
   peopleTableData:Array<any>;
 
-  constructor(private http: Http, private myElement: ElementRef) {
+  constructor(private http: Http, private myElement: ElementRef, private authHttp: AuthHttp) {
     this.elementRef = myElement;
     this.getDataDosen();
   }
 
   getDataDosen(){
-    this.http.get('http://210.16.120.17:8000/dosen')
+    this.http.get('http://simak.apps.cs.ipb.ac.id:2016/dosen')
       .map(res => res.json())
         .subscribe( data => {
           this.count = data[0]['id'];
@@ -79,7 +79,7 @@ export class TaAdmin implements OnInit {
   }
 
   getDataTA(){
-    this.http.get('http://210.16.120.17:8000/ta/daftar')
+    this.http.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar')
       .map(res => res.json())
       .subscribe(data => {
         this.response = data;
@@ -87,7 +87,7 @@ export class TaAdmin implements OnInit {
   }
 
   openProfile(input){
-    this.http.get('http://210.16.120.17:8000/ta/'+input)
+    this.http.get('http://simak.apps.cs.ipb.ac.id:2016/ta/'+input)
       .map(res => res.json())
       .subscribe(data => {
         this.nim = data[0]['nim'];
@@ -109,7 +109,7 @@ export class TaAdmin implements OnInit {
     headers.append('Content-Type', 'application/json');
     this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2});
 
-    this.http.put("http://210.16.120.17:8000/ta/edit/", this.creds, {headers: headers})
+    this.http.put("http://simak.apps.cs.ipb.ac.id:2016/ta/edit/", this.creds, {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;

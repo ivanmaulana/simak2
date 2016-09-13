@@ -19,3 +19,9 @@ input[type=password]:focus {
   -webkit-box-shadow: 1px 1px 10px #999;
       box-shadow: 1px 1px 10px #999;
 }
+
+textarea {
+  -moz-box-shadow: 1px 1px 10px #999;
+  -webkit-box-shadow: 1px 1px 10px #999;
+      box-shadow: 1px 1px 10px #999;
+}

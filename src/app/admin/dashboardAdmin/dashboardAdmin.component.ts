@@ -20,11 +20,7 @@ export class DashboardAdmin implements OnInit {
   status;
 
   ngOnInit(){
-    this.http.get('http://210.16.120.17:8000/ta/daftar')
-      .map(res => res.json())
-      .subscribe(data => {
-        this.response = data;
-      })
+
   }
 
   constructor(private http: Http, private router: Router) {

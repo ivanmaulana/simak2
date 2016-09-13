@@ -88,13 +88,13 @@ export const menuItems = [
     selected: false,
     expanded: false,
     order: 300
-  },
-  {
-    title: 'Menu',
-    component: 'Menu',
-    icon: 'ion-android-home',
-    selected: false,
-    expanded: false,
-    order: 500
   }
+  // {
+  //   title: 'Menu',
+  //   component: 'Menu',
+  //   icon: 'ion-android-home',
+  //   selected: false,
+  //   expanded: false,
+  //   order: 500
+  // }
 ];

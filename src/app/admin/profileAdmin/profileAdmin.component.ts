@@ -38,7 +38,7 @@ export class ProfileAdmin implements OnInit {
 
 
   ngOnInit(){
-    this.http.get('http://210.16.120.17:8000/profile/g64130076')
+    this.http.get('http://simak.apps.cs.ipb.ac.id:2016/profile/g64130076')
       .map(res => res.json())
       .subscribe(data => {
         this.profile = data;
@@ -52,7 +52,7 @@ export class ProfileAdmin implements OnInit {
   }
 
   openProfile(input){
-    this.http.get('http://210.16.120.17:8000/profile/'+input)
+    this.http.get('http://simak.apps.cs.ipb.ac.id:2016/profile/'+input)
       .map(res => res.json())
       .subscribe(data => {
         this.profile = data;
@@ -64,7 +64,7 @@ export class ProfileAdmin implements OnInit {
     headers.append('Content-Type', 'application/json');
     this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2});
 
-    this.http.put("http://210.16.120.17:8000/ta/edit/", this.creds, {headers: headers})
+    this.http.put("http://simak.apps.cs.ipb.ac.id:2016/ta/edit/", this.creds, {headers: headers})
       .map(res => res.json())
       .subscribe(data => {
         this.status = data[0].status;

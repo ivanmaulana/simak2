@@ -88,7 +88,7 @@ export class App implements OnInit{
         this.route.navigate(['Pages']);
       }
       else if(this.role === 4){
-        this.route.navigate(['Dosen']);
+        this.route.navigate(['Admin']);
       }
       else {
         this.route.navigate(['Login']);

@@ -34,10 +34,11 @@ export class PengajuanAdmin implements OnInit {
 
 
   ngOnInit(){
-    this.http.get('http://210.16.120.17:8000/ta/daftar/list')
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar/list')
       .map(res => res.json())
       .subscribe(data => {
         this.response = data;
+        console.log(data);
       })
   }
 
@@ -48,7 +49,7 @@ export class PengajuanAdmin implements OnInit {
   }
 
   openProfile(input){
-    this.http.get('http://210.16.120.17:8000/ta/daftar/'+input)
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar/detail/'+input)
       .map(res => res.json())
       .subscribe(data => {
         this.nim = data[0].nim;
@@ -70,7 +71,7 @@ export class PengajuanAdmin implements OnInit {
   }
 
   downloadData(){
-    this.authHttp.get('http://210.16.120.17:8100/excel');
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/excel');
   }
 
 }

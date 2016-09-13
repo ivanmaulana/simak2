@@ -2,19 +2,24 @@
      [ngClass]="{scrolled: isScrolled}">
   <a href="#/pages/dashboard" class="al-logo clearfix">SIM Ilkom</a>
   <a (click)="toggleMenu()" class="collapse-menu-link ion-navicon"></a>
-
-  <!-- <div class="search">
-    <i class="ion-ios-search-strong" ng-click="startSearch()"></i>
-    <input id="searchInput" type="text" placeholder="Search for...">
-  </div> -->
   <div class="search" (updateTime)="updateMyTime()"><i style="padding-left:10px" class="ion-calendar"></i>{{date | date: "EEEE, d MMMM y"}}
-    <span style="padding-left:30px"></span><i style="padding-left:10px" class="ion-clock"></i>{{date | date: "H:mm:ss"}}
+    <i style="padding-left:10px" class="ion-clock"></i>{{date | date: "H:mm:ss"}}
   </div>
-  <div class="user-profile clearfix">
+
+  <div style="padding-top:15px" class="user-profile clearfix text-right" *ngIf="role == 4">
+    <a href="#/admin" class="admin">
+      Admin Panel
+    </a>
+    <a style="padding-left:30px" href="#/admin" class="admin" (click)="signOut()">
+      Logout
+    </a>
+  </div>
+
+  <div class="user-profile clearfix" *ngIf="role != 4">
 
     <div class="dropdown al-user-profile">
       <a class="profile-toggle-link dropdown-toggle" id="user-profile-dd" data-toggle="dropdown" aria-expanded="false">
-        <img src="{{ ( 'Nasta' | baProfilePicture ) }}">
+        <img src="assets/img/profile.png">
       </a>
       <div class="dropdown-menu top-dropdown-menu profile-dropdown" aria-labelledby="user-profile-dd">
         <li class="dropdown-item"><i class="dropdown-arr"></i></li>
