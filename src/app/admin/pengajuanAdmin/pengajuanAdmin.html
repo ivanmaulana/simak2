@@ -5,13 +5,39 @@
   dosen_1 : {{res.lab}}<br />
 </div> -->
 
+<!-- <button class="btn btn-primary" (click)="downloadData()">
+  Download as XLS
+</button> -->
+
+<div class="text-right">
+  <button class="btn btn-primary text-right">
+    <a href="http://simak.apps.cs.ipb.ac.id:2016/excel" class="link">
+      Download As XLS
+    </a>
+  </button>
+</div>
+<div class="row">
+  <br />
+</div>
+
 <div class="row" *ngIf="nim">
   <div class="col-md-4 col-sm-12 col-xs-12">
+    <br />
     <ba-card title="Profil Mahasiswa" baCardClass="with-scroll">
-      <img class="profile" src="https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png"/>
+      <img class="profile" src="foto"/>
       <br /><br />
-      <p>NIM : {{nim}}</p>
-      <p>Nama : {{nama}}</p>
+      <p class="col-sm-2">
+        NIM
+      </p>
+      <p class="col-sm-10">
+        : {{nim}}
+      </p>
+      <p class="col-sm-2">
+        Nama
+      </p>
+      <p class="col-sm-10">
+        : {{nama}}
+      </p>
     </ba-card>
   </div>
 

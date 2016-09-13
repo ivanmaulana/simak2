@@ -32,6 +32,8 @@ export class PengajuanAdmin implements OnInit {
   private progress_3: boolean = false;
   private progress_4: boolean = false;
 
+  foto;
+
 
   ngOnInit(){
     this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar/list')
@@ -49,6 +51,8 @@ export class PengajuanAdmin implements OnInit {
   }
 
   openProfile(input){
+
+
     this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar/detail/'+input)
       .map(res => res.json())
       .subscribe(data => {
@@ -67,11 +71,18 @@ export class PengajuanAdmin implements OnInit {
         this.progress_2 = data[0].progress_2;
         this.progress_3 = data[0].progress_3;
         this.progress_4 = data[0].progress_4;
+
+        this.foto = 'http://simak.apps.cs.ipb.ac.id/upload/filePhoto/foto-'+this.nim+'-'+this.nama+'.png';
       })
+
+
   }
 
   downloadData(){
-    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/excel');
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/excel')
+      .map(res => res.blob())
+
+
   }
 
 }
