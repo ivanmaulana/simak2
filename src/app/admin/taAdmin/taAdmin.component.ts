@@ -48,8 +48,15 @@ export class TaAdmin implements OnInit {
   private c2 : boolean = true;
   private elementRef;
 
+  private dataMahasiswa;
+  private query3;
+  private mahasiswa = [];
+  private filteredListMahasiswa = [];
+
+  foto;
+
   ngOnInit(){
-    // this.getDataTA();
+    this.getDataTA();
   }
 
   peopleTableData:Array<any>;
@@ -68,6 +75,8 @@ export class TaAdmin implements OnInit {
           for (var i = 0; i < this.count; i++){
             this.dosen.push(data[i]['nama']);
           }
+
+          // console.log(this.dosen);
         })
   }
 
@@ -81,15 +90,26 @@ export class TaAdmin implements OnInit {
   }
 
   getDataTA(){
-    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar')
+    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar/list')
       .map(res => res.json())
       .subscribe(data => {
-        this.response = data;
+        this.dataMahasiswa = data;
+        // console.log(data);
+
+        for( var i = 0; i < data.length; i++) {
+          this.mahasiswa.push(data[i]['nama']);
+        }
+
+        // console.log(this.mahasiswa);
       })
   }
 
   openProfile(input){
-    this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar/detail/'+input)
+    // console.log(this.query3);
+
+    let creds = JSON.stringify({nama: this.query3});
+
+    this.authHttp.post('http://simak.apps.cs.ipb.ac.id:2016/ta/penentuan', creds)
       .map(res => res.json())
       .subscribe(data => {
         this.nim = data[0]['nim'];
@@ -103,6 +123,8 @@ export class TaAdmin implements OnInit {
 
         if (this.query) this.c = false;
         if (this.query2) this.c2 = false;
+
+        this.foto = 'http://simak.apps.cs.ipb.ac.id/upload/filePhoto/foto-'+this.nim+'-'+this.nama+'.png';
       })
   }
 
@@ -125,6 +147,28 @@ export class TaAdmin implements OnInit {
   }
 
 
+  filterNama() {
+    if (this.query3 !== "" && this.query3.length > 2){
+        this.filteredListMahasiswa = this.mahasiswa.filter(function(el){
+            return el.toLowerCase().indexOf(this.query3.toLowerCase()) > -1;
+        }.bind(this));
+    }else{
+        this.filteredListMahasiswa = [];
+    }
+  }
+
+  selectNama(item){
+      this.query3 = item;
+      this.filteredListMahasiswa = [];
+      // this.c = !this.c;
+  }
+
+  resetNama(){
+    this.c = true;
+    this.query = "";
+    this.dosen_1 = "0";
+  }
+
   filter() {
     if (this.query !== "" && this.query.length > 2){
         this.filteredList = this.dosen.filter(function(el){
@@ -146,7 +190,7 @@ export class TaAdmin implements OnInit {
   reset(){
     this.c = true;
     this.query = "";
-    this.dosen_1 = "";
+    this.dosen_1 = "0";
   }
 
   filter2() {
@@ -170,7 +214,7 @@ export class TaAdmin implements OnInit {
   reset2(){
     this.c2 = true;
     this.query2 = "";
-    this.dosen_2 = "";
+    this.dosen_2 = "0";
   }
 
   handleClick(event){

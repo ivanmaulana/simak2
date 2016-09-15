@@ -6,7 +6,7 @@
     <i style="padding-left:10px" class="ion-clock"></i>{{date | date: "H:mm:ss"}}
   </div>
 
-  <div style="padding-top:15px" class="user-profile clearfix text-right" *ngIf="role == 4">
+  <!-- <div style="padding-top:15px" class="user-profile clearfix text-right" *ngIf="role == 4">
     <a href="#/dosen" class="admin">
       Dosen Panel |
     </a>
@@ -16,9 +16,9 @@
     <a style="padding-left:30px" href="#/admin" class="admin" (click)="signOut()">
       Logout
     </a>
-  </div>
+  </div> -->
 
-  <div class="user-profile clearfix" *ngIf="role != 4">
+  <div class="user-profile clearfix">
 
     <div class="dropdown al-user-profile">
       <a class="profile-toggle-link dropdown-toggle" id="user-profile-dd" data-toggle="dropdown" aria-expanded="false">
@@ -26,7 +26,9 @@
       </a>
       <div class="dropdown-menu top-dropdown-menu profile-dropdown" aria-labelledby="user-profile-dd">
         <li class="dropdown-item"><i class="dropdown-arr"></i></li>
-        <li class="dropdown-item"><a href="#/mahasiswa/profile"><i class="fa fa-user"></i>Profile</a></li>
+        <li class="dropdown-item" *ngIf="role == 3"><a href="#/mahasiswa/profile"><i class="fa fa-user"></i>Profile</a></li>
+        <li class="dropdown-item" *ngIf="role == 4"><a href="#/admin"><i class="fa fa-user"></i>Admin Panel</a></li>
+        <li class="dropdown-item" *ngIf="role == 4"><a href="#/dosen"><i class="fa fa-user"></i>Dosen Panel</a></li>
         <!-- <li class="dropdown-item"><a href><i class="fa fa-cog"></i>Settings</a></li> -->
         <li (click)="signOut()" class="dropdown-item"><a class="signout"><i class="fa fa-power-off"></i>Sign out</a></li>
       </div>

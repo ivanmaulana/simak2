@@ -1,25 +1,32 @@
 <div class="row">
   <div class="row col-lg-12 col-md-12 col-sm-12">
-    <ba-card title="Penentuan TA" baCardClass="with-scroll table-panel">
+    <ba-card title="Penentuan TA" baCardClass="table-panel">
       <form (onSubmit)="openProfile(input)">
         <div class="row">
-          <div class="col-md-3 col-sm-12 padding-top"><p>Cari Berdasarkan NIM : </p></div>
+          <div class="col-md-3 col-sm-12 padding-top"><p>Cari Berdasarkan Nama : </p></div>
           <div class="form-group col-md-5 col-sm-12">
-            <input [(ngModel)]="input" class="form-control"/>
+            <!-- <input [(ngModel)]="input" class="form-control"/> -->
+            <input type="text" class="form-control validate filter-input has-error" [(ngModel)]=query3 (keyup)=filterNama() placeholder="Cari Berdasarkan Nama">
+            <div style="position:absolute;z-index:2" *ngIf="filteredListMahasiswa.length > 0">
+              <div *ngFor="let item of filteredListMahasiswa" class="form-control primary" (click)="selectNama(item)">
+                    {{item}}
+              </div>
+            </div>
           </div>
           <div class="form-group col-md-2 col-sm-12">
             <button type="submit" class="btn btn-primary btn-md" (click)="openProfile(input)">Cari</button>
           </div>
+
         </div>
       </form>
     </ba-card>
   </div>
 
   <div class="row col-lg-12 col-md-12 col-sm-12" *ngIf="nim">
-    <ba-card title="Profile Mahasiswa">
+    <ba-card title="Penentuan TA Mahasiswa">
       <div class="col-md-4 col-sm-12 col-xs-12">
         <br /><br />
-        <img src="https://case.edu/medicine/admissions/media/school-of-medicine/admissions/classprofile.png" class="profile" />
+        <img src="{{foto}}" class="profile" />
         <div class="col-md-12"><br />
           NIM : {{nim}}
         </div>
@@ -57,14 +64,14 @@
 
         <div class="form-group col-md-7 col-sm-7 col-xs-12 input-group">
           <input [disabled]="!c" type="text" class="form-control validate filter-input has-error" [(ngModel)]=query (keyup)=filter() placeholder="Pembimbing Ketua">
+          <div class="row" style="position:absolute;z-index:2;padding-top:37px;padding-left:20px" *ngIf="filteredList.length > 0">
+            <div *ngFor="let item of filteredList" class="form-control primary" (click)="select(item)">
+                  {{item}}
+            </div>
+          </div>
           <span class="input-group-btn">
               <button class="btn btn-danger" type="button" (click)="reset()">x</button>
           </span>
-        </div>
-        <div style="position:absolute;z-index:2" *ngIf="filteredList.length > 0">
-          <div class="row" *ngFor="let item of filteredList" class="form-control primary" (click)="select(item)">
-                {{item}}
-          </div>
         </div>
 
 
@@ -74,15 +81,16 @@
 
         <div class="form-group col-md-7 col-sm-7 col-xs-12 input-group">
           <input [disabled]="!c2" type="text" class="form-control validate filter-input has-error" [(ngModel)]=query2 (keyup)=filter2() placeholder="Pembimbing Anggota">
+          <div class="row" style="position:absolute;z-index:2;padding-top:37px;padding-left:20px" *ngIf="filteredList2.length > 0">
+            <div *ngFor="let item of filteredList2" class="form-control primary" (click)="select2(item)">
+                  {{item}}
+            </div>
+          </div>
           <span class="input-group-btn">
               <button class="btn btn-danger" type="button" (click)="reset2()">x</button>
           </span>
         </div>
-        <div style="position:absolute;z-index:2" *ngIf="filteredList2.length > 0">
-          <div class="row" *ngFor="let item of filteredList2" class="form-control primary" (click)="select2(item)">
-                {{item}}
-          </div>
-        </div>
+
 
       </div>
       <div class="row">
@@ -93,10 +101,3 @@
     </ba-card>
   </div>
 </div>
-
-
-<!-- dosen 1 : {{dosen_1}} : {{query}}<br />
-dosen_2 : {{dosen_2}} : {{query2}}<br />
-
-status : {{status}}<br />
-message : {{message}} -->

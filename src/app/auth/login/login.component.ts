@@ -88,7 +88,7 @@ export class Login implements OnInit {
     this.toastr.success("Selamat datang di SIM Ilkom", 'Success !');
   }
 
-  checkStatus(){
+  checkStatus() {
 
     if (this.role === 3){
       this.route.navigate(['Pages']);
@@ -97,7 +97,7 @@ export class Login implements OnInit {
       this.route.navigate(['Dosen']);
     }
     else if (this.role === 4){
-      this.route.navigate(['Dosen']);
+      this.route.navigate(['Admin']);
     }
     else if (this.role === 1){
       this.route.navigate(['Admin']);

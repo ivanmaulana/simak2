@@ -5,7 +5,7 @@ import {AuthHttp, JwtHelper, tokenNotExpired} from 'angular2-jwt';
 import {BaPageTop, BaContentTop, BaSidebarDosen, BaBackTop} from '../theme/components';
 
 import {DashboardDosen} from './dashboardDosen';
-// import {LogDosen} from './logDosen';
+import {LogDosen} from './logDosen';
 
 @Component({
   selector: 'dosen',
@@ -37,11 +37,11 @@ import {DashboardDosen} from './dashboardDosen';
     path: '/dashboard',
     useAsDefault: true,
   },
-  // {
-  //   name: 'LogDosen',
-  //   component: LogDosen,
-  //   path: '/log'
-  // }
+  {
+    name: 'LogDosen',
+    component: LogDosen,
+    path: '/log'
+  }
 ])
 
 @CanActivate(() => tokenNotExpired())
@@ -77,24 +77,26 @@ export class Dosen implements OnInit {
   }
 
   ngOnInit(){
-    // this.token = localStorage.getItem('id_token');
-    // this.decode = this.jwtHelper.decodeToken(this.token);
-    // this.role = this.decode['role'];
-    //
-    // if (this.role === '1'){
-    //   this.route.navigate(['Admin']);
-    // }
-    // else if(this.role === '2'){
-    //
-    // }
-    // else if(this.role === '3'){
-    //   this.route.navigate(['Pages']);
-    // }
-    // else if(this.role === '4'){
-    //   this.route.navigate(['Dosen']);
-    // }
-    // else {
-    //   this.route.navigate(['Login']);
-    // }
+  //   this.token = localStorage.getItem('id_token');
+  //   this.decode = this.jwtHelper.decodeToken(this.token);
+  //   this.role = this.decode['role'];
+  //
+  //   if (this.role === '1'){
+  //     this.route.navigate(['Admin']);
+  //   }
+  //   else if(this.role === '2'){
+  //
+  //   }
+  //   else if(this.role === '3'){
+  //     this.route.navigate(['Pages']);
+  //   }
+  //   else if(this.role === '4'){
+  //
+  //   }
+  //   else {
+  //     this.route.navigate(['Login']);
+  //   }
+  // }
+
   }
 }

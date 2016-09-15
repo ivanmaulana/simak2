@@ -6,11 +6,11 @@ export const menuItemsDosen = [
     selected: false,
     expanded: false
   },
-  {
-    title: 'Log Bimbingan',
-    component: 'LogDosen',
-    icon: 'ion-compose',
-    selected: false,
-    expanded: false
-  }
+  // {
+  //   title: 'Log Bimbingan',
+  //   component: 'LogDosen',
+  //   icon: 'ion-compose',
+  //   selected: false,
+  //   expanded: false
+  // }
 ];

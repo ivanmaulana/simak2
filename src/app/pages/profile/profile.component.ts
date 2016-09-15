@@ -119,7 +119,7 @@ export class Profile implements OnInit{
     this.creds = JSON.stringify({nim: this.nim, alamat: this.alamat, hp: this.no, email: this.email, namaayah: this.nama_ayah,
     namaibu: this.nama_ibu, noortu: this.no_ortu, telportu: this.telp_ortu, alamatortu: this.alamat_ortu});
 
-    console.log(this.creds);
+    // console.log(this.creds);
 
     if(!this.alamat || !this.email || !this.no || !this.nama_ayah || !this.nama_ibu || !this.no_ortu || !this.telp_ortu || !this.alamat_ortu) {
       this.showKurang();

@@ -53,7 +53,6 @@ export class Pengajuan implements OnInit{
   ngOnInit(){
     this.getConnection();
     this.getStatus();
-    this.getDataPengajuan();
   }
 
   private noConn = 0;
@@ -83,6 +82,21 @@ export class Pengajuan implements OnInit{
     this.getDataPengajuan();
   }
 
+  // DASHBOARD SERVICE
+  getStatus() {
+    this.authHttp.get(this.service.urlStatus)
+      .map(res => res.json())
+      .subscribe( data => {
+        this.statusProfile = data[0]['statusProfile'];
+        this.statusDaftar = data[0]['statusDaftar'];
+
+        if(this.statusProfile) {
+          this.getDataPengajuan();
+        }
+        // console.log(this.statusProfile);
+      })
+  }
+
   showNoConn() {
     this.toastr.warning("No Internet Connection", 'Error');
   }
@@ -104,7 +118,6 @@ export class Pengajuan implements OnInit{
 
     this.nim = this.service.nim;
     this.nama = this.service.nama;
-    this.getDataPengajuan();
 
   }
 
@@ -236,7 +249,7 @@ export class Pengajuan implements OnInit{
     this.creds = JSON.stringify({nim: this.nim, topik: this.topik, lab: this.lab, dosen_1: this.dosen_1, dosen_2: this.dosen_2, konsultasi_1: this.konsultasi_1, konsultasi_2: this.konsultasi_2,
     pertemuan_1: this.pertemuan_1, pertemuan_2: this.pertemuan_2, progress_1: this.progress_1, progress_2: this.progress_2, progress_3: this.progress_3, progress_4: this.progress_4});
 
-    console.log(this.creds);
+    // console.log(this.creds);
 
     this.authHttp.post(this.service.urlDaftarPengajuan, this.creds)
       .map(res => res.json())
@@ -257,16 +270,7 @@ export class Pengajuan implements OnInit{
     }, 2000)
   }
 
-  // DASHBOARD SERVICE
-  getStatus() {
-    this.authHttp.get(this.service.urlStatus)
-      .map(res => res.json())
-      .subscribe( data => {
-        this.statusProfile = data[0]['statusProfile'];
-        this.statusDaftar = data[0]['statusDaftar'];
-        // console.log(this.statusProfile);
-      })
-  }
+
 
 
   showError() {

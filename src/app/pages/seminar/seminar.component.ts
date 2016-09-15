@@ -91,7 +91,7 @@ export class Seminar implements OnInit {
       .map(res => res.json())
       .subscribe( data => {
         this.statusProfile = data[0]['statusProfile'];
-        this.statusPraseminar = data[0]['statusKolokium'];
+        this.statusPraseminar = data[0]['statusPraseminar'];
         // console.log(this.statusProfile);
       })
   }
