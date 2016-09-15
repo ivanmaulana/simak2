@@ -41,10 +41,6 @@ export class Skl implements OnInit {
   ngOnInit() {
     this.getConnection();
     this.getStatus();
-    if(this.statusSidang){
-      this.getDataMahasiswa();
-
-    }
 
 
   }
@@ -71,10 +67,6 @@ export class Skl implements OnInit {
   refresh() {
     this.getConnection();
     this.getStatus();
-    if(this.statusSidang){
-      this.getDataMahasiswa();
-
-    }
 
   }
 
@@ -85,6 +77,10 @@ export class Skl implements OnInit {
       .subscribe( data => {
         this.statusProfile = data[0]['statusProfile'];
         this.statusSidang = data[0]['statusSidang'];
+
+        if(this.statusSidang) {
+          this.getDataMahasiswa();
+        }
         // console.log(this.statusProfile);
       })
   }

@@ -60,9 +60,6 @@ export class Sidang {
   ngOnInit(){
     this.getConnection();
     this.getStatus();
-    if(this.statusSeminar) {
-      this.getDataMahasiswa();
-    }
 
   }
 
@@ -90,9 +87,6 @@ export class Sidang {
   refresh() {
     this.getConnection();
     this.getStatus();
-    if(this.statusSeminar) {
-      this.getDataMahasiswa();
-    }
 
   }
 
@@ -103,6 +97,10 @@ export class Sidang {
       .subscribe( data => {
         this.statusProfile = data[0]['statusProfile'];
         this.statusSeminar = data[0]['statusSeminar'];
+
+        if(this.statusSeminar) {
+          this.getDataMahasiswa();
+        }
         // console.log(this.statusProfile);
       })
   }

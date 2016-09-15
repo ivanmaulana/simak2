@@ -30,7 +30,7 @@
             <!-- nama & nim-->
             <div class="col-md-12 col-xs-12">
 
-              <div class="col-md-6 col-sm-12">
+              <div class="col-md-4 col-sm-12">
                 <div class="row">
                   <div class="col-md-2">
                     Nama
@@ -50,13 +50,13 @@
                 </div>
               </div>
 
-              <div class="col-md-6 col-sm-12">
+              <div class="col-md-8 col-sm-12">
                 <div class="row">
                   <div class="col-md-5">
                     Pembimbing Ketua
                   </div>
                   <div class="col-md-7">
-                    : Bu Imas Sitanggang
+                    : {{dosen_1}}
                   </div>
                 </div>
 
@@ -65,7 +65,7 @@
                     Pembimbing Anggota
                   </div>
                   <div class="col-md-7">
-                    : Pak Abrar Istiadi
+                    : {{dosen_2}}
                   </div>
                 </div>
               </div>
@@ -88,7 +88,7 @@
 
             <!-- upload makalah kolokium -->
             <div class="form-group col-md-12 col-xs-12">
-              <label><p href primary>Upload makalah praseminar</p></label><br />
+              <label><p href primary>Upload File Tugas Akhir</p></label><br />
               <input type="file" ng2FileSelect [uploader]="uploader" />
             </div>
 
@@ -104,7 +104,7 @@
                     </button>
                     <button type="button" class="btn btn-danger btn-s"
                             (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                        <span class="glyphicon glyphicon-trash"></span> Remove
+                        <span class="glyphicon glyphicon-trash"></span> Clear
                     </button>
                 </div>
             </div>
