@@ -34,6 +34,8 @@ export class PengajuanAdmin implements OnInit {
 
   foto;
 
+  private excel = 'http://simak.apps.cs.ipb.ac.id:2016/excel/'+localStorage.getItem('id_token');
+
 
   ngOnInit(){
     this.authHttp.get('http://simak.apps.cs.ipb.ac.id:2016/ta/daftar/list')
@@ -48,6 +50,12 @@ export class PengajuanAdmin implements OnInit {
 
   constructor(private http: Http, private authHttp: AuthHttp) {
 
+  }
+
+  changeLab(input) {
+    if (input == 1) return 'NCC';
+    else if (input == 2) return 'ACI';
+    else if (input == 3) return 'SEIS';
   }
 
   openProfile(input){

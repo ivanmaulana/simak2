@@ -1,17 +1,6 @@
-<!-- <div *ngFor="let res of response">
-  nim : {{res.nim}}<br />
-  topik : {{res.topik}}<br />
-  lab : {{res.lab}}<br />
-  dosen_1 : {{res.lab}}<br />
-</div> -->
-
-<!-- <button class="btn btn-primary" (click)="downloadData()">
-  Download as XLS
-</button> -->
-
 <div class="text-right">
   <button class="btn btn-primary text-right">
-    <a href="http://simak.apps.cs.ipb.ac.id:2016/excel" class="link">
+    <a href="{{excel}}" class="link">
       Download As XLS
     </a>
   </button>
@@ -22,7 +11,6 @@
 
 <div class="row" *ngIf="nim">
   <div class="col-md-4 col-sm-12 col-xs-12">
-    <br />
     <ba-card title="Profil Mahasiswa" baCardClass="with-scroll">
       <img class="profile" src="{{foto}}"/>
       <br /><br />
@@ -125,7 +113,6 @@
         <table class="table table-condensed">
           <thead>
           <tr>
-            <th class="table-id">#</th>
             <th>NIM</th>
             <th>Nama</th>
             <th>Lab</th>
@@ -136,10 +123,9 @@
           </thead>
           <tbody>
           <tr *ngFor="let res of response">
-            <td class="table-id">{{ res.id }}</td>
             <td>{{ res.nim }}</td>
-            <td>{{res.nama}}</td>
-            <td>{{ res.lab}}</td>
+            <td>{{ res.nama}}</td>
+            <td>{{ changeLab(res.lab)}}</td>
             <td>{{ res.dosen1}}</td>
             <td>{{ res.dosen2}}</td>
             <td><button type="button" class="btn btn-primary btn-sm" (click)="openProfile(res.nim)"><i class="ion-eye"></i></button></td>
